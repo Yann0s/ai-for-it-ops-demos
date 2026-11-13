@@ -19,16 +19,16 @@ services:
       DISK_SIZE: "80G"
       # Réseau statique via Dockur (la VM configure sa propre IP)
       DHCP: "N"
-      IP: "192.168.1.241"
-      GATEWAY: "192.168.1.1"
-      DNS: "192.168.1.1"
+      IP: "192.168.10.241"
+      GATEWAY: "192.168.10.254"
+      DNS: "192.168.10.254"
     devices:
       - /dev/kvm
       - /dev/net/tun
     cap_add:
       - NET_ADMIN
     volumes:
-      - ./srv-dc:/storage
+      - /vm-gold/dockur/srv-dc:/storage
       - ./oem-srv-dc:/oem              # install.bat exécuté post-install
     restart: always
     stop_grace_period: 2m
@@ -47,16 +47,16 @@ services:
       CPU_CORES: "2"
       DISK_SIZE: "64G"
       DHCP: "N"
-      IP: "192.168.1.242"
-      GATEWAY: "192.168.1.1"
-      DNS: "192.168.1.241"             # pointe vers le DC (DNS du domaine)
+      IP: "192.168.10.242"
+      GATEWAY: "192.168.10.254"
+      DNS: "192.168.10.241"             # pointe vers le DC (DNS du domaine)
     devices:
       - /dev/kvm
       - /dev/net/tun
     cap_add:
       - NET_ADMIN
     volumes:
-      - ./cli-01:/storage
+      - /vm-gold/dockur/cli-01:/storage
     restart: always
     stop_grace_period: 2m
 
@@ -64,9 +64,9 @@ networks:
   default:
     driver: macvlan
     driver_opts:
-      parent: eno1                     # ← ADAPTER au nom d'interface sur ubu1
+      parent: br0                     # interface bridge sur ubu1
     ipam:
       config:
-        - subnet: 192.168.1.0/24
-          gateway: 192.168.1.1
-          ip_range: 192.168.1.240/28
+        - subnet: 192.168.10.0/24
+          gateway: 192.168.10.254
+          ip_range: 192.168.10.240/28

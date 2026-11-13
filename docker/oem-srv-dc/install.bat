@@ -9,8 +9,8 @@ echo [install.bat] Demarrage de la configuration post-install...
 
 REM ── Config IP statique (redondant avec les vars d'env Dockur, sécurité) ──
 echo [install.bat] Configuration reseau statique...
-netsh interface ip set address "Ethernet" static 192.168.1.241 255.255.255.0 192.168.1.1
-netsh interface ip set dns "Ethernet" static 192.168.1.1 primary
+netsh interface ip set address "Ethernet" static 192.168.10.241 255.255.255.0 192.168.10.254
+netsh interface ip set dns "Ethernet" static 192.168.10.254 primary
 
 REM ── WinRM (PowerShell Remoting) ──
 echo [install.bat] Activation de WinRM...

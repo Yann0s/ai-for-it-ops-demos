@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI for IT & OPS — Déploiement Dockur</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, sans-serif; color: var(--foreground); padding: 32px; max-width: 800px; }
+  h1 { font-size: 1.5rem; margin-bottom: 4px; }
+  h2 { font-size: 1rem; color: var(--muted-foreground); margin: 24px 0 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+  .subtitle { color: var(--muted-foreground); font-size: 0.85rem; margin-bottom: 24px; }
+  .card { border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+  .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .card-title { font-weight: 600; font-size: 0.95rem; }
+  .badge { font-size: 0.75rem; padding: 3px 10px; border-radius: 12px; font-weight: 600; }
+  .badge-ok { background: #16a34a20; color: #16a34a; }
+  .badge-warn { background: #f59e0b20; color: #f59e0b; }
+  .badge-pending { background: var(--border); color: var(--muted-foreground); }
+  .kv { display: flex; font-size: 0.83rem; line-height: 1.6; }
+  .kv-key { color: var(--muted-foreground); min-width: 140px; }
+  .kv-val { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.8rem; }
+  a { color: var(--accent); }
+  .timeline { border-left: 2px solid var(--border); padding-left: 16px; margin: 8px 0; }
+  .timeline-item { margin-bottom: 10px; font-size: 0.83rem; position: relative; }
+  .timeline-item::before { content: ''; position: absolute; left: -21px; top: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  .timeline-item.done::before { background: #16a34a; }
+  .section { margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+<h1>🖥 Déploiement Dockur — Lab Windows AD</h1>
+<p class="subtitle">ubu1 · 13 novembre 2026 · <a href="https://github.com/Yann0s/ai-for-it-ops-demos">github.com/Yann0s/ai-for-it-ops-demos</a></p>
+
+<h2>État des VMs</h2>
+
+<div class="card">
+  <div class="card-header">
+    <span class="card-title">🖥 SRV-DC — Windows Server 2022</span>
+    <span class="badge badge-ok">EN LIGNE</span>
+  </div>
+  <div class="kv"><span class="kv-key">Console web</span><span class="kv-val"><a href="http://192.168.10.241:8006">192.168.10.241:8006</a></span></div>
+  <div class="kv"><span class="kv-key">RDP</span><span class="kv-val">mstsc /v:192.168.10.241 · Admin / MCPdemo2024!</span></div>
+  <div class="kv"><span class="kv-key">WinRM (5985)</span><span class="kv-val badge badge-pending">⏳ en attente (post-install)</span></div>
+  <div class="kv"><span class="kv-key">SSH (22)</span><span class="kv-val badge badge-pending">⏳ en attente (post-install)</span></div>
+  <div class="kv"><span class="kv-key">Stockage</span><span class="kv-val">/ vm-gold/dockur / srv-dc (80 G)</span></div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <span class="card-title">💻 CLI-01 — Windows 11</span>
+    <span class="badge badge-warn">DÉMARRAGE</span>
+  </div>
+  <div class="kv"><span class="kv-key">Console web</span><span class="kv-val"><a href="http://192.168.10.242:8006">192.168.10.242:8006</a></span></div>
+  <div class="kv"><span class="kv-key">Stockage</span><span class="kv-val">/ vm-gold/dockur / cli-01 (64 G)</span></div>
+</div>
+
+<h2>Infrastructure</h2>
+
+<div class="card">
+  <div class="kv"><span class="kv-key">Hôte</span><span class="kv-val">ubul (192.168.10.5, 125 G RAM)</span></div>
+  <div class="kv"><span class="kv-key">Docker</span><span class="kv-val">28.3.3 + Compose v2.39.1</span></div>
+  <div class="kv"><span class="kv-key">Réseau</span><span class="kv-val">macvlan sur br0 — 192.168.10.0/24</span></div>
+  <div class="kv"><span class="kv-key">Shim hôte</span><span class="kv-val badge badge-ok">actif (192.168.10.250)</span></div>
+</div>
+
+<h2>Chronologie du déploiement</h2>
+<div class="timeline">
+  <div class="timeline-item done">🔑 Générateur AD seed (SEED=42) → 35 utilisateurs, 12 OUs, agdlp</div>
+  <div class="timeline-item done">📦 Push GithHub → Yanns/ ai-for-it-ops-demos</div>
+  <div class="timeline-item done">🔒 Authentification SSH (clé ed25519)</div>
+  <div class="timeline-item done">🐳 Dockr compose up — pull images + création résea macvlan</div>
+  <div class="timeline-item done">📡 Shim macvlan-hôte (ubu1 ↔ conteneurs)</div>
+  <div class="timeline-item done">🖥 SRV-DC démarré — Windows Server 2022 FR</div>
+  <div class="timeline-item">💻 CLI-01 en cours — Windows 11 FR</div>
+  <div class="timeline-item">⏳ Vérification install.bat (WinRM, SSH, RDP)</div>
+  <div class="timeline-item">⏳ Promotion DC + création domaine aiitops.local via MCP</div>
+  <div class="timeline-item">⏳ Join CLI-01 au domaine</div>
+</div>
+
+<h2>Prochianes étapes</h2>
+<div class="card">
+  <div style="font-size:0.85rem; line-height:1.7;">
+    1. Attendre que CLI-01 finisse son install Windows 11<br>
+    2. Vérifier que l’install.bat a bien activé WinRM + SSH sur SRV-DC<br>
+    3. Déployer le serveur MCP (WinRM/SSH) sur ub u1<br>
+    4. Lancer l’épisode : agent lit ad_seed.json → crée le domaine aiitops.local<br>
+    5. Join CLI-01 au domaine, création utilisateur, connexion<br>
+  </div>
+</div>
+
+<p style="color:var(--muted-foreground); font-size:0.75rem; margin-top:24px;">
+  Projet <strong>AI for IT & OPS</strong> — Lab Windos AD via Dockur ·
+  Seed JSON : 35 users · 7 role groups · 7 ressource groups · 2 shares
+</p>
+
+</body>
+</html>

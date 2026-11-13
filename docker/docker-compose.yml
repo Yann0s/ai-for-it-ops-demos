@@ -1,5 +1,5 @@
 # Dockur Windows Server 2022 + Windows 11
-# Docker macvlan sur le LAN + DHCP=Y → macvtap natif, guest direct sur br0
+# Docker macvlan + DHCP=Y : conteneur et guest sur IPs distinctes
 
 services:
   srv-dc:
@@ -31,6 +31,9 @@ services:
     volumes:
       - /vm-gold/dockur/srv-dc:/storage
       - ./oem-srv-dc:/oem
+    networks:
+      default:
+        ipv4_address: 192.168.10.240
     restart: always
     stop_grace_period: 2m
 
@@ -60,6 +63,9 @@ services:
       - 'c *:* rwm'
     volumes:
       - /vm-gold/dockur/cli-01:/storage
+    networks:
+      default:
+        ipv4_address: 192.168.10.243
     restart: always
     stop_grace_period: 2m
 

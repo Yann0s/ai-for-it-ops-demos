@@ -1,0 +1,830 @@
+{
+  "domain": "aiitops.local",
+  "netbios": "AIITOPS",
+  "dc_hostname": "SRV-DC",
+  "dc_ip": "192.168.1.241",
+  "seed": 42,
+  "ous": [
+    {
+      "name": "TN",
+      "path": "OU=TN,DC=aiitops,DC=local",
+      "description": "Racine TechNova"
+    },
+    {
+      "name": "Groupes",
+      "path": "OU=Groupes,OU=TN,DC=aiitops,DC=local"
+    },
+    {
+      "name": "Serveurs",
+      "path": "OU=Serveurs,OU=TN,DC=aiitops,DC=local"
+    },
+    {
+      "name": "Ordinateurs",
+      "path": "OU=Ordinateurs,OU=TN,DC=aiitops,DC=local"
+    },
+    {
+      "name": "Stagiaires",
+      "path": "OU=Stagiaires,OU=TN,DC=aiitops,DC=local"
+    },
+    {
+      "name": "Comptes_de_service",
+      "path": "OU=Comptes_de_service,OU=TN,DC=aiitops,DC=local"
+    },
+    {
+      "name": "Direction",
+      "path": "OU=Direction,OU=TN,DC=aiitops,DC=local"
+    },
+    {
+      "name": "DSI",
+      "path": "OU=DSI,OU=TN,DC=aiitops,DC=local"
+    },
+    {
+      "name": "RH",
+      "path": "OU=RH,OU=TN,DC=aiitops,DC=local"
+    },
+    {
+      "name": "Comptabilité",
+      "path": "OU=Comptabilité,OU=TN,DC=aiitops,DC=local"
+    },
+    {
+      "name": "Commercial",
+      "path": "OU=Commercial,OU=TN,DC=aiitops,DC=local"
+    },
+    {
+      "name": "Production",
+      "path": "OU=Production,OU=TN,DC=aiitops,DC=local"
+    }
+  ],
+  "users": [
+    {
+      "username": "pgarcia",
+      "firstName": "Pauline",
+      "lastName": "Garcia",
+      "displayName": "Pauline Garcia",
+      "title": "Directeur Général",
+      "department": "Direction",
+      "ou": "OU=Direction,OU=TN,DC=aiitops,DC=local",
+      "manager": null,
+      "password": "MCPdemo2024!",
+      "uidNumber": 1000,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\pgarcia",
+      "phone": "+33148872246",
+      "office": "A-1007"
+    },
+    {
+      "username": "cbernard",
+      "firstName": "Charlotte",
+      "lastName": "Bernard",
+      "displayName": "Charlotte Bernard",
+      "title": "Assistante de Direction",
+      "department": "Direction",
+      "ou": "OU=Direction,OU=TN,DC=aiitops,DC=local",
+      "manager": "pgarcia",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1001,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\cbernard",
+      "phone": "+33145329258",
+      "office": "A-1009"
+    },
+    {
+      "username": "mroux",
+      "firstName": "Mathieu",
+      "lastName": "Roux",
+      "displayName": "Mathieu Roux",
+      "title": "Tech Support",
+      "department": "DSI/Infrastructure",
+      "ou": "OU=Infrastructure,OU=TN,DC=aiitops,DC=local",
+      "manager": null,
+      "password": "MCPdemo2024!",
+      "uidNumber": 1002,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\mroux",
+      "phone": "+33191106814",
+      "office": "A-4006"
+    },
+    {
+      "username": "rmoreau",
+      "firstName": "Romane",
+      "lastName": "Moreau",
+      "displayName": "Romane Moreau",
+      "title": "Admin Système",
+      "department": "DSI/Infrastructure",
+      "ou": "OU=Infrastructure,OU=TN,DC=aiitops,DC=local",
+      "manager": "mroux",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1003,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\rmoreau",
+      "phone": "+33153900581",
+      "office": "B-1002"
+    },
+    {
+      "username": "ypetit",
+      "firstName": "Yasmine",
+      "lastName": "Petit",
+      "displayName": "Yasmine Petit",
+      "title": "Admin Réseau",
+      "department": "DSI/Infrastructure",
+      "ou": "OU=Infrastructure,OU=TN,DC=aiitops,DC=local",
+      "manager": "mroux",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1004,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\ypetit",
+      "phone": "+33162988662",
+      "office": "B-3001"
+    },
+    {
+      "username": "cmartine",
+      "firstName": "Chloé",
+      "lastName": "Martinez",
+      "displayName": "Chloé Martinez",
+      "title": "Ingénieur Cloud",
+      "department": "DSI/Infrastructure",
+      "ou": "OU=Infrastructure,OU=TN,DC=aiitops,DC=local",
+      "manager": "mroux",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1005,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\cmartine",
+      "phone": "+33174230889",
+      "office": "B-1009"
+    },
+    {
+      "username": "lrobert",
+      "firstName": "Lucas",
+      "lastName": "Robert",
+      "displayName": "Lucas Robert",
+      "title": "Support N2",
+      "department": "DSI/Support",
+      "ou": "OU=Support,OU=TN,DC=aiitops,DC=local",
+      "manager": null,
+      "password": "MCPdemo2024!",
+      "uidNumber": 1006,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\lrobert",
+      "phone": "+33142793384",
+      "office": "A-3002"
+    },
+    {
+      "username": "opetit",
+      "firstName": "Olivier",
+      "lastName": "Petit",
+      "displayName": "Olivier Petit",
+      "title": "Support N1",
+      "department": "DSI/Support",
+      "ou": "OU=Support,OU=TN,DC=aiitops,DC=local",
+      "manager": "lrobert",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1007,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\opetit",
+      "phone": "+33164391476",
+      "office": "B-3003"
+    },
+    {
+      "username": "xandre",
+      "firstName": "Xavier",
+      "lastName": "Andre",
+      "displayName": "Xavier Andre",
+      "title": "Responsable Support",
+      "department": "DSI/Support",
+      "ou": "OU=Support,OU=TN,DC=aiitops,DC=local",
+      "manager": "lrobert",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1008,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\xandre",
+      "phone": "+33153802729",
+      "office": "B-1003"
+    },
+    {
+      "username": "idavid",
+      "firstName": "Inès",
+      "lastName": "David",
+      "displayName": "Inès David",
+      "title": "Support N3",
+      "department": "DSI/Support",
+      "ou": "OU=Support,OU=TN,DC=aiitops,DC=local",
+      "manager": "lrobert",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1009,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\idavid",
+      "phone": "+33150584714",
+      "office": "B-3009"
+    },
+    {
+      "username": "nmorel",
+      "firstName": "Nicolas",
+      "lastName": "Morel",
+      "displayName": "Nicolas Morel",
+      "title": "Développeur Full-Stack",
+      "department": "DSI/Développement",
+      "ou": "OU=Développement,OU=TN,DC=aiitops,DC=local",
+      "manager": null,
+      "password": "MCPdemo2024!",
+      "uidNumber": 1010,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\nmorel",
+      "phone": "+33153787277",
+      "office": "B-4008"
+    },
+    {
+      "username": "jbertran",
+      "firstName": "Jean",
+      "lastName": "Bertrand",
+      "displayName": "Jean Bertrand",
+      "title": "DevOps",
+      "department": "DSI/Développement",
+      "ou": "OU=Développement,OU=TN,DC=aiitops,DC=local",
+      "manager": "nmorel",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1011,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\jbertran",
+      "phone": "+33148358607",
+      "office": "C-3007"
+    },
+    {
+      "username": "mdupont",
+      "firstName": "Mathieu",
+      "lastName": "Dupont",
+      "displayName": "Mathieu Dupont",
+      "title": "Développeur Frontend",
+      "department": "DSI/Développement",
+      "ou": "OU=Développement,OU=TN,DC=aiitops,DC=local",
+      "manager": "nmorel",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1012,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\mdupont",
+      "phone": "+33163329974",
+      "office": "A-4002"
+    },
+    {
+      "username": "ddurand",
+      "firstName": "Delphine",
+      "lastName": "Durand",
+      "displayName": "Delphine Durand",
+      "title": "Développeur Frontend",
+      "department": "DSI/Développement",
+      "ou": "OU=Développement,OU=TN,DC=aiitops,DC=local",
+      "manager": "nmorel",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1013,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\ddurand",
+      "phone": "+33149757924",
+      "office": "A-4002"
+    },
+    {
+      "username": "ymercier",
+      "firstName": "Yasmine",
+      "lastName": "Mercier",
+      "displayName": "Yasmine Mercier",
+      "title": "Lead Dev",
+      "department": "DSI/Développement",
+      "ou": "OU=Développement,OU=TN,DC=aiitops,DC=local",
+      "manager": "nmorel",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1014,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\ymercier",
+      "phone": "+33178590785",
+      "office": "C-3009"
+    },
+    {
+      "username": "adurand",
+      "firstName": "Antoine",
+      "lastName": "Durand",
+      "displayName": "Antoine Durand",
+      "title": "Lead Dev",
+      "department": "DSI/Développement",
+      "ou": "OU=Développement,OU=TN,DC=aiitops,DC=local",
+      "manager": "nmorel",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1015,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\adurand",
+      "phone": "+33183663054",
+      "office": "B-3002"
+    },
+    {
+      "username": "cbertran",
+      "firstName": "Chloé",
+      "lastName": "Bertrand",
+      "displayName": "Chloé Bertrand",
+      "title": "Chargé de recrutement",
+      "department": "RH",
+      "ou": "OU=RH,OU=TN,DC=aiitops,DC=local",
+      "manager": null,
+      "password": "MCPdemo2024!",
+      "uidNumber": 1016,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\cbertran",
+      "phone": "+33172898975",
+      "office": "A-1005"
+    },
+    {
+      "username": "schevali",
+      "firstName": "Stéphanie",
+      "lastName": "Chevalier",
+      "displayName": "Stéphanie Chevalier",
+      "title": "Responsable RH",
+      "department": "RH",
+      "ou": "OU=RH,OU=TN,DC=aiitops,DC=local",
+      "manager": "cbertran",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1017,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\schevali",
+      "phone": "+33178308573",
+      "office": "A-3003"
+    },
+    {
+      "username": "iblanc",
+      "firstName": "Inès",
+      "lastName": "Blanc",
+      "displayName": "Inès Blanc",
+      "title": "Gestionnaire RH",
+      "department": "RH",
+      "ou": "OU=RH,OU=TN,DC=aiitops,DC=local",
+      "manager": "cbertran",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1018,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\iblanc",
+      "phone": "+33198100599",
+      "office": "C-3008"
+    },
+    {
+      "username": "lrichard",
+      "firstName": "Laura",
+      "lastName": "Richard",
+      "displayName": "Laura Richard",
+      "title": "Contrôleur de Gestion",
+      "department": "Comptabilité",
+      "ou": "OU=Comptabilité,OU=TN,DC=aiitops,DC=local",
+      "manager": null,
+      "password": "MCPdemo2024!",
+      "uidNumber": 1019,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\lrichard",
+      "phone": "+33145867460",
+      "office": "B-1009"
+    },
+    {
+      "username": "ileroy",
+      "firstName": "Isabelle",
+      "lastName": "Leroy",
+      "displayName": "Isabelle Leroy",
+      "title": "Chef Comptable",
+      "department": "Comptabilité",
+      "ou": "OU=Comptabilité,OU=TN,DC=aiitops,DC=local",
+      "manager": "lrichard",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1020,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\ileroy",
+      "phone": "+33182598369",
+      "office": "C-2005"
+    },
+    {
+      "username": "hbonnet",
+      "firstName": "Henri",
+      "lastName": "Bonnet",
+      "displayName": "Henri Bonnet",
+      "title": "Assistant Comptable",
+      "department": "Comptabilité",
+      "ou": "OU=Comptabilité,OU=TN,DC=aiitops,DC=local",
+      "manager": "lrichard",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1021,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\hbonnet",
+      "phone": "+33153665492",
+      "office": "C-2005"
+    },
+    {
+      "username": "zlefevre",
+      "firstName": "Zacharie",
+      "lastName": "Lefevre",
+      "displayName": "Zacharie Lefevre",
+      "title": "Comptable",
+      "department": "Comptabilité",
+      "ou": "OU=Comptabilité,OU=TN,DC=aiitops,DC=local",
+      "manager": "lrichard",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1022,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\zlefevre",
+      "phone": "+33168642717",
+      "office": "B-1004"
+    },
+    {
+      "username": "arobert",
+      "firstName": "Antoine",
+      "lastName": "Robert",
+      "displayName": "Antoine Robert",
+      "title": "Chargé de Clientèle",
+      "department": "Commercial",
+      "ou": "OU=Commercial,OU=TN,DC=aiitops,DC=local",
+      "manager": null,
+      "password": "MCPdemo2024!",
+      "uidNumber": 1023,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\arobert",
+      "phone": "+33185761759",
+      "office": "A-2002"
+    },
+    {
+      "username": "cgirard",
+      "firstName": "Charlotte",
+      "lastName": "Girard",
+      "displayName": "Charlotte Girard",
+      "title": "Commercial Sédentaire",
+      "department": "Commercial",
+      "ou": "OU=Commercial,OU=TN,DC=aiitops,DC=local",
+      "manager": "arobert",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1024,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\cgirard",
+      "phone": "+33144639131",
+      "office": "A-3008"
+    },
+    {
+      "username": "nroussea",
+      "firstName": "Nicolas",
+      "lastName": "Rousseau",
+      "displayName": "Nicolas Rousseau",
+      "title": "Responsable Commercial",
+      "department": "Commercial",
+      "ou": "OU=Commercial,OU=TN,DC=aiitops,DC=local",
+      "manager": "arobert",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1025,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\nroussea",
+      "phone": "+33148858490",
+      "office": "C-4004"
+    },
+    {
+      "username": "élambert",
+      "firstName": "Élodie",
+      "lastName": "Lambert",
+      "displayName": "Élodie Lambert",
+      "title": "Responsable Commercial",
+      "department": "Commercial",
+      "ou": "OU=Commercial,OU=TN,DC=aiitops,DC=local",
+      "manager": "arobert",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1026,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\élambert",
+      "phone": "+33152198907",
+      "office": "A-4006"
+    },
+    {
+      "username": "cgirard1",
+      "firstName": "Chloé",
+      "lastName": "Girard",
+      "displayName": "Chloé Girard",
+      "title": "Designer UX",
+      "department": "Production",
+      "ou": "OU=Production,OU=TN,DC=aiitops,DC=local",
+      "manager": null,
+      "password": "MCPdemo2024!",
+      "uidNumber": 1027,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\cgirard1",
+      "phone": "+33191214576",
+      "office": "A-2004"
+    },
+    {
+      "username": "ifrancoi",
+      "firstName": "Inès",
+      "lastName": "Francois",
+      "displayName": "Inès Francois",
+      "title": "Product Manager",
+      "department": "Production",
+      "ou": "OU=Production,OU=TN,DC=aiitops,DC=local",
+      "manager": "cgirard1",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1028,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\ifrancoi",
+      "phone": "+33148542374",
+      "office": "A-3008"
+    },
+    {
+      "username": "probert",
+      "firstName": "Pauline",
+      "lastName": "Robert",
+      "displayName": "Pauline Robert",
+      "title": "Designer UI",
+      "department": "Production",
+      "ou": "OU=Production,OU=TN,DC=aiitops,DC=local",
+      "manager": "cgirard1",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1029,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\probert",
+      "phone": "+33168947272",
+      "office": "C-1001"
+    },
+    {
+      "username": "troussea",
+      "firstName": "Thierry",
+      "lastName": "Rousseau",
+      "displayName": "Thierry Rousseau",
+      "title": "Scrum Master",
+      "department": "Production",
+      "ou": "OU=Production,OU=TN,DC=aiitops,DC=local",
+      "manager": "cgirard1",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1030,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\troussea",
+      "phone": "+33193115474",
+      "office": "A-2003"
+    },
+    {
+      "username": "agarnier",
+      "firstName": "Amélie",
+      "lastName": "Garnier",
+      "displayName": "Amélie Garnier",
+      "title": "Chef de Projet",
+      "department": "Production",
+      "ou": "OU=Production,OU=TN,DC=aiitops,DC=local",
+      "manager": "cgirard1",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1031,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\agarnier",
+      "phone": "+33170324130",
+      "office": "B-1003"
+    },
+    {
+      "username": "qmartine",
+      "firstName": "Quentin",
+      "lastName": "Martinez",
+      "displayName": "Quentin Martinez",
+      "title": "Stagiaire RH",
+      "department": "Stagiaires",
+      "ou": "OU=Stagiaires,OU=TN,DC=aiitops,DC=local",
+      "manager": null,
+      "password": "MCPdemo2024!",
+      "uidNumber": 1032,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\qmartine",
+      "phone": "+33158543555",
+      "office": "C-4003"
+    },
+    {
+      "username": "mvincent",
+      "firstName": "Marie",
+      "lastName": "Vincent",
+      "displayName": "Marie Vincent",
+      "title": "Stagiaire Réseau",
+      "department": "Stagiaires",
+      "ou": "OU=Stagiaires,OU=TN,DC=aiitops,DC=local",
+      "manager": "qmartine",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1033,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\mvincent",
+      "phone": "+33153161324",
+      "office": "C-1006"
+    },
+    {
+      "username": "dthomas",
+      "firstName": "Delphine",
+      "lastName": "Thomas",
+      "displayName": "Delphine Thomas",
+      "title": "Stagiaire Développement",
+      "department": "Stagiaires",
+      "ou": "OU=Stagiaires,OU=TN,DC=aiitops,DC=local",
+      "manager": "qmartine",
+      "password": "MCPdemo2024!",
+      "uidNumber": 1034,
+      "homeDrive": "H:",
+      "homeDirectory": "\\\\SRV-DC\\Home\\dthomas",
+      "phone": "+33177599948",
+      "office": "C-2001"
+    }
+  ],
+  "service_accounts": [
+    {
+      "username": "SVC_MCP",
+      "displayName": "Service MCP",
+      "ou": "OU=Comptes_de_service,OU=TN,DC=aiitops,DC=local",
+      "password": "MCPdemo2024!",
+      "description": "Compte de service pour le serveur MCP"
+    },
+    {
+      "username": "SVC_Backup",
+      "displayName": "Service Backup",
+      "ou": "OU=Comptes_de_service,OU=TN,DC=aiitops,DC=local",
+      "password": "MCPdemo2024!",
+      "description": "Agent de sauvegarde Veeam"
+    },
+    {
+      "username": "SVC_SQL",
+      "displayName": "Service SQL Server",
+      "ou": "OU=Comptes_de_service,OU=TN,DC=aiitops,DC=local",
+      "password": "MCPdemo2024!",
+      "description": "Service SQL Server"
+    }
+  ],
+  "role_groups": [
+    {
+      "name": "G_DSI_Admins",
+      "scope": "Global",
+      "ou": "OU=Groupes,OU=TN,DC=aiitops,DC=local",
+      "members": [
+        "mroux",
+        "rmoreau",
+        "ypetit",
+        "cmartine"
+      ]
+    },
+    {
+      "name": "G_DSI_Devs",
+      "scope": "Global",
+      "ou": "OU=Groupes,OU=TN,DC=aiitops,DC=local",
+      "members": [
+        "nmorel",
+        "jbertran",
+        "mdupont",
+        "ddurand",
+        "ymercier",
+        "adurand"
+      ]
+    },
+    {
+      "name": "G_DSI_Support",
+      "scope": "Global",
+      "ou": "OU=Groupes,OU=TN,DC=aiitops,DC=local",
+      "members": [
+        "lrobert",
+        "opetit",
+        "xandre",
+        "idavid"
+      ]
+    },
+    {
+      "name": "G_RH",
+      "scope": "Global",
+      "ou": "OU=Groupes,OU=TN,DC=aiitops,DC=local",
+      "members": [
+        "cbertran",
+        "schevali",
+        "iblanc"
+      ]
+    },
+    {
+      "name": "G_Compta",
+      "scope": "Global",
+      "ou": "OU=Groupes,OU=TN,DC=aiitops,DC=local",
+      "members": [
+        "lrichard",
+        "ileroy",
+        "hbonnet",
+        "zlefevre"
+      ]
+    },
+    {
+      "name": "G_Commercial",
+      "scope": "Global",
+      "ou": "OU=Groupes,OU=TN,DC=aiitops,DC=local",
+      "members": [
+        "arobert",
+        "cgirard",
+        "nroussea",
+        "élambert"
+      ]
+    },
+    {
+      "name": "G_Production",
+      "scope": "Global",
+      "ou": "OU=Groupes,OU=TN,DC=aiitops,DC=local",
+      "members": [
+        "cgirard1",
+        "ifrancoi",
+        "probert",
+        "troussea",
+        "agarnier"
+      ]
+    },
+    {
+      "name": "G_Direction",
+      "scope": "Global",
+      "ou": "OU=Groupes,OU=TN,DC=aiitops,DC=local",
+      "members": [
+        "pgarcia",
+        "cbernard"
+      ]
+    }
+  ],
+  "resource_groups": [
+    {
+      "name": "DL_Services_DSI_RW",
+      "scope": "DomainLocal",
+      "description": "Modify sur \\Services\\DSI"
+    },
+    {
+      "name": "DL_Services_DSI_RO",
+      "scope": "DomainLocal",
+      "description": "Read sur \\Services\\DSI (stakeholders)"
+    },
+    {
+      "name": "DL_Services_RH_RW",
+      "scope": "DomainLocal",
+      "description": "Modify sur \\Services\\RH"
+    },
+    {
+      "name": "DL_Services_Compta_RW",
+      "scope": "DomainLocal",
+      "description": "Modify sur \\Services\\Comptabilité"
+    },
+    {
+      "name": "DL_Services_Commercial_RW",
+      "scope": "DomainLocal",
+      "description": "Modify sur \\Services\\Commercial"
+    },
+    {
+      "name": "DL_Services_Production_RW",
+      "scope": "DomainLocal",
+      "description": "Modify sur \\Services\\Production"
+    },
+    {
+      "name": "DL_Services_Direction_RO",
+      "scope": "DomainLocal",
+      "description": "Read sur \\Services\\Direction"
+    }
+  ],
+  "shares": [
+    {
+      "name": "Services",
+      "uncPath": "\\\\SRV-DC\\Services",
+      "localPath": "E:\\Shares\\Services",
+      "subdirs": [
+        "DSI",
+        "RH",
+        "Comptabilité",
+        "Commercial",
+        "Production",
+        "Direction"
+      ],
+      "permissions": [
+        {
+          "group": "DL_Services_DSI_RW",
+          "folder": "DSI",
+          "rights": "Modify"
+        },
+        {
+          "group": "DL_Services_RH_RW",
+          "folder": "RH",
+          "rights": "Modify"
+        },
+        {
+          "group": "DL_Services_Compta_RW",
+          "folder": "Comptabilité",
+          "rights": "Modify"
+        },
+        {
+          "group": "DL_Services_Commercial_RW",
+          "folder": "Commercial",
+          "rights": "Modify"
+        },
+        {
+          "group": "DL_Services_Production_RW",
+          "folder": "Production",
+          "rights": "Modify"
+        },
+        {
+          "group": "DL_Services_Direction_RO",
+          "folder": "Direction",
+          "rights": "Read"
+        }
+      ]
+    },
+    {
+      "name": "Home",
+      "uncPath": "\\\\SRV-DC\\Home",
+      "localPath": "E:\\Shares\\Home",
+      "subdirs": [],
+      "permissions": [
+        {
+          "group": "Utilisateurs du domaine",
+          "folder": "",
+          "rights": "Modify"
+        }
+      ]
+    }
+  ]
+}

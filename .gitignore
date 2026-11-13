@@ -1,0 +1,6 @@
+# Données Docker Dockur (volumes de stockage des VMs)
+docker/srv-dc/
+docker/cli-01/
+
+# Fichier de verrou Docker
+docker-compose.override.yml

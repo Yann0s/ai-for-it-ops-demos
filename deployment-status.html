@@ -16,7 +16,6 @@
   .badge { font-size: 0.75rem; padding: 3px 10px; border-radius: 12px; font-weight: 600; }
   .badge-ok { background: #16a34a20; color: #16a34a; }
   .badge-warn { background: #f59e0b20; color: #f59e0b; }
-  .badge-pending { background: var(--border); color: var(--muted-foreground); }
   .kv { display: flex; font-size: 0.83rem; line-height: 1.6; }
   .kv-key { color: var(--muted-foreground); min-width: 140px; }
   .kv-val { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.8rem; }
@@ -29,7 +28,7 @@
 </head>
 <body>
 
-<h1>🖥 Déploiement Dockur — Lab Windows AD</h1>
+<h1>🖥 Lab Windows AD — Déploiement terminé</h1>
 <p class="subtitle">ubu1 · 13 novembre 2026 · <a href="https://github.com/Yann0s/ai-for-it-ops-demos">github.com/Yann0s/ai-for-it-ops-demos</a></p>
 
 <h2>État des VMs</h2>
@@ -37,24 +36,24 @@
 <div class="card">
   <div class="card-header">
     <span class="card-title">🖥 SRV-DC — Windows Server 2022</span>
-    <span class="badge badge-warn">REDÉMARRAGE</span>
+    <span class="badge badge-ok">PRÊT</span>
   </div>
-  <div class="kv"><span class="kv-key">Console web</span><span class="kv-val"><a href="http://192.168.10.241:8006">192.168.10.241:8006</a> ✅</span></div>
-  <div class="kv"><span class="kv-key">Ping ubu1</span><span class="kv-val">✅ 0.07 ms</span></div>
-  <div class="kv"><span class="kv-key">RDP (3389)</span><span class="kv-val"><span class="badge badge-warn">🔄 reboot install.bat</span></span></div>
-  <div class="kv"><span class="kv-key">WinRM (5985)</span><span class="kv-val"><span class="badge badge-warn">🔄 reboot install.bat</span></span></div>
-  <div class="kv"><span class="kv-key">SSH (22)</span><span class="kv-val"><span class="badge badge-warn">🔄 reboot install.bat</span></span></div>
-  <div class="kv"><span class="kv-key">Mode réseau</span><span class="kv-val">DHCP · macvlan br0</span></div>
+  <div class="kv"><span class="kv-key">Console web</span><span class="kv-val"><a href="http://192.168.10.240:8006">192.168.10.240:8006</a></span></div>
+  <div class="kv"><span class="kv-key">Conteneur / Guest</span><span class="kv-val">.240 conteneur · .241 guest</span></div>
+  <div class="kv"><span class="kv-key">RDP (3389)</span><span class="kv-val"><span class="badge badge-ok">✅</span> mstsc /v:192.168.10.241</span></div>
+  <div class="kv"><span class="kv-key">WinRM (5985)</span><span class="kv-val"><span class="badge badge-ok">✅</span></span></div>
+  <div class="kv"><span class="kv-key">SSH (22)</span><span class="kv-val"><span class="badge badge-ok">✅</span></span></div>
+  <div class="kv"><span class="kv-key">MCP</span><span class="kv-val"><span class="badge badge-ok">37 outils</span> smoke test OK</span></div>
   <div class="kv"><span class="kv-key">Stockage</span><span class="kv-val">/vm-gold/dockur/srv-dc (80 GB)</span></div>
 </div>
 
 <div class="card">
   <div class="card-header">
     <span class="card-title">💻 CLI-01 — Windows 11</span>
-    <span class="badge badge-warn">DÉMARRAGE</span>
+    <span class="badge badge-warn">EN COURS</span>
   </div>
-  <div class="kv"><span class="kv-key">Console web</span><span class="kv-val"><a href="http://192.168.10.242:8006">192.168.10.242:8006</a> (boot en cours)</span></div>
-  <div class="kv"><span class="kv-key">Mode réseau</span><span class="kv-val">DHCP · macvlan br0</span></div>
+  <div class="kv"><span class="kv-key">Console web</span><span class="kv-val"><a href="http://192.168.10.243:8006">192.168.10.243:8006</a></span></div>
+  <div class="kv"><span class="kv-key">Conteneur / Guest</span><span class="kv-val">.243 conteneur · .242 guest</span></div>
   <div class="kv"><span class="kv-key">Stockage</span><span class="kv-val">/vm-gold/dockur/cli-01 (64 GB)</span></div>
 </div>
 
@@ -62,38 +61,38 @@
 <div class="card">
   <div class="kv"><span class="kv-key">Hôte</span><span class="kv-val">ubu1 (192.168.10.5) — 125 GB RAM · KVM</span></div>
   <div class="kv"><span class="kv-key">Docker</span><span class="kv-val">28.3.3 + Compose v2.39.1</span></div>
-  <div class="kv"><span class="kv-key">Réseau</span><span class="kv-val">macvlan sur br0 — 192.168.10.0/24</span></div>
-  <div class="kv"><span class="kv-key">Mode guest</span><span class="kv-val">DHCP (macvtap natif) · pas de shim nécessaire</span></div>
-  <div class="kv"><span class="kv-key">Notifications</span><span class="kv-val"><span class="badge badge-ok">Telegram CI actif</span></span></div>
+  <div class="kv"><span class="kv-key">Réseau</span><span class="kv-val">macvlan br0 · conteneur ≠ guest · shim .250</span></div>
+  <div class="kv"><span class="kv-key">MCP server</span><span class="kv-val">dr-stutters/windows-mcp (uv sync)</span></div>
+  <div class="kv"><span class="kv-key">Notifications</span><span class="kv-val"><span class="badge badge-ok">Telegram CI</span></span></div>
 </div>
 
 <h2>Chronologie</h2>
 <div class="timeline">
-  <div class="timeline-item done">🔑 Générateur AD seed — 35 users, 12 OUs, AGDLP</div>
-  <div class="timeline-item done">📦 Push GitHub → Yann0s/ai-for-it-ops-demos</div>
-  <div class="timeline-item done">🔒 SSH ed25519 → ubu1 (yannos)</div>
-  <div class="timeline-item done">🔧 Fix réseau → macvlan + DHCP=Y (4 itérations)</div>
-  <div class="timeline-item done">🖥 SRV-DC up — ping OK, web console OK</div>
-  <div class="timeline-item done">📡 CI Telegram notif → chaque push</div>
-  <div class="timeline-item">💻 CLI-01 — boot Windows 11 en cours</div>
-  <div class="timeline-item">⏳ Exécution install.bat (WinRM, SSH, RDP)</div>
-  <div class="timeline-item">⏳ Promotion DC + domaine aiitops.local via MCP</div>
-  <div class="timeline-item">⏳ Join CLI-01 au domaine</div>
+  <div class="timeline-item done">🔑 Seed AD — 35 users, 12 OUs, AGDLP</div>
+  <div class="timeline-item done">📦 GitHub → Yann0s/ai-for-it-ops-demos</div>
+  <div class="timeline-item done">🔒 SSH ed25519 → ubu1</div>
+  <div class="timeline-item done">🔧 Réseau macvlan DHCP=Y · IPs distinctes · shim</div>
+  <div class="timeline-item done">🖥 SRV-DC installé · install.bat manuel</div>
+  <div class="timeline-item done">🔌 WinRM + SSH + RDP opérationnels</div>
+  <div class="timeline-item done">🧪 windows-mcp smoke test OK (37 outils)</div>
+  <div class="timeline-item done">📡 Telegram CI → chaque push</div>
+  <div class="timeline-item">💻 CLI-01 — boot Win11 en cours</div>
+  <div class="timeline-item">🎬 Scène 1 — Déployer AD via MCP</div>
+  <div class="timeline-item">🔗 Join CLI-01 au domaine</div>
 </div>
 
-<h2>Prochaines étapes</h2>
+<h2>Prochaine étape — Demain</h2>
 <div class="card">
   <div style="font-size:0.85rem; line-height:1.7;">
-    1. Forcer le réinstall Windows pour que l'install.bat s'exécute<br>
-    2. Vérifier WinRM + SSH + RDP sur SRV-DC<br>
-    3. Déployer le serveur MCP (WinRM/SSH) sur ubu1<br>
-    4. Épisode : agent lit ad_seed.json → crée aiitops.local<br>
-    5. Join CLI-01, création utilisateur, connexion<br>
+    1. <code>win_rename_computer("SRV-DC")</code> → reboot<br>
+    2. <code>win_promote_to_dc</code> → aiitops.local<br>
+    3. Peupler l'annuaire depuis <code>ad_seed.json</code><br>
+    4. Vérifier CLI-01 → join domaine<br>
   </div>
 </div>
 
 <p style="color:var(--muted-foreground); font-size:0.75rem; margin-top:24px;">
-  Lab Windows AD · Dockur + macvlan br0 · Seed 35 users · 7 role groups · 7 resource groups
+  Lab Windows AD · Dockur + macvlan br0 · windows-mcp · Seed 35 users
 </p>
 
 </body>

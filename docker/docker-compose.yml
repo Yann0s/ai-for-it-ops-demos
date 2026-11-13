@@ -1,7 +1,5 @@
-# ───────────────────────────────────────────────────────────
-# Dockur Windows Server 2022 + Windows 11 via macvlan
-# Épisode « l'agent crée un domaine AD via MCP »
-# ───────────────────────────────────────────────────────────
+# Dockur Windows Server 2022 + Windows 11
+# Docker macvlan sur le LAN + DHCP=Y → macvtap natif, guest direct sur br0
 
 services:
   srv-dc:
@@ -17,8 +15,7 @@ services:
       RAM_SIZE: "8G"
       CPU_CORES: "4"
       DISK_SIZE: "80G"
-      # Réseau statique via Dockur (la VM configure sa propre IP)
-      DHCP: "N"
+      DHCP: "Y"
       IP: "192.168.10.241"
       GATEWAY: "192.168.10.254"
       DNS: "192.168.10.254"
@@ -27,9 +24,11 @@ services:
       - /dev/net/tun
     cap_add:
       - NET_ADMIN
+    device_cgroup_rules:
+      - 'c *:* rwm'
     volumes:
       - /vm-gold/dockur/srv-dc:/storage
-      - ./oem-srv-dc:/oem              # install.bat exécuté post-install
+      - ./oem-srv-dc:/oem
     restart: always
     stop_grace_period: 2m
 
@@ -46,15 +45,17 @@ services:
       RAM_SIZE: "4G"
       CPU_CORES: "2"
       DISK_SIZE: "64G"
-      DHCP: "N"
+      DHCP: "Y"
       IP: "192.168.10.242"
       GATEWAY: "192.168.10.254"
-      DNS: "192.168.10.241"             # pointe vers le DC (DNS du domaine)
+      DNS: "192.168.10.241"
     devices:
       - /dev/kvm
       - /dev/net/tun
     cap_add:
       - NET_ADMIN
+    device_cgroup_rules:
+      - 'c *:* rwm'
     volumes:
       - /vm-gold/dockur/cli-01:/storage
     restart: always
@@ -64,7 +65,7 @@ networks:
   default:
     driver: macvlan
     driver_opts:
-      parent: br0                     # interface bridge sur ubu1
+      parent: br0
     ipam:
       config:
         - subnet: 192.168.10.0/24

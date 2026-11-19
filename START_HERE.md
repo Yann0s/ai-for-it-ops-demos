@@ -80,7 +80,9 @@ Création de l'interface shim macvlan-host sur br0...
   Ping DC  : ping 192.168.10.241  
   Ping Win11: ping 192.168.10.242  
   Console DC web : http://192.168.10.241:8006  
-  RDP DC         : mstsc /v:192.168.10.241  
+  **RDP Activé :**  
+  SRV-DC         : mstsc /v:192.168.10.241 ou Remmina  
+  CLI-01         : mstsc /v:192.168.10.242 ou Remmina  
 _____  
 
 ## Accès

@@ -69,6 +69,19 @@ Vérifications :
 ping 192.168.1.241    # SRV-DC
 ping 192.168.1.242    # CLI-01
 ```
+_____
+**⚠ Ce setup n'est PAS persistant au reboot. Pour le rendre permanent :**
+   → ajouter dans /etc/network/interfaces ou un service systemd
+   → ou relancer ce script après reboot
+
+sudo ./setup-macvlan-shim.sh
+Création de l'interface shim macvlan-host sur br0...
+✓ Interface shim active. ce host peut maintenant joindre les conteneurs.
+  Ping DC  : ping 192.168.10.241
+  Ping Win11: ping 192.168.10.242
+  Console DC web : http://192.168.10.241:8006
+  RDP DC         : mstsc /v:192.168.10.241
+_____
 
 ## Accès
 

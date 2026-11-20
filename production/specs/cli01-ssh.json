@@ -1,0 +1,32 @@
+{
+  "title": "hermes  \u25b8  cli-01",
+  "prompt": [
+    "> Pr\u00e9pare cette machine Windows 11",
+    "  pour l'administration \u00e0 distance"
+  ],
+  "bullets": [
+    "renomme-la CLI-01",
+    "installe OpenSSH Server",
+    "d\u00e9marre le service sshd"
+  ],
+  "command": "$ Add-WindowsCapability -Online ...",
+  "result_label": "R\u00c9SULTAT",
+  "results": [
+    "hostname  \u2192  CLI-01",
+    "OpenSSH Server install\u00e9",
+    "sshd  Running  \u00b7  port 22"
+  ],
+  "next_label": "PROCHAINE \u00c9TAPE",
+  "next": [
+    "L'agent se connecte en SSH",
+    "et pilote la machine."
+  ],
+  "footer": [
+    "hermes  \u00b7  AI for IT & OPS",
+    "Windows 11  \u00b7  OpenSSH  \u00b7  d\u00e9mo"
+  ],
+  "crop": [82, 218, 975, 688],
+  "layout": {"prompt_h": 400, "vm_h": 880},
+  "hold_image": "fresh.png",
+  "hold_frames": 12
+}

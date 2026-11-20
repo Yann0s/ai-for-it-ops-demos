@@ -134,6 +134,6 @@ Convertir data.img vers data.qcow2 :
 
 ```bash
 qemu-img convert -c -O qcow2 path/to/windows/data.img some_path/my_windows_version.qcow2
-```bash
+```
 
 ### Realiser es Snapshots :  

@@ -138,16 +138,16 @@ qemu-img convert -c -O qcow2 path/to/windows/data.img some_path/my_windows_versi
 
 ### Realiser les Snapshots :  
 #### Sur VM / Conteneur éteint (docker compose stop)
-Creer un snapshot:
+Creer un snapshot:  
 qemu-img snapshot -c snapshot_name data.qcow2
 
-Restaurer un snapshot:
+Restaurer un snapshot:  
 qemu-img snapshot -a snapshot_name data.qcow2
 
-Supprimer un snapshot:
+Supprimer un snapshot:  
 qemu-img snapshot -d snapshot_name data.qcow2
 
-Lister les snapshots:
+Lister les snapshots:  
 qemu-img snapshot -l data.qcow2  
 
 
@@ -164,12 +164,12 @@ environment:
 En se connectant sur le port 7777 du conteneur via telnet,
 on peut utiliser les commandes suivantes:  
 
-Creer un snapshot machine virtuelle complete:
+Creer un snapshot machine virtuelle complete:  
 savevm <tag>
 
-Restorer la machine virtuelle depuis le snapshot:
+Restorer la machine virtuelle depuis le snapshot:  
 loadvm <tag>
 
-Supprimer le snapshot:
+Supprimer le snapshot:  
 delvm <tag>
 

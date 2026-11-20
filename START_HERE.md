@@ -1,6 +1,8 @@
 # AI for IT & OPS — Maquettes Docker (Dockur)
 
-**Deux VMs Windows reproductibles** pour les épisodes MCP : un **Server 2022** (futur DC) et un **Windows 11** (poste client), déployées via [Dockur](https://github.com/dockur/windows) en macvlan.
+**Deux VMs Windows reproductibles** pour les épisodes MCP : un **Server 2022** (futur DC) et un **Windows 11** (poste client), déployées via [Dockur](https://github.com/dockur/windows) en macvlan.  
+
+Notes Personnelles : convertion du fichier image, snapshot ...  
 
 ## Structure
 
@@ -60,7 +62,7 @@ Une fois l'installation terminée, l'`install.bat` s'exécute automatiquement (W
 
 ```bash
 # Rétablir la connectivité hôte → conteneurs
-sudo ./setup-macvlan-shim.sh
+**sudo ./setup-macvlan-shim.sh**
 ```
 
 Vérifications :
@@ -125,3 +127,13 @@ docker compose down -v
 rm -rf srv-dc cli-01
 # Relancer → VMs vierges, nouvel install
 ```
+
+## Notes Personnelles  
+### Convertion du fichier image de l'OS:  
+Convertir data.img vers data.qcow2 :  
+
+```bash
+qemu-img convert -c -O qcow2 path/to/windows/data.img some_path/my_windows_version.qcow2
+```bash
+
+### Realiser es Snapshots :  

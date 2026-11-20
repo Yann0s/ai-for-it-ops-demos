@@ -165,11 +165,11 @@ En se connectant sur le port 7777 du conteneur via telnet,
 on peut utiliser les commandes suivantes:  
 
 Creer un snapshot machine virtuelle complete:  
-savevm <tag>
+savevm nom_du_snapshot
 
 Restorer la machine virtuelle depuis le snapshot:  
-loadvm <tag>
+loadvm nom_du_snapshot
 
 Supprimer le snapshot:  
-delvm <tag>
+delvm nom_du_snapshot
 

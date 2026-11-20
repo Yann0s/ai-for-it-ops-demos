@@ -136,4 +136,42 @@ Convertir data.img vers data.qcow2 :
 qemu-img convert -c -O qcow2 path/to/windows/data.img some_path/my_windows_version.qcow2
 ```
 
-### Realiser es Snapshots :  
+### Realiser les Snapshots :  
+#### Sur VM / Conteneur éteint (docker compose stop)
+Creer un snapshot:
+
+qemu-img snapshot -c snapshot_name data.qcow2
+
+Restaurer un snapshot:
+
+qemu-img snapshot -a snapshot_name data.qcow2
+
+Supprimer un snapshot:
+
+qemu-img snapshot -d snapshot_name data.qcow2
+
+Lister les snapshots:
+
+qemu-img snapshot -l data.qcow2  
+
+Pour faire les memes operations sur machine allumée, il faut se connecter au port de monitoring de QEMU:  
+
+```bash
+environment:
+  MONITOR: "telnet:0.0.0.0:7777,server,nowait,nodelay"
+  HOST_PORTS: "7777"
+```  
+
+#### En utilisant le port de monitoring de QEMU:  
+En se connectant sur le port 7777 du conteneur via telnet,
+on peut utiliser les commandes suivantes:  
+
+Creer un snapshot machine virtuelle complete:
+savevm <tag>
+
+Restorer la machine virtuelle depuis le snapshot:
+loadvm <tag>
+
+Supprimer le snapshot:
+delvm <tag>
+

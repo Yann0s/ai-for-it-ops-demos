@@ -150,26 +150,3 @@ qemu-img snapshot -d snapshot_name data.qcow2
 Lister les snapshots:  
 qemu-img snapshot -l data.qcow2  
 
-
-Pour faire les memes operations sur machine allumée, il faut se connecter au port de monitoring de QEMU:  
-
-```bash
-# Dans docker-compose.yml
-environment:
-  MONITOR: "telnet:0.0.0.0:7777,server,nowait,nodelay"
-  HOST_PORTS: "7777"
-```  
-
-#### En utilisant le port de monitoring de QEMU:  
-En se connectant sur le port 7777 du conteneur via telnet,
-on peut utiliser les commandes suivantes:  
-
-Creer un snapshot machine virtuelle complete:  
-savevm nom_du_snapshot
-
-Restorer la machine virtuelle depuis le snapshot:  
-loadvm nom_du_snapshot
-
-Supprimer le snapshot:  
-delvm nom_du_snapshot
-

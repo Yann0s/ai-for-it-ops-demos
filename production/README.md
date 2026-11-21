@@ -128,3 +128,26 @@ diagnostic, il est pédagogique.
 `Add-WindowsCapability -name OpenSSH.Server~~~~0.0.1.0` prend 40-90 s. Couper
 la capture avant la fin donne l'impression que ça « gèle ». Prévoir la marge
 dans la timeline (ou couper le temps mort au montage).
+
+## 6. Livrable d'un clip (convention)
+
+Un clip validé se dépose dans un dossier `Clip-<ID>/` à la racine du dépôt,
+avec quatre fichiers :
+
+```
+Clip-0.1/
+├── scene-0.1-<slug>.mp4          # le clip 1080×1920
+├── <slug>.timeline.json          # actions + timings (rejouable)
+├── <slug>.spec.json              # textes + cadrage de la composition
+└── README.md                     # description, gabarit ci-dessous
+```
+
+Le README suit le gabarit `production/templates/clip-README.template.md`
+(exemple de référence : `Clip-0.1/README.md`). Il contient toujours, dans
+cet ordre : **Stack** (Hermes Desktop / Hermes Agent / Dockur), **Prompt de
+départ**, **Format + Cible**, **Ce que montre le clip** (tableau), **Réalisation**,
+**Contenu**.
+
+Les chiffres du README (durée, taille, résolution) viennent de `ffprobe`, pas
+d'une estimation.
+

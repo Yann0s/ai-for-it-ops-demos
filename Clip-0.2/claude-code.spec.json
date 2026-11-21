@@ -1,0 +1,40 @@
+{
+  "title": "hermes  ▸  cli-01",
+  "prompt": [
+    "> Installe Claude Code",
+    "  sur ce poste Windows 11"
+  ],
+  "bullets": [
+    "télécharge l'installeur officiel",
+    "lance l'installation",
+    "vérifie la version installée"
+  ],
+  "command": "$ curl.exe -fsSL .../install.cmd",
+  "result_label": "RÉSULTAT",
+  "results": [
+    "Claude Code 2.1.330",
+    "installé dans .local\\bin",
+    "claude --version  →  OK"
+  ],
+  "next_label": "PROCHAINE ÉTAPE",
+  "next": [
+    "L'agent interroge le serveur 2022",
+    "en SSH depuis ce poste."
+  ],
+  "footer": [
+    "hermes  ·  AI for IT & OPS",
+    "Windows 11  ·  Claude Code  ·  démo"
+  ],
+  "crop": [
+    0,
+    30,
+    830,
+    545
+  ],
+  "layout": {
+    "prompt_h": 380,
+    "vm_h": 960
+  },
+  "max_hold": 3,
+  "hold_frames": 10
+}

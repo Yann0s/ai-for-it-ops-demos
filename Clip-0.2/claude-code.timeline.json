@@ -1,0 +1,15 @@
+[
+  {"t": 1.0,  "type": "cmd", "text": "cd ..\\..", "layout": "us"},
+  {"t": 2.0,  "type": "key", "key": "enter"},
+  {"t": 4.0,  "type": "cmd", "text": "cls", "layout": "us"},
+  {"t": 5.0,  "type": "key", "key": "enter"},
+  {"t": 7.0,  "type": "cmd", "text": "curl.exe -fsSL https://claude.ai/install.cmd -o cc.cmd", "layout": "us"},
+  {"t": 12.0, "type": "key", "key": "enter"},
+  {"t": 17.0, "type": "cmd", "text": "cc.cmd", "layout": "us"},
+  {"t": 19.0, "type": "key", "key": "enter"},
+  {"t": 40.0, "type": "cmd", "text": "cd .local\\bin", "layout": "us"},
+  {"t": 42.0, "type": "key", "key": "enter"},
+  {"t": 44.0, "type": "cmd", "text": "claude --version", "layout": "us"},
+  {"t": 46.0, "type": "key", "key": "enter"},
+  {"t": 54.0, "type": "key", "key": "enter"}
+]

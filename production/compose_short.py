@@ -20,7 +20,7 @@ ACC = "#58a6ff"
 GRN = "#3fb950"
 DIM = "#8b949e"
 PANEL = "#161b22"
-BAND_BG = "#0c0c0c"
+BAND_BG = "#000000"
 FONTS = os.environ.get("PANEL_FONTS", "/home/hermes/.hermes/cache/scratch/fonts")
 
 
@@ -61,49 +61,50 @@ def make_result(spec, height):
     img = Image.new("RGB", (W, height), BG)
     d = ImageDraw.Draw(img)
     d.rectangle([0, 0, W, 4], fill=ACC)
-    y = 40
+    y = 32
     d.text((34, y), spec.get("result_label", "R\u00c9SULTAT"), font=font(22, True), fill=DIM)
-    y += 52
+    y += 46
     for item in spec.get("results", []):
-        d.text((34, y), "\u2713  " + item, font=font(29), fill=GRN)
-        y += 70
+        d.text((34, y), "\u2713  " + item, font=font(27), fill=GRN)
+        y += 58
 
     nxt = spec.get("next")
     if nxt:
-        y += 26
+        y += 18
         d.rectangle([34, y, W - 34, y + 2], fill="#21262d")
-        y += 36
+        y += 30
         d.text((34, y), spec.get("next_label", "PROCHAINE \u00c9TAPE"), font=font(20, True), fill=DIM)
-        y += 42
+        y += 34
         for line in nxt:
-            d.text((34, y), line, font=font(27), fill=FG)
-            y += 38
+            d.text((34, y), line, font=font(25), fill=FG)
+            y += 34
 
     footer = spec.get("footer", [])
     if footer:
-        fy = height - 92
-        d.rectangle([34, fy - 28, W - 34, fy - 26], fill="#21262d")
+        fy = height - 84
+        d.rectangle([34, fy - 26, W - 34, fy - 24], fill="#21262d")
         d.text((34, fy), footer[0], font=font(22), fill=DIM)
         if len(footer) > 1:
-            d.text((34, fy + 32), footer[1], font=font(20), fill="#484f58")
+            d.text((34, fy + 30), footer[1], font=font(20), fill="#484f58")
     return img
 
 
 def fit_band(img, crop, band_h):
-    """Recadre sur la zone utile, redimensionne sans deformer, centre sur fond noir."""
+    """Recadre sur la zone utile, ajuste par la largeur, centre sur fond noir."""
     c = img.crop(tuple(crop))
     w, h = c.size
-    new_h = int(w * band_h / W)
-    if new_h > band_h:
-        new_h = band_h
-        new_w = int(h * W / band_h)
-        left = (w - new_w) // 2
-        c = c.crop((left, 0, left + new_w, h))
-        w, h = c.size
-        new_h = band_h
-    resized = c.resize((W, new_h), Image.LANCZOS)
+    nh = int(h * W / w)
     band = Image.new("RGB", (W, band_h), BAND_BG)
-    band.paste(resized, (0, (band_h - new_h) // 2))
+    if nh <= band_h:
+        resized = c.resize((W, nh), Image.LANCZOS)
+        band.paste(resized, (0, (band_h - nh) // 2))
+        return band
+    # trop haut : ajuster par la hauteur et rogner les cotes
+    nw = int(w * band_h / h)
+    left = (w - nw) // 2
+    c = c.crop((left, 0, left + nw, h))
+    resized = c.resize((W, band_h), Image.LANCZOS)
+    band.paste(resized, (0, 0))
     return band
 
 
@@ -129,9 +130,22 @@ def main():
 
     files = sorted(glob.glob(os.path.join(src, "f_*.png")))
     crop = spec.get("crop", [82, 218, 975, 688])
+    max_hold = int(spec.get("max_hold", 0))  # 0 = pas de dedupe
     n = 0
+    last_sig = None
+    hold = 0
     for fp in files:
-        band = fit_band(Image.open(fp).convert("RGB"), crop, vm_h)
+        img = Image.open(fp).convert("RGB")
+        if max_hold:
+            sig = img.resize((64, 48)).tobytes()
+            if sig == last_sig:
+                hold += 1
+                if hold > max_hold:
+                    continue
+            else:
+                last_sig = sig
+                hold = 0
+        band = fit_band(img, crop, vm_h)
         c = canvas.copy()
         c.paste(band, (0, prompt_h))
         n += 1

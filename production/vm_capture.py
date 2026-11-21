@@ -21,10 +21,29 @@ from vncdotool import api
 
 HOST = os.environ.get("VNC_HOST", "localhost::5902")
 
-# touches US a envoyer pour obtenir le caractere AZERTY voulu
-AZERTY_MAP = {"a": "q", "m": ";", "z": "w", "w": "z", "-": "6", "'": "4", "=": "8"}
+# QEMU traduit le keysym envoye en scancodes via un keymap US (les modificateurs
+# envoyes par le client sont ignores). Donc : pour une VM US, envoyer le keysym du
+# caractere ; pour une VM AZERTY, envoyer le keysym US de la touche physique.
+_LETTERS = {
+    "a": "q", "b": "b", "c": "c", "d": "d", "e": "e", "f": "f", "g": "g",
+    "h": "h", "i": "i", "j": "j", "k": "k", "l": "l", "m": ";", "n": "n",
+    "o": "o", "p": "p", "q": "a", "r": "r", "s": "s", "t": "t", "u": "u",
+    "v": "v", "w": "z", "x": "x", "y": "y", "z": "w",
+}
+_PUNCT = {
+    "-": "6", ".": "<", ",": "m", ";": ",", ":": ".", "/": ">", "!": "/",
+    "?": "M", "(": "5", ")": "-", "=": "=", "+": "+", "_": "8", '"': "3",
+    "'": "4", "$": "]", "^": "[", "*": '"', "\u00f9": "'", "&": "1",
+    "\u00e9": "2", "\u00e8": "7", "\u00e7": "9", "\u00e0": "0",
+}
+AZERTY_TO_US = dict(_LETTERS)
+AZERTY_TO_US.update({k.upper(): v.upper() for k, v in _LETTERS.items()})
+AZERTY_TO_US.update(_PUNCT)
+# non typables en AZERTY sans AltGr : ~ @ # \ |
 
-# caracteres US necessitant Shift (keysym de base -> keysym envoye)
+# En layout US : ces caracteres necessitent un Shift reel (envoye avec un delai,
+# sinon QEMU perd le modificateur). Les majuscules, elles, passent en envoyant
+# directement le keysym majuscule.
 US_SHIFT = {
     "~": "`", "!": "1", "@": "2", "#": "3", "$": "4", "%": "5", "^": "6",
     "&": "7", "*": "8", "(": "9", ")": "0", "_": "-", "+": "=", "{": "[",
@@ -33,33 +52,24 @@ US_SHIFT = {
 
 
 def type_text(c, text, layout="us", delay=0.03):
-    """Tape un texte. layout='us' (VM en QWERTY) ou 'azerty' (VM en FR)."""
+    """Tape un texte. layout='us' (VM QWERTY) ou 'azerty' (VM FR)."""
     for ch in text:
         if ch == " ":
             c.keyPress("space")
         elif layout == "azerty":
-            if ch.isupper():
-                base = AZERTY_MAP.get(ch.lower(), ch.lower())
-                c.keyDown("shift")
-                c.keyPress(base)
-                c.keyUp("shift")
-            elif ch.isdigit():
-                c.keyDown("shift")
-                c.keyPress(ch)
-                c.keyUp("shift")
-            else:
-                c.keyPress(AZERTY_MAP.get(ch, ch))
-        else:  # us
-            if ch in US_SHIFT:
-                c.keyDown("shift")
-                c.keyPress(US_SHIFT[ch])
-                c.keyUp("shift")
-            elif ch.isupper():
-                c.keyDown("shift")
-                c.keyPress(ch.lower())
-                c.keyUp("shift")
-            else:
-                c.keyPress(ch)
+            ks = AZERTY_TO_US.get(ch)
+            if ks is None:
+                raise ValueError(f"caractere non typable en AZERTY: {ch!r}")
+            c.keyPress(ks)
+        elif ch in US_SHIFT:
+            c.keyDown("shift")
+            time.sleep(0.09)
+            c.keyPress(US_SHIFT[ch])
+            time.sleep(0.05)
+            c.keyUp("shift")
+            time.sleep(0.07)
+        else:
+            c.keyPress(ch)
         time.sleep(delay)
 
 

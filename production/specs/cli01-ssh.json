@@ -6,14 +6,15 @@
   ],
   "bullets": [
     "renomme-la CLI-01",
+    "r\u00e9pare le DNS et v\u00e9rifie Internet",
     "installe OpenSSH Server",
     "d\u00e9marre le service sshd"
   ],
-  "command": "$ Add-WindowsCapability -Online ...",
+  "command": "$ add-windowscapability -online ...",
   "result_label": "R\u00c9SULTAT",
   "results": [
     "hostname  \u2192  CLI-01",
-    "OpenSSH Server install\u00e9",
+    "ping microsoft.com  \u2192  OK",
     "sshd  Running  \u00b7  port 22"
   ],
   "next_label": "PROCHAINE \u00c9TAPE",
@@ -25,8 +26,9 @@
     "hermes  \u00b7  AI for IT & OPS",
     "Windows 11  \u00b7  OpenSSH  \u00b7  d\u00e9mo"
   ],
-  "crop": [82, 218, 975, 688],
-  "layout": {"prompt_h": 400, "vm_h": 880},
-  "hold_image": "fresh.png",
+  "crop": [4, 40, 1326, 1000],
+  "layout": {"prompt_h": 400, "vm_h": 1000},
+  "max_hold": 5,
+  "hold_image": "fresh2.png",
   "hold_frames": 12
 }

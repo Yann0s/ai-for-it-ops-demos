@@ -1,2 +1,4 @@
 # Fichier de verrou Docker
-docker-compose.override.yml
+docker-compose.override.yml__pycache__/
+*.pyc
+production/renders/

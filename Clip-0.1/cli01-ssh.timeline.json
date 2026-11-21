@@ -1,0 +1,20 @@
+[
+  {"t": 2.0,   "type": "cmd", "text": "hostname", "layout": "us"},
+  {"t": 3.0,   "type": "key", "key": "enter"},
+  {"t": 7.0,   "type": "cmd", "text": "rename-computer -newname CLI-01 -force", "layout": "us"},
+  {"t": 9.5,   "type": "key", "key": "enter"},
+  {"t": 14.0,  "type": "cmd", "text": "ping microsoft.com -n 2", "layout": "us"},
+  {"t": 15.5,  "type": "key", "key": "enter"},
+  {"t": 38.0,  "type": "cmd", "text": "netsh interface ip set dns \"Ethernet\" static 1.1.1.1", "layout": "us"},
+  {"t": 40.0,  "type": "key", "key": "enter"},
+  {"t": 44.0,  "type": "cmd", "text": "ping microsoft.com -n 2", "layout": "us"},
+  {"t": 45.5,  "type": "key", "key": "enter"},
+  {"t": 56.0,  "type": "cmd", "text": "add-windowscapability -online -name openssh.server~~~~0.0.1.0", "layout": "us"},
+  {"t": 58.5,  "type": "key", "key": "enter"},
+  {"t": 205.0, "type": "cmd", "text": "start-service sshd", "layout": "us"},
+  {"t": 206.5, "type": "key", "key": "enter"},
+  {"t": 210.0, "type": "cmd", "text": "set-service sshd -startuptype automatic", "layout": "us"},
+  {"t": 212.0, "type": "key", "key": "enter"},
+  {"t": 215.0, "type": "cmd", "text": "get-service sshd", "layout": "us"},
+  {"t": 216.5, "type": "key", "key": "enter"}
+]

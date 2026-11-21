@@ -1,0 +1,41 @@
+{
+  "title": "hermes  ▸  cli-01",
+  "prompt": [
+    "> Installe Antigravity CLI",
+    "  sur ce poste Windows 11"
+  ],
+  "bullets": [
+    "télécharge l'installeur officiel",
+    "lance l'installation",
+    "vérifie le binaire installé"
+  ],
+  "command": "$ curl.exe -fsSL .../install.cmd",
+  "prompt_rule": "none",
+  "result_label": "RÉSULTAT",
+  "results": [
+    "Antigravity CLI installé",
+    "agy.exe dans AppData\\Local\\agy\\bin",
+    "prêt pour agy -p"
+  ],
+  "next_label": "PROCHAINE ÉTAPE",
+  "next": [
+    "L'agent interroge le serveur 2022",
+    "en SSH depuis ce poste."
+  ],
+  "footer": [
+    "hermes  ·  AI for IT & OPS",
+    "Windows 11  ·  Antigravity  ·  démo"
+  ],
+  "crop": [
+    0,
+    0,
+    830,
+    470
+  ],
+  "layout": {
+    "prompt_h": 380,
+    "vm_h": 960
+  },
+  "max_hold": 3,
+  "hold_frames": 10
+}

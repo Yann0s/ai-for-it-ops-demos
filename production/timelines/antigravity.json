@@ -1,0 +1,13 @@
+[
+  {"t": 1.0,  "type": "cmd", "text": "cls", "layout": "us"},
+  {"t": 2.0,  "type": "key", "key": "enter"},
+  {"t": 4.0,  "type": "cmd", "text": "curl.exe -fsSL https://antigravity.google/cli/install.cmd -o agy.cmd", "layout": "us"},
+  {"t": 11.0, "type": "key", "key": "enter"},
+  {"t": 18.0, "type": "cmd", "text": "agy.cmd", "layout": "us"},
+  {"t": 20.0, "type": "key", "key": "enter"},
+  {"t": 36.0, "type": "cmd", "text": "cd appdata\\local\\agy\\bin", "layout": "us"},
+  {"t": 38.0, "type": "key", "key": "enter"},
+  {"t": 40.0, "type": "cmd", "text": "dir agy.exe", "layout": "us"},
+  {"t": 42.0, "type": "key", "key": "enter"},
+  {"t": 50.0, "type": "key", "key": "enter"}
+]

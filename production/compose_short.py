@@ -52,8 +52,14 @@ def make_prompt(spec, height):
     if cmd:
         d.text((34, y), cmd, font=font(26, True), fill=GRN)
 
-    d.rectangle([34, height - 28, W - 34, height - 18], fill="#21262d")
-    d.rectangle([34, height - 28, 34 + int((W - 68) * 0.86), height - 18], fill=ACC)
+    # Filet de separation bas de panneau. "accent" (defaut, historique) = bleu plein ;
+    # "subtle" = gris discret ; "none" = rien. Un filet bleu colle sous la ligne de
+    # commande se lit comme une barre qui passe sur le texte : preferer "none".
+    rule = spec.get("prompt_rule", "accent")
+    if rule == "accent":
+        d.rectangle([0, height - 4, W, height], fill=ACC)
+    elif rule == "subtle":
+        d.rectangle([0, height - 2, W, height], fill="#21262d")
     return img
 
 

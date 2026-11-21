@@ -70,13 +70,24 @@ def type_text(c, text, layout="us", delay=0.03):
             time.sleep(0.07)
         else:
             c.keyPress(ch)
+            if ch.isupper():
+                # QEMU peut laisser Shift enfonce apres un keysym majuscule :
+                # forcer le relachement, sinon la suite sort en MAJUSCULES.
+                c.keyUp("shift")
         time.sleep(delay)
+        # Relachement systematique : un Shift residuel (apres ':' ou '-' dans une URL)
+        # transforme la suite de la commande en MAJUSCULES.
+        c.keyUp("shift")
 
 
 def run_take(out_dir, duration, timeline, host=HOST, fps_sleep=0.15):
     """Capture en continu et execute la timeline (secondes, une fois chaque)."""
     os.makedirs(out_dir, exist_ok=True)
     c = api.connect(host)
+    # Etat clavier propre : QEMU peut garder Shift enfonce d'une session precedente.
+    for _ in range(3):
+        c.keyUp("shift")
+        time.sleep(0.05)
     pending = sorted(timeline, key=lambda a: a["t"])
     start = time.time()
     i = 0

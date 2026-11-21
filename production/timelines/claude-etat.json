@@ -1,0 +1,19 @@
+[
+ {
+  "t": 1.0,
+  "type": "cmd",
+  "text": "cls",
+  "enter": true
+ },
+ {
+  "t": 3.0,
+  "type": "cmd",
+  "text": ".\\claude -p \"connecte toi en ssh sur admin@192.168.10.241 avec la cle .ssh\\demo, puis fais l etat des lieux : hostname, adresse ipv4, espace disque libre, ports en ecoute, et les 5 derniers evenements systeme et application\" --dangerously-skip-permissions",
+  "enter": true
+ },
+ {
+  "t": 125.0,
+  "type": "wait",
+  "seconds": 0.1
+ }
+]

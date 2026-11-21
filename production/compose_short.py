@@ -68,11 +68,13 @@ def make_result(spec, height):
     d = ImageDraw.Draw(img)
     d.rectangle([0, 0, W, 4], fill=ACC)
     y = 32
-    d.text((34, y), spec.get("result_label", "R\u00c9SULTAT"), font=font(22, True), fill=DIM)
-    y += 46
-    for item in spec.get("results", []):
-        d.text((34, y), "\u2713  " + item, font=font(27), fill=GRN)
-        y += 58
+    items = spec.get("results", [])
+    if items:
+        d.text((34, y), spec.get("result_label", "R\u00c9SULTAT"), font=font(22, True), fill=DIM)
+        y += 46
+        for item in items:
+            d.text((34, y), "\u2713  " + item, font=font(27), fill=GRN)
+            y += 58
 
     nxt = spec.get("next")
     if nxt:
@@ -84,6 +86,19 @@ def make_result(spec, height):
         for line in nxt:
             d.text((34, y), line, font=font(25), fill=FG)
             y += 34
+
+    # Bloc de conclusion : phrase(s) de synthese, sans coche. Remplace le bloc
+    # "prochaine etape" quand le clip cloture un chapitre.
+    concl = spec.get("conclusion")
+    if concl:
+        y += 14
+        d.rectangle([34, y, W - 34, y + 2], fill="#21262d")
+        y += 28
+        d.text((34, y), spec.get("conclusion_label", "EN R\u00c9SUM\u00c9"), font=font(20, True), fill=DIM)
+        y += 34
+        for line in concl:
+            d.text((34, y), line, font=font(26), fill=FG)
+            y += 36
 
     footer = spec.get("footer", [])
     if footer:

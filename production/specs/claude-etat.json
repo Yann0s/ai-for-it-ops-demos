@@ -1,0 +1,38 @@
+{
+  "title": "hermes  ▸  cli-01",
+  "prompt": [
+    "> L'agent fait l'etat des lieux",
+    "  du serveur 2022, en ssh"
+  ],
+  "bullets": [
+    "ssh admin@192.168.10.241 (cle .ssh\\demo)",
+    "os, ip, disque, ports, evenements",
+    "aucune intervention sur le serveur"
+  ],
+  "command": "$ claude -p \"…\" --dangerously-skip-permissions",
+  "prompt_rule": "none",
+  "result_label": "RÉSULTAT",
+  "results": [],
+  "conclusion_label": "CE QUE ÇA MONTRE",
+  "conclusion": [
+    "Un LLM pilote un poste ou un serveur Windows",
+    "avec les outils natifs : cmd, PowerShell, ssh.",
+    "Rien a deployer cote machine cible."
+  ],
+  "footer": [
+    "hermes  ·  AI for IT & OPS",
+    "Windows 11  ·  serveur 2022  ·  démo"
+  ],
+  "crop": [
+    700,
+    130,
+    1400,
+    875
+  ],
+  "layout": {
+    "prompt_h": 380,
+    "vm_h": 1150
+  },
+  "max_hold": 0,
+  "hold_frames": 10
+}

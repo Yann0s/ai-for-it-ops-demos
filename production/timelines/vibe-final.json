@@ -1,0 +1,4 @@
+[
+  {"t": 1.5, "type": "cmd", "text": "vibe --version", "enter": true},
+  {"t": 4.0, "type": "idle_wait", "quiet": 4, "timeout": 25}
+]

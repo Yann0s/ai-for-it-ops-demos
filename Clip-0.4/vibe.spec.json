@@ -1,0 +1,41 @@
+{
+  "title": "hermes  ▸  cli-01",
+  "prompt": [
+    "> Installe Vibe (Mistral)",
+    "  sur ce poste Windows 11"
+  ],
+  "bullets": [
+    "installe uv via winget",
+    "installe mistral-vibe",
+    "vérifie le binaire vibe"
+  ],
+  "command": "$ uv tool install --python 3.12 mistral-vibe",
+  "prompt_rule": "none",
+  "result_label": "RÉSULTAT",
+  "results": [
+    "Vibe 3.1.4 installé",
+    "vibe, vibe-acp, vibe-app-server",
+    "prêt pour vibe -p"
+  ],
+  "next_label": "PROCHAINE ÉTAPE",
+  "next": [
+    "L'agent se connecte au serveur 2022",
+    "et fait l'état des lieux."
+  ],
+  "footer": [
+    "hermes  ·  AI for IT & OPS",
+    "Windows 11  ·  Vibe  ·  démo"
+  ],
+  "crop": [
+    0,
+    60,
+    1120,
+    985
+  ],
+  "layout": {
+    "prompt_h": 380,
+    "vm_h": 980
+  },
+  "max_hold": 3,
+  "hold_frames": 10
+}

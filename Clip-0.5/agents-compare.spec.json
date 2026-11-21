@@ -1,0 +1,41 @@
+{
+  "title": "hermes  ▸  cli-01",
+  "prompt": [
+    "> Trois agents, la même question",
+    "  sur ce poste Windows 11"
+  ],
+  "bullets": [
+    "claude code · antigravity · vibe",
+    "même question, trois réponses",
+    "mode headless (-p)"
+  ],
+  "command": "$ claude -p \"un controleur de domaine en 10 mots\"",
+  "prompt_rule": "none",
+  "result_label": "RÉSULTAT",
+  "results": [
+    "Claude Code 2.1.330 — répond",
+    "Antigravity 1.5.14 — Google AI Pro",
+    "Vibe 3.1.4 — clé API Mistral"
+  ],
+  "next_label": "PROCHAINE ÉTAPE",
+  "next": [
+    "Les agents passent au serveur 2022",
+    "et font l'état des lieux."
+  ],
+  "footer": [
+    "hermes  ·  AI for IT & OPS",
+    "Windows 11  ·  3 agents  ·  démo"
+  ],
+  "crop": [
+    0,
+    48,
+    700,
+    683
+  ],
+  "layout": {
+    "prompt_h": 380,
+    "vm_h": 980
+  },
+  "max_hold": 3,
+  "hold_frames": 10
+}

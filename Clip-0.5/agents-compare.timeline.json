@@ -1,0 +1,7 @@
+[
+  {"t": 1.0,  "type": "cmd", "text": "cls", "enter": true},
+  {"t": 4.0,  "type": "cmd", "text": ".\\claude -p \"un controleur de domaine en 10 mots\"", "enter": true},
+  {"t": 34.0, "type": "cmd", "text": "agy -p \"un controleur de domaine en 10 mots\"", "enter": true},
+  {"t": 64.0, "type": "cmd", "text": ".\\vibe -p \"un controleur de domaine en 10 mots\"", "enter": true},
+  {"t": 96.0, "type": "wait", "seconds": 18}
+]

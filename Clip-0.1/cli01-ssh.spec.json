@@ -1,34 +1,41 @@
 {
-  "title": "hermes  \u25b8  cli-01",
+  "title": "hermes  ▸  cli-01",
   "prompt": [
-    "> Pr\u00e9pare cette machine Windows 11",
-    "  pour l'administration \u00e0 distance"
+    "> Prépare cette machine Windows 11",
+    "  pour l'administration à distance"
   ],
   "bullets": [
     "renomme-la CLI-01",
-    "r\u00e9pare le DNS et v\u00e9rifie Internet",
-    "installe OpenSSH Server",
-    "d\u00e9marre le service sshd"
+    "répare le DNS et vérifie Internet",
+    "installe OpenSSH Server et démarre sshd"
   ],
   "command": "$ add-windowscapability -online ...",
-  "result_label": "R\u00c9SULTAT",
+  "prompt_rule": "none",
+  "result_label": "RÉSULTAT",
   "results": [
-    "hostname  \u2192  CLI-01",
-    "ping microsoft.com  \u2192  OK",
-    "sshd  Running  \u00b7  port 22"
+    "hostname  →  CLI-01",
+    "ping microsoft.com  →  OK",
+    "sshd  Running  ·  port 22"
   ],
-  "next_label": "PROCHAINE \u00c9TAPE",
+  "next_label": "PROCHAINE ÉTAPE",
   "next": [
     "L'agent se connecte en SSH",
     "et pilote la machine."
   ],
   "footer": [
-    "hermes  \u00b7  AI for IT & OPS",
-    "Windows 11  \u00b7  OpenSSH  \u00b7  d\u00e9mo"
+    "hermes  ·  AI for IT & OPS",
+    "Windows 11  ·  OpenSSH  ·  démo"
   ],
-  "crop": [4, 40, 1326, 1000],
-  "layout": {"prompt_h": 400, "vm_h": 1000},
+  "crop": [
+    0,
+    40,
+    1010,
+    894
+  ],
+  "layout": {
+    "prompt_h": 380,
+    "vm_h": 980
+  },
   "max_hold": 5,
-  "hold_image": "fresh2.png",
-  "hold_frames": 12
+  "band_bg": "#0c0c0c"
 }

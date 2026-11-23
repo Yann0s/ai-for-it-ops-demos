@@ -69,11 +69,27 @@ ffmpeg -y -framerate 2 -i comp/f_%04d.png \
 
 ### Gabarit du montage (1080×1920)
 
+Gabarit en vigueur (clips 0.5 à 0.8, référence d'homogénéité) :
+
 | Bande | Hauteur | Contenu |
 |---|---|---|
-| Panneau prompt | 400 px | objectif en langage naturel + commande clé |
-| Bande VM | 880 px | terminal recadré (`CROP`) sur fond noir `#0c0c0c` |
-| Panneau résultat | 640 px | 3 vérifications + prochaine étape + signature |
+| Panneau prompt | 380 px | objectif en langage naturel + 3 puces + commande clé |
+| Bande VM | 980 px | terminal recadré (`crop`) |
+| Panneau résultat | 560 px | vérifications + prochaine étape (ou conclusion) + signature |
+
+Le panneau résultat doit faire **≥ 560 px** dès qu'il porte les trois blocs
+(vérifications + prochaine étape + signature) : à 390 px le bloc « prochaine
+étape » chevauche la signature. Un panneau à 390 px ne convient qu'aux clips
+qui remplacent les vérifications par un bloc de conclusion.
+
+Deux clés de spec gouvernent le rendu :
+
+- `prompt_rule` : `accent` (filet bleu, historique), `subtle` (gris), `none`
+  (rien). Un filet bleu collé sous la ligne de commande se lit comme une barre
+  qui passe sur le texte — la série utilise `none`.
+- `band_bg` : couleur du fond de bande, `#000000` par défaut. La mettre à
+  `#0c0c0c` (noir du terminal Windows) rend le letterbox invisible quand
+  l'image recadrée ne remplit pas la bande en hauteur.
 
 Le fond de la bande VM est le **noir du terminal** : le letterbox devient
 invisible et la fenêtre paraît occuper toute la bande.

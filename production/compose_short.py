@@ -110,12 +110,12 @@ def make_result(spec, height):
     return img
 
 
-def fit_band(img, crop, band_h):
-    """Recadre sur la zone utile, ajuste par la largeur, centre sur fond noir."""
+def fit_band(img, crop, band_h, band_bg=BAND_BG):
+    """Recadre sur la zone utile, ajuste par la largeur, centre sur fond band_bg."""
     c = img.crop(tuple(crop))
     w, h = c.size
     nh = int(h * W / w)
-    band = Image.new("RGB", (W, band_h), BAND_BG)
+    band = Image.new("RGB", (W, band_h), band_bg)
     if nh <= band_h:
         resized = c.resize((W, nh), Image.LANCZOS)
         band.paste(resized, (0, (band_h - nh) // 2))
@@ -151,6 +151,7 @@ def main():
 
     files = sorted(glob.glob(os.path.join(src, "f_*.png")))
     crop = spec.get("crop", [82, 218, 975, 688])
+    band_bg = spec.get("band_bg", BAND_BG)
     max_hold = int(spec.get("max_hold", 0))  # 0 = pas de dedupe
     n = 0
     last_sig = None
@@ -166,7 +167,7 @@ def main():
             else:
                 last_sig = sig
                 hold = 0
-        band = fit_band(img, crop, vm_h)
+        band = fit_band(img, crop, vm_h, band_bg)
         c = canvas.copy()
         c.paste(band, (0, prompt_h))
         n += 1
@@ -174,7 +175,7 @@ def main():
 
     extra_img = spec.get("hold_image")
     if extra_img and os.path.exists(extra_img):
-        band = fit_band(Image.open(extra_img).convert("RGB"), crop, vm_h)
+        band = fit_band(Image.open(extra_img).convert("RGB"), crop, vm_h, band_bg)
         c = canvas.copy()
         c.paste(band, (0, prompt_h))
         for _ in range(spec.get("hold_frames", 12)):

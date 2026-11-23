@@ -1,0 +1,7 @@
+[
+  {"t": 1.0, "type": "cmd", "text": "clear-host", "enter": true},
+  {"t": 2.6, "type": "cmd", "text": "hostname", "enter": true},
+  {"t": 4.4, "type": "cmd", "text": "get-computerinfo | select-object -expandproperty windowsproductname", "enter": true},
+  {"t": 7.0, "type": "cmd", "text": "get-windowsfeature ad-domain-services | select-object name, installstate", "enter": true},
+  {"t": 10.0, "type": "idle_wait", "quiet": 3, "timeout": 25}
+]

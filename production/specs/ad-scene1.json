@@ -1,0 +1,32 @@
+{
+  "title": "hermes  \u25b8  srv-dc  \u25b8  sc\u00e8ne 1",
+  "prompt": [
+    "> installer le r\u00f4le AD DS"
+  ],
+  "bullets": [
+    "windows server 2022 \u00b7 commandes en minuscules"
+  ],
+  "command": "PS> install-windowsfeature ad-domain-services",
+  "prompt_rule": "none",
+  "result_label": "R\u00c9SULTAT",
+  "results": [
+    "success : true \u2014 restart needed : no",
+    "services AD DS + outils d'administration install\u00e9s"
+  ],
+  "next_label": "PROCHAINE \u00c9TAPE",
+  "next": [
+    "Promouvoir le serveur en contr\u00f4leur de domaine aiitops.local."
+  ],
+  "footer": [
+    "hermes  \u00b7  AI for IT & OPS",
+    "Windows Server 2022  \u00b7  d\u00e9mo"
+  ],
+  "crop": [8, 31, 1895, 655],
+  "layout": {
+    "prompt_h": 236,
+    "vm_h": 634
+  },
+  "max_hold": 3,
+  "max_frames": 78,
+  "hold_frames": 10
+}

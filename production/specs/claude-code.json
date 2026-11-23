@@ -27,14 +27,16 @@
   ],
   "crop": [
     0,
-    30,
-    830,
-    545
+    40,
+    700,
+    520
   ],
   "layout": {
     "prompt_h": 380,
-    "vm_h": 960
+    "vm_h": 980
   },
   "max_hold": 3,
-  "hold_frames": 10
+  "hold_frames": 10,
+  "prompt_rule": "none",
+  "band_bg": "#0c0c0c"
 }

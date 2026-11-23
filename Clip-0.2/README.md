@@ -16,7 +16,7 @@
   · vérifie la version installée
 ```
 
-**Format :** 1080×1920 (9:16) · 22,5 s · H.264 · ~285 Ko
+**Format :** 1080×1920 (9:16) · 22,5 s · H.264 · ~305 Ko
 **Cible :** CLI-01, Windows 11 (Dockur / QEMU-KVM, macvlan `192.168.10.242`)
 
 ## Ce que montre le clip
@@ -36,6 +36,13 @@ Capture VNC de la console (2 fps) pilotée par `claude-code.timeline.json`, comp
 9:16 via `compose_short.py` + `claude-code.spec.json`, encodage ffmpeg
 (`setpts=0.42*PTS`, 30 fps). Timeline et spec sont incluses : la prise est rejouable
 à l'identique.
+
+**Format aligné sur le clip 0.5** (homogénéité de la série) : panneaux 380 / 980 / 560 px,
+`prompt_rule: none` (le filet bleu par défaut coupait la ligne de commande),
+`band_bg: #0c0c0c` (le fond de bande prend le noir exact du terminal, le letterbox
+disparaît), recadrage `[0, 40, 700, 520]` — largeur 700 px pour un zoom de ×1,54,
+identique à la fenêtre demi-écran du 0.5. La composition est refaite depuis la prise
+d'origine (`take-cc-trim/`, 108 frames), sans rejouer la scène sur la VM.
 
 ## Contenu
 

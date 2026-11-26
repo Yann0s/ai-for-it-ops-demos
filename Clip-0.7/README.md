@@ -6,6 +6,10 @@
 - **Hermes Agent** (VPS) — orchestre la scène : tunnel SSH vers le serveur Linux local, pilote la console VNC, capture les frames et compose le clip.
 - **Dockur** (serveur Linux local, ubu1) — les maquettes : conteneurs QEMU/KVM avec IP macvlan sur le LAN (CLI-01 = `192.168.10.242`, serveur 2022 = `192.168.10.241`).
 
+## BandeSon
+
+Antigravity fait l'état des lieux de Windows Server 2022 : il se connecte en ssh depuis le PC d'administration puis fait un inventaire rapide : hostname, adresse ipv4, espace disque libre, ports en ecoute, et les 5 derniers evenements systeme et application C'est l'agent qui determine les commandes systemes a utiliser
+
 ## Prompt de départ
 
 ```

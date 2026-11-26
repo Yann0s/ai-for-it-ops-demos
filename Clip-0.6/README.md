@@ -8,6 +8,7 @@
 
 ## BandeSon
 Claude Code fait l'état des lieux de Windows Server 2022 : il se connecte en ssh depuis le PC d'administration puis fait un inventaire rapide : hostname, adresse ipv4, espace disque libre, ports en ecoute, et les 5 derniers evenements systeme et application
+C'est l'agent qui determine les commandes systemes a utiliser
 
 ## Prompt de départ
 

@@ -1,14 +1,13 @@
 [
   {"t": 1.0, "type": "cmd", "text": "clear-host", "enter": true},
-  {"t": 3.2, "type": "cmd", "text": "hostname", "enter": true},
-  {"t": 5.6, "type": "cmd", "text": "get-addomain | select-object name, dnsroot, forest, domainmode", "enter": true},
-  {"t": 9.5, "type": "cmd", "text": "new-adorganizationalunit -name \"lab\" -path \"dc=aiitops,dc=local\"", "enter": true},
-  {"t": 13.0, "type": "cmd", "text": "$p = convertto-securestring \"LabUser2024!\" -asplaintext -force", "enter": true},
-  {"t": 16.5, "type": "cmd", "text": "new-aduser -name \"alice.martin\" -samaccountname \"a.martin\" -path \"ou=lab,dc=aiitops,dc=local\" -accountpassword $p -enabled $true -passwordneverexpires $true", "enter": true},
-  {"t": 23.5, "type": "cmd", "text": "new-aduser -name \"bob.dupont\" -samaccountname \"b.dupont\" -path \"ou=lab,dc=aiitops,dc=local\" -accountpassword $p -enabled $true -passwordneverexpires $true", "enter": true},
-  {"t": 30.5, "type": "cmd", "text": "new-adgroup -name \"grp-helpdesk\" -groupscope global -path \"ou=lab,dc=aiitops,dc=local\"", "enter": true},
-  {"t": 34.5, "type": "cmd", "text": "add-adgroupmember -identity \"grp-helpdesk\" -members \"a.martin\",\"b.dupont\"", "enter": true},
-  {"t": 38.0, "type": "cmd", "text": "get-aduser -filter * -searchbase \"ou=lab,dc=aiitops,dc=local\" | select-object name, samaccountname, enabled", "enter": true},
-  {"t": 42.0, "type": "cmd", "text": "get-adgroupmember -identity \"grp-helpdesk\" | select-object name, objectclass", "enter": true},
-  {"t": 46.0, "type": "wait", "seconds": 12}
+  {"t": 3.0, "type": "cmd", "text": "hostname", "enter": true},
+  {"t": 6.5, "type": "cmd", "text": "new-adorganizationalunit -name \"lab\" -path \"dc=aiitops,dc=local\"", "enter": true},
+  {"t": 10.5, "type": "cmd", "text": "$p = convertto-securestring \"LabUser2024!\" -asplaintext -force", "enter": true},
+  {"t": 13.5, "type": "cmd", "text": "new-aduser -name \"alice.martin\" -samaccountname \"a.martin\" -path \"ou=lab,dc=aiitops,dc=local\" -accountpassword $p -enabled $true -passwordneverexpires $true", "enter": true},
+  {"t": 20.0, "type": "cmd", "text": "new-aduser -name \"bob.dupont\" -samaccountname \"b.dupont\" -path \"ou=lab,dc=aiitops,dc=local\" -accountpassword $p -enabled $true -passwordneverexpires $true", "enter": true},
+  {"t": 26.5, "type": "cmd", "text": "new-adgroup -name \"grp-helpdesk\" -groupscope global -path \"ou=lab,dc=aiitops,dc=local\"", "enter": true},
+  {"t": 31.0, "type": "cmd", "text": "add-adgroupmember -identity \"grp-helpdesk\" -members \"a.martin\",\"b.dupont\"", "enter": true},
+  {"t": 35.0, "type": "cmd", "text": "get-aduser -filter * -searchbase \"ou=lab,dc=aiitops,dc=local\" | select-object name, samaccountname, enabled", "enter": true},
+  {"t": 40.5, "type": "cmd", "text": "get-adgroupmember -identity \"grp-helpdesk\" | select-object name, objectclass", "enter": true},
+  {"t": 45.0, "type": "idle_wait", "quiet": 6, "timeout": 40}
 ]

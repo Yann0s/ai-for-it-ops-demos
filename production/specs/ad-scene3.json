@@ -14,23 +14,14 @@
     "alice.martin et bob.dupont activés",
     "grp-helpdesk : 2 membres"
   ],
-  "next_label": "PROCHAINE ÉTAPE",
-  "next": [
-    "Le poste Windows 11 rejoint le domaine, piloté par MCP."
-  ],
   "footer": [
     "hermes  ·  AI for IT & OPS",
     "Windows Server 2022  ·  démo"
   ],
-  "crop": [
-    8,
-    11,
-    1895,
-    635
-  ],
+  "crop": [8, 31, 1835, 661],
   "layout": {
     "prompt_h": 236,
-    "vm_h": 634
+    "vm_h": 662
   },
   "max_hold": 3,
   "hold_frames": 10

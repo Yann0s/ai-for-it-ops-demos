@@ -26,13 +26,23 @@ Dépôt : `github.com/Yann0s/ai-for-it-ops-demos` (privé), clone sur le VPS dan
 | VPS Hermes | `ryna07` | 100.86.98.63 (tailnet) | héberge le clone git, les rendus, le serveur HTTP |
 | Hôte KVM | `ubu1` | 100.109.58.79 (tailnet), user `yannos` | Docker + Dockur, stockage `/vm-gold`, **Xorg :0 + lightdm**, OBS 32.2.0 |
 | Conteneur DC | `srv-dc` | 192.168.10.240 | VM Windows Server 2022 → **192.168.10.241** |
+| Conteneur DC 2 | `srv-dc2` | 192.168.10.244 | VM Windows Server 2022 → **192.168.10.245**, disque **qcow2 80G** (`DISK_FMT`), OEM `docker/oem-srv-dc2/` |
 | Conteneur client | `cli-01` | 192.168.10.243 | VM Windows 11 → 192.168.10.242 |
 
-- Domaine : **`aiitops.local`**, contrôleur unique **`SRV-DC`** (renommé depuis
-  `ADMINWI-3F0QOC5` à la scène 4).
-- VNC : tunnel SSH depuis ubu1, `-L 5901:192.168.10.240:5900` (SRV-DC).
+- Domaine : **`aiitops.local`**, **deux contrôleurs** : `SRV-DC` (PDC, tous les FSMO)
+  et `SRV-DC2` (promu à l'antenne, `install-addsdomaincontroller`, DNS installé).
+  Réplication vérée 0 échec dans les deux sens après chaque cycle.
+- VNC : tunnel SSH depuis ubu1, `-L 5901:192.168.10.240:5900` (SRV-DC),
+  `-L 5903:192.168.10.244:5900` (SRV-DC2).
+- Console SRV-DC2 : compte **de domaine** après promotion (`aiitops\admin`,
+  profil `C:\Users\Admin.AIITOPS`) — registre console et profil d'auto-placement
+  ré-appliqués pour CE profil ; clavier US posé par `Set-WinUserLanguageList`
+  (0409:00000409, UI reste française), effectif après reboot.
+- IPv6 : **RouterDiscovery ET Dhcp désactivés** sur les deux DC (le DHCPv6 du
+  routeur ré-inscrit des AAAA publiques même avec RouterDiscovery coupé) ;
+  0 AAAA dans les zones `aiitops.local` / `_msdcs` après nettoyage.
 - Le mot de passe du lab est dans `seed/ad_seed.json` (champ `password`).
-- `/vm-gold` : 636 G, ~93 G libres.
+- `/vm-gold` : 636 G, ~93 G libres ; disque srv-dc2 en qcow2 (~7 Go écrits).
 
 ### État réel de l'annuaire (vérifié après la scène 5)
 
@@ -46,6 +56,20 @@ hôte         SRV-DC · domaine aiitops · PDC Emulator SRV-DC.aiitops.local
 ```
 
 L'OU `lab` (scène 3) contient `alice.martin`, `bob.dupont` et `grp-helpdesk`.
+
+### Prises brutes du déploiement srv-dc2 (à monter)
+
+| Prise | Où | Contenu |
+|---|---|---|
+| `/vm-gold/frames-srvdc2` (ubu1) | 83 frames 1280×800 | install Dockur passive (ISO, setup, install.bat) |
+| `/tmp/f6b` | 599 frames 1920×1080 | promotion : feature + `install-addsdomaincontroller`, reboot |
+| `/tmp/f7b` | 85 frames | vérification : 2 DC, `repadmin /replsummary` 0 échec, FSMO |
+| `/tmp/f8a` | 48 frames | MMC ADUC → OU Domain Controllers (SRV-DC + SRV-DC2) |
+| `/tmp/f8d` | 59 frames | MMC DNS sur SRV-DC2 (SOA servi, 2 NS, A .241/.245) |
+| `/tmp/f9c` | 57 frames | résilience : arrêt conteneur srv-dc, le domaine répond via SRV-DC2 |
+
+La première tentative de promotion (`/tmp/f6`) s'est soldée par le piège
+AAAA/IPv6 (voir section pièges) — elle n'est pas à monter.
 
 ---
 

@@ -1,0 +1,494 @@
+<!doctype html>
+<!--
+  Panorama des serveurs MCP Windows / Active Directory — préparation des clips.
+  Données relevées le 27/11/2026 via l'API GitHub (étoiles, dernier push,
+  licence) et lecture du code source pour les noms d'outils.
+  Page autonome : aucun réseau requis à l'affichage.
+-->
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>12 serveurs MCP Windows / AD — préparation des clips | AI for IT &amp; OPS</title>
+<style>
+  :root{
+    --bg:#08090b; --panel:#0e1013; --panel2:#12161b; --line:#1d2126;
+    --fg:#e9edf2; --dim:#8b95a1; --faint:#5f6873;
+    --acc:#2f9dfa; --acc-dim:#1a5f9e; --grn:#3fb950; --warn:#d29922; --red:#f85149;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 var(--mono);
+       -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 28px 80px}
+
+  header{padding:52px 0 26px;border-bottom:1px solid var(--line)}
+  .eyebrow{color:var(--acc);font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin:0 0 14px}
+  h1{font-size:30px;line-height:1.2;font-weight:600;margin:0 0 12px;letter-spacing:-.01em}
+  .lede{color:var(--dim);font-size:14px;margin:0;max-width:78ch}
+  .lede b{color:var(--fg);font-weight:500}
+  .facts{display:flex;flex-wrap:wrap;gap:8px 26px;margin:22px 0 0;font-size:12px;color:var(--dim)}
+  .facts b{color:var(--fg);font-weight:500}
+
+  /* ---- épisode 1 ---- */
+  .hero{margin:30px 0 0;border:1px solid var(--acc-dim);border-radius:8px;
+        background:linear-gradient(180deg,#0d1621,#0a0e13);padding:26px 28px}
+  .hero .tag{display:inline-block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+             color:#06121f;background:var(--acc);border-radius:3px;padding:4px 9px;font-weight:600}
+  .hero h2{font-size:22px;margin:14px 0 6px;font-weight:600}
+  .hero h2 a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--acc-dim)}
+  .hero p{color:var(--dim);font-size:14px;margin:0 0 14px;max-width:88ch}
+  .hero .picks{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 4px}
+
+  /* ---- barre d'outils ---- */
+  .tools{position:sticky;top:0;z-index:20;background:rgba(8,9,11,.94);
+         backdrop-filter:blur(6px);border-bottom:1px solid var(--line);
+         padding:14px 0;margin:34px 0 0;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  input[type=search]{flex:1 1 240px;min-width:180px;background:var(--panel);color:var(--fg);
+    border:1px solid var(--line);border-radius:4px;padding:9px 12px;font:14px var(--mono);outline:none}
+  input[type=search]:focus{border-color:var(--acc-dim)}
+  input[type=search]::placeholder{color:var(--faint)}
+  .chips{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{font-size:12px;color:var(--dim);border:1px solid var(--line);background:transparent;
+        border-radius:999px;padding:6px 13px;cursor:pointer;transition:.12s}
+  .chip:hover{color:var(--fg);border-color:var(--acc-dim)}
+  .chip[aria-pressed=true]{background:#10243a;border-color:var(--acc);color:#cfe6ff}
+  select{background:var(--panel);color:var(--dim);border:1px solid var(--line);
+         border-radius:4px;padding:8px 10px;font:12px var(--mono)}
+  .count{margin-left:auto;color:var(--faint);font-size:12px;font-variant-numeric:tabular-nums}
+
+  /* ---- cartes ---- */
+  .grid{display:grid;gap:14px;margin:22px 0 0}
+  .card{border:1px solid var(--line);border-radius:6px;background:var(--panel);
+        padding:18px 20px;transition:border-color .12s,background .12s}
+  .card:hover{border-color:#2a3138}
+  .card.open{border-color:var(--acc-dim);background:var(--panel2)}
+  .top{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .rank{color:var(--faint);font-size:12px;min-width:22px}
+  .name{font-size:17px;font-weight:600}
+  .name a{color:var(--fg);text-decoration:none}
+  .name a:hover{color:var(--acc)}
+  .owner{color:var(--faint);font-size:12px}
+  .badge{font-size:11px;border:1px solid var(--line);border-radius:3px;padding:2px 7px;color:var(--dim)}
+  .badge.ad{border-color:#1f4d33;color:#79d19b}
+  .badge.win{border-color:#1e3f5c;color:#7cc0f0}
+  .badge.prio{border-color:var(--acc);color:var(--acc)}
+  .metrics{display:flex;gap:16px;flex-wrap:wrap;margin:10px 0 0;font-size:12px;color:var(--dim)}
+  .metrics b{color:var(--fg);font-weight:500}
+  .why{margin:12px 0 0;color:#b9c2cd;font-size:13.5px}
+  .picks{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0}
+  .pick{font-size:12px;color:#cfe6ff;background:#0f1c29;
+        border:1px solid #1b3550;border-radius:3px;padding:3px 8px;font-family:var(--mono)}
+  .toggle{margin-top:14px;background:none;border:0;color:var(--acc);font:12px var(--mono);
+          cursor:pointer;padding:0}
+  .toggle:hover{text-decoration:underline}
+  .detail{display:none;margin:16px 0 0;padding:16px 0 0;border-top:1px solid var(--line)}
+  .card.open .detail{display:block}
+  .detail h4{margin:0 0 6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:600}
+  .detail p{margin:0 0 16px;color:#b9c2cd;font-size:13.5px}
+  .detail p:last-child{margin-bottom:0}
+  .kv{display:grid;grid-template-columns:130px 1fr;gap:6px 16px;font-size:13px;margin:0 0 16px}
+  .kv dt{color:var(--faint);font-size:12px}
+  .kv dd{margin:0;color:#b9c2cd}
+  .clip{border-left:2px solid var(--acc-dim);padding-left:14px;margin:0 0 16px}
+  .clip div{font-size:13.5px;color:#b9c2cd;margin:0 0 6px}
+  .clip div b{color:var(--fg);font-weight:500}
+  .picklist{margin:0;padding:0;list-style:none}
+  .picklist li{font-size:13px;color:#b9c2cd;margin:0 0 8px;padding-left:18px;position:relative}
+  .picklist li:before{content:"▸";position:absolute;left:0;color:var(--acc)}
+  .picklist code{color:#cfe6ff;background:#0f1c29;border-radius:3px;padding:1px 5px}
+
+  footer{margin-top:48px;padding-top:24px;border-top:1px solid var(--line);color:var(--dim);font-size:12px}
+  footer p{margin:0 0 6px}
+  footer code{color:#b9c2cd}
+  .empty{color:var(--faint);font-size:13px;padding:28px 0}
+  @media (max-width:640px){
+    .wrap{padding:0 16px 56px}
+    h1{font-size:23px}
+    .kv{grid-template-columns:1fr;gap:2px 0}
+    .kv dd{margin-bottom:10px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">AI for IT &amp; OPS &nbsp;·&nbsp; préparation de saison</p>
+    <h1>Douze serveurs MCP pour Windows et Active Directory</h1>
+    <p class="lede">Les projets recensés aux pages 4 et 5 de l'état des lieux, passés au crible
+      pour en faire des clips : ce que chacun sait faire, ce qu'il faut en montrer, et les
+      <b>3 à 5 outils</b> à retenir par épisode. Relevé du <b>27 novembre 2026</b> — étoiles,
+      dernier commit, licence et noms d'outils lus dans le code, pas dans les slogans.</p>
+    <div class="facts">
+      <span><b>12</b> projets</span>
+      <span><b>6</b> annuaire · <b>6</b> serveur</span>
+      <span><b>~500</b> outils cumulés</span>
+      <span>sources : GitHub API + code source</span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <span class="tag">Épisode 1</span>
+    <h2><a href="https://github.com/dr-stutters/windows-mcp" target="_blank" rel="noopener">windows-mcp</a>
+      <span class="owner">— dr-stutters</span></h2>
+    <p>Le seul du panorama qui couvre <b>AD DS, DNS, DHCP et AD CS</b> avec un vocabulaire de
+      tâches — et qui sait <b>promouvoir un serveur en contrôleur de domaine</b>. C'est
+      littéralement l'histoire que la chaîne raconte depuis cinq scènes : un serveur nu devient
+      un domaine, sans écrire de PowerShell. Le clip peut reprendre la trame du chapitre AD et la
+      rejouer en une phrase.</p>
+    <div class="picks" id="hero-picks"></div>
+  </section>
+
+  <div class="tools">
+    <input type="search" id="q" placeholder="chercher un projet, un outil, un mot-clé…" autocomplete="off">
+    <div class="chips" id="filters">
+      <button class="chip" data-f="all" aria-pressed="true">tous</button>
+      <button class="chip" data-f="ad" aria-pressed="false">annuaire</button>
+      <button class="chip" data-f="win" aria-pressed="false">serveur</button>
+      <button class="chip" data-f="prio" aria-pressed="false">épisode 1</button>
+    </div>
+    <select id="sort">
+      <option value="default">ordre du document</option>
+      <option value="stars">étoiles</option>
+      <option value="push">activité récente</option>
+      <option value="tools">nombre d'outils</option>
+    </select>
+    <span class="count" id="count"></span>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" hidden>aucun projet ne correspond — efface la recherche ou change de filtre.</div>
+
+  <footer>
+    <p><b>Méthode.</b> Étoiles, date du dernier push, licence et langage : API GitHub. Noms d'outils :
+      décorateurs <code>@*.tool</code> dans le code, ou registre <code>ToolSpec</code>, ou tableaux du README
+      quand le dépôt n'expose rien d'exploitable. Les comptes annoncés par les README diffèrent parfois du
+      code — c'est signalé quand c'est le cas.</p>
+    <p><b>Prudence.</b> Cinq projets sur douze n'ont pas de licence déclarée, sept ont moins de dix étoiles,
+      deux n'ont pas bougé depuis 2025. Un clip n'est pas une recommandation de production : le dire à l'antenne.</p>
+  </footer>
+
+</div>
+
+<script>
+const DATA = [
+  {
+    id:"windows-mcp", name:"windows-mcp", owner:"dr-stutters", cat:"win", prio:true,
+    stars:0, push:"2026-10-22", lang:"Python", lic:"aucune", tools:37, transport:"stdio",
+    why:"AD DS + DNS + DHCP + AD CS sur un seul hôte, pilotés en WinRM — et la promotion en DC.",
+    analysis:"Un serveur MCP mono-hôte qui exécute du PowerShell via pypsrp. Cinq familles d'outils (general, AD DS, DNS, DHCP, AD CS) plus trois échappatoires (run_powershell, run_powershell_json, run_command). Il appartient à une suite d'une dizaine de serveurs MCP réseau/sécurité (CML, ISE, Firepower, Splunk, Catalyst Center) où il tient le rôle d'annuaire, d'ICP et de DNS : les autres serveurs de la suite viennent y chercher leurs certificats et leurs enregistrements.",
+    security:"WinRM avec NTLM, Kerberos, CredSSP ou Basic ; 5985 en clair (chiffrement au niveau message) ou 5986 avec un certificat de listener. Aucune notion de rôle : le compte WinRM fait tout ce que son compte Windows autorise.",
+    clip:{hook:"Un serveur Windows nu, une phrase, et il devient contrôleur de domaine.",
+          demo:"win_system_info pour prouver la connexion, win_promote_to_dc pour créer la forêt, puis OU, utilisateurs et un enregistrement DNS — la suite exacte du chapitre AD, mais dictée.",
+          payoff:"37 outils, un seul hôte, et zéro ligne de PowerShell tapée à la main."},
+    picks:[
+      {n:"win_promote_to_dc", w:"la scène d'ouverture : Install-ADDSForest déclenché par une phrase"},
+      {n:"win_create_ad_ou", w:"montre que la structure de l'annuaire se décrit, pas se scripte"},
+      {n:"win_create_ad_user", w:"le peuplement, avec le contraste face aux 35 comptes de la scène 5"},
+      {n:"win_add_dns_a_record", w:"le DNS suit le domaine — le détail qui prouve que ce n'est pas une maquette"},
+      {n:"win_sign_csr", w:"la porte vers la PKI : signer un CSR, c'est l'épisode suivant"}
+    ]
+  },
+  {
+    id:"alpadalar", name:"ActiveDirectoryMCP", owner:"alpadalar", cat:"ad",
+    stars:55, push:"2026-11-25", lang:"Python", lic:"MIT", tools:45, transport:"stdio + HTTP",
+    why:"Le plus étoilé du panorama, et le mieux pensé côté garde-fous : lecture seule par défaut.",
+    analysis:"Quarante-cinq outils sur LDAP, avec une architecture de sécurité explicite : rien ne s'écrit sans allow_writes, rien ne se supprime sans allow_destructive, les cibles privilégiées sont protégées et chaque résultat est plafonné. Il expose aussi des requêtes d'audit toutes faites (comptes inactifs, postes périmés, violations de politique) qui évitent d'écrire du LDAP à la main.",
+    security:"Lecture seule par défaut, deux verrous successifs pour l'écriture puis la destruction, protection des comptes privilégiés, journal d'audit, clé API en HTTP, LDAPS.",
+    clip:{hook:"« Montre-moi ce qui cloche dans l'annuaire » — et il le montre.",
+          demo:"get_inactive_users, get_stale_computers, get_password_policy_violations, puis get_tls_posture pour la couche transport.",
+          payoff:"Le serveur qui refuse d'écrire tant qu'on ne lui a pas donné la permission — la démo sécurité la plus simple à filmer."},
+    picks:[
+      {n:"get_inactive_users", w:"la requête que tout admin rêve de poser en français"},
+      {n:"get_stale_computers", w:"les comptes d'ordinateurs morts, fléau classique des domaines"},
+      {n:"get_password_policy_violations", w:"audit de conformité sans une ligne de script"},
+      {n:"get_tls_posture", w:"le contrôle LDAPS — utile pour l'épisode sécurité"},
+      {n:"add_group_member", w:"la seule écriture à montrer, précisément parce qu'elle est verrouillée"}
+    ]
+  },
+  {
+    id:"abhid", name:"ActiveDirectory_MCPServer", owner:"abhid", cat:"ad",
+    stars:1, push:"2026-07-01", lang:"Python", lic:"aucune", tools:37, transport:"stdio + HTTP + UI",
+    why:"Le seul qui sait qui parle : RBAC par groupe AD, trois modes, audit SQLite et interface web.",
+    analysis:"Trente-sept outils rangés en six catégories (utilisateurs, groupes, postes, OU, sécurité et audit, système). Son originalité n'est pas le catalogue mais l'authentification : le serveur s'authentifie contre le domaine, lit les appartenances de l'appelant et n'expose que les outils de son rôle — admin, helpdesk ou lecture seule. Chaque appel est journalisé en SQLite, et une interface Tailwind permet de vérifier ce qui a été fait.",
+    security:"Trois modes (readonly, readwrite, full), RBAC adossé aux groupes AD, clés API nommées, audit SQLite, LDAPS.",
+    clip:{hook:"Deux personnes, le même serveur MCP, deux métiers différents.",
+          demo:"Connexion en helpdesk : ad_get_locked_accounts puis ad_unlock_account passent, ad_delete_user est refusé ; on rejoue la même scène en admin.",
+          payoff:"Le MCP qui applique la délégation de l'AD au lieu de la contourner."},
+    picks:[
+      {n:"ad_get_locked_accounts", w:"le cas d'usage helpdesk numéro un, et il est lisible"},
+      {n:"ad_unlock_account", w:"l'écriture la plus fréquente d'un service desk"},
+      {n:"ad_reset_password", w:"deuxième réflexe du helpdesk — à montrer avec le refus en mode readonly"},
+      {n:"ad_move_object", w:"déplacer un objet d'OU, c'est la structure qui bouge"},
+      {n:"ad_get_privileged_accounts", w:"la vue « qui est dangereux ici »"}
+    ]
+  },
+  {
+    id:"skills-mcp-ad", name:"Skills-MCP-AD", owner:"DevSkillsIT", cat:"ad",
+    stars:5, push:"2026-11-03", lang:"Python", lic:"MIT", tools:47, transport:"stdio + HTTP",
+    why:"Pensé pour un MSP : multi-locataire, quinze playbooks, confirmation par client.",
+    analysis:"Le projet ne vend pas des outils mais des enchaînements : quinze playbooks d'exploitation (arrivée, départ, audit, hygiène des privilèges) qui combinent les briques de base. Le multi-locataire est natif — un client, un tenant, une confirmation — ce qui en fait le seul du lot à traiter le cas d'un prestataire qui gère plusieurs domaines.",
+    security:"Confirmation par tenant ou jeton Bearer « automation », audit de chaque opération, refus des groupes privilégiés par défaut.",
+    clip:{hook:"Un prestataire, huit clients, un seul agent.",
+          demo:"Un playbook de départ : désactivation, retrait des groupes, déplacement d'OU, en une commande et avec la trace.",
+          payoff:"L'admin délégué, pas l'admin tout-puissant."},
+    picks:[
+      {n:"reset_password", w:"la brique de base du helpdesk, à comparer avec la version abhid"},
+      {n:"remove_from_groups", w:"le cœur d'un départ propre — souvent oublié dans les démos"},
+      {n:"move_to_ou", w:"le même geste que ad_move_object, autre école"},
+      {n:"privileged_groups", w:"l'audit des groupes sensibles"},
+      {n:"password_violations", w:"l'hygiène des mots de passe, chiffres à l'appui"}
+    ]
+  },
+  {
+    id:"chiefff", name:"adds-mcp · adcs-mcp · addns-mcp", owner:"Chiefff-Kiefff", cat:"ad",
+    stars:0, push:"2026-08-30", lang:"Python", lic:"aucune", tools:76, transport:"HTTP (8080-8082)",
+    why:"Trois serveurs séparés, lecture seule stricte, et une couverture PKI que personne d'autre n'a.",
+    analysis:"L'auteur a découpé le problème en trois serveurs : AD DS, AD CS et DNS intégré à AD. Tous en lecture seule, avec readOnlyHint déclaré sur chaque outil, LDAPS et WinRM HTTPS obligatoires. La partie AD CS est la plus intéressante du panorama : autorités, modèles, certificats émis, CRL, points AIA et CDP, santé des hôtes de CA.",
+    security:"Lecture seule stricte, LDAPS 636 et WinRM 5986 imposés, readOnlyHint sur chaque outil.",
+    clip:{hook:"Cartographier un domaine et sa PKI sans rien pouvoir casser.",
+          demo:"list_locked_out_users, list_password_never_expires, get_ou_tree, puis le passage côté PKI : list_issued_certificates et check_ca_hosts_health.",
+          payoff:"La lecture seule comme fonctionnalité, pas comme limitation."},
+    picks:[
+      {n:"list_locked_out_users", w:"le même cas que les autres, en version strictement passive"},
+      {n:"list_password_never_expires", w:"le classique des audits de conformité"},
+      {n:"get_ou_tree", w:"la structure complète en un appel — très visuel"},
+      {n:"list_issued_certificates", w:"l'entrée dans la PKI, sujet d'un épisode à part"},
+      {n:"check_ca_hosts_health", w:"la santé des autorités de certification"}
+    ]
+  },
+  {
+    id:"fredriksknese", name:"mcp-activedirectory", owner:"fredriksknese", cat:"ad",
+    stars:0, push:"2026-05-29", lang:"TypeScript", lic:"non standard", tools:18, transport:"stdio",
+    why:"Le seul qui parle à l'AD local et à Entra ID avec le même vocabulaire.",
+    analysis:"Dix-huit outils en TypeScript, volontairement symétriques : list_users, list_groups, list_computers, list_ous existent des deux côtés, on-prem en LDAP et cloud via Graph. Deux outils sont spécifiquement cloud : les service principals et l'activité de connexion d'un utilisateur.",
+    security:"Compte de service par variables d'environnement côté LDAP, OAuth2 client credentials côté Entra.",
+    clip:{hook:"Le même utilisateur, deux annuaires, une seule question.",
+          demo:"list_users on-prem, puis get_user_sign_in_activity côté Entra pour le même compte.",
+          payoff:"La hybridation sans changer d'outil — le sujet qui parle à tous ceux qui migrent."},
+    picks:[
+      {n:"list_users", w:"la brique commune aux deux mondes"},
+      {n:"get_user_sign_in_activity", w:"le signal cloud qu'on ne trouve pas en LDAP"},
+      {n:"list_service_principals", w:"l'angle sécurité applicative, rarement montré"},
+      {n:"list_devices", w:"les objets appareils, souvent absents des démos AD"},
+      {n:"search_ous", w:"la navigation dans l'arbre, côté cloud"}
+    ]
+  },
+  {
+    id:"koppla", name:"Koppla", owner:"ruudmens", cat:"ad",
+    stars:60, push:"2025-04-14", lang:"Python", lic:"MIT", tools:1, transport:"stdio",
+    why:"Un seul outil, query_ad — l'idée la plus radicale du panorama, mais le projet dort.",
+    analysis:"Koppla n'expose qu'un outil : query_ad, qui prend une question en langage naturel et va interroger l'annuaire. C'est l'aboutissement de la promesse MCP — l'outil n'est plus un verbe technique, c'est une question. Le revers : dernier commit en avril 2025, aucune activité depuis, et un périmètre qui s'arrête aux utilisateurs et aux groupes.",
+    security:"Interrupteur AD_WRITE_ENABLED, bind classique, pas d'audit intégré.",
+    clip:{hook:"Un serveur MCP avec un seul outil. Et c'est suffisant.",
+          demo:"« quels utilisateurs n'ont pas changé de mot de passe depuis un an » — et la réponse tombe.",
+          payoff:"La démonstration la plus pure de l'idée, à condition de dire que le projet est dormant."},
+    picks:[
+      {n:"query_ad", w:"l'unique outil : la question en langage naturel comme interface"}
+    ]
+  },
+  {
+    id:"winrdp-mcp", name:"winrdp-mcp", owner:"emog33k", cat:"win",
+    stars:7, push:"2026-11-07", lang:"Python", lic:"MIT", tools:147, transport:"stdio + HTTP",
+    why:"Le plus gros catalogue du panorama, et le seul qui met en état une machine nue avant de l'administrer.",
+    analysis:"Cent quarante-sept outils répartis en quinze modules : shell, fichiers, registre, services, tâches, RDP, automatisation d'interface, UAC. Sa vraie différence est le provisionnement en cascade : WinRM, puis SSH, puis SMB/DCOM, puis un one-liner RDP — le serveur trouve un chemin vers la machine avant de proposer ses outils. Pensé pour une flotte, avec un inventaire d'hôtes.",
+    security:"Déploiement d'agent à la volée, élévation UAC pilotée, baseline de durcissement (apply_baseline, provision_and_harden).",
+    clip:{hook:"Une machine Windows dont personne n'a jamais activé WinRM.",
+          demo:"provision_host puis health_report sur une cible vierge, avant d'élargir à run_on_hosts sur deux machines.",
+          payoff:"De la boîte nue à la flotte gérée, sans prérequis."},
+    picks:[
+      {n:"provision_host", w:"le geste unique du projet : rendre une machine administrable"},
+      {n:"health_report", w:"la sortie la plus démonstrative pour un premier contact"},
+      {n:"enable_winrm", w:"le prérequis que tous les autres projets supposent acquis"},
+      {n:"run_on_hosts", w:"la flotte — ce que les autres ne font pas"},
+      {n:"security_audit", w:"la contrepartie : auditer ce qu'on vient d'ouvrir"}
+    ]
+  },
+  {
+    id:"chillwind", name:"win-mcp-server", owner:"Chillwind132", cat:"win",
+    stars:1, push:"2026-07-23", lang:"Python", lic:"MIT", tools:50, transport:"HTTP",
+    why:"L'identité de l'appelant portée par un en-tête : chaque requête agit en tant qu'utilisateur AD.",
+    analysis:"Une cinquantaine d'outils classiques (fichiers, services, registre, journaux, performances, réseau, certificats), mais une architecture d'authentification inhabituelle : le serveur lit un en-tête X-AD-User et agit avec l'identité de cet utilisateur, sans stocker de secret sur disque — les identifiants vivent en mémoire avec une durée de vie.",
+    security:"Identité par utilisateur via en-tête, zéro secret sur disque, identifiants en mémoire avec TTL.",
+    clip:{hook:"Le serveur MCP ne connaît aucun mot de passe. Il sait seulement qui appelle.",
+          demo:"get_security_context pour montrer l'identité effective, puis get_perf_snapshot et restart_service sous deux utilisateurs différents.",
+          payoff:"La délégation sans coffre-fort de secrets."},
+    picks:[
+      {n:"get_security_context", w:"la preuve que l'identité suit la requête"},
+      {n:"get_perf_snapshot", w:"le diagnostic de base, visuel"},
+      {n:"get_event_log", w:"les journaux, matière première de tout dépannage"},
+      {n:"restart_service", w:"l'écriture la plus courante, à montrer sous deux identités"},
+      {n:"get_certificates", w:"l'angle PKI côté machine"}
+    ]
+  },
+  {
+    id:"cosmicjedi", name:"windows-admin-mcp", owner:"Cosmicjedi", cat:"win",
+    stars:9, push:"2025-09-24", lang:"Python", lic:"aucune", tools:8, transport:"stdio / Docker",
+    why:"Huit outils, un seul métier : le diagnostic. Le plus petit périmètre, le plus lisible.",
+    analysis:"Huit outils seulement, tous orientés dépannage : tester la connexion, diagnostiquer le système, vérifier un service, lire les journaux, mesurer les performances, exécuter une commande, appliquer un correctif. WinRM en primaire avec repli sur SSH PowerShell. Dernier commit en septembre 2025 — le projet n'a pas bougé depuis.",
+    security:"WinRM NTLM ou Basic, repli SSH, aucun stockage d'identifiants.",
+    clip:{hook:"Un serveur MCP qui ne fait qu'une chose : comprendre pourquoi ça ne marche pas.",
+          demo:"diagnose_system sur une machine en panne, puis view_logs pour remonter la cause, et apply_solution.",
+          payoff:"Le premier répondant — et la démonstration qu'un petit périmètre bien choisi suffit."},
+    picks:[
+      {n:"diagnose_system", w:"l'outil éponyme, à filmer en premier"},
+      {n:"view_logs", w:"la remontée vers la cause"},
+      {n:"get_performance_metrics", w:"le contexte chiffré"},
+      {n:"check_service", w:"le réflexe numéro un du support"},
+      {n:"apply_solution", w:"la boucle fermée : diagnostiquer puis corriger"}
+    ]
+  },
+  {
+    id:"imrrd", name:"powershell-mcp", owner:"IMRRD", cat:"win",
+    stars:1, push:"2026-11-10", lang:"TypeScript", lic:"MIT", tools:27, transport:"stdio",
+    why:"PowerShell sans fenêtre qui clignote : l'exécution invisible, avec SSH et WinRM in-process.",
+    analysis:"Le projet s'attaque à un détail que tout le monde ignore : lancer PowerShell depuis un agent ouvre une console, ce qui casse une démo et gêne un utilisateur. Ici l'exécution est masquée (windowsHide), les sorties sont plafonnées, les délais contrôlés, et les transports SSH, WinRM et SFTP vivent dans le même processus. Il expose aussi une exécution asynchrone avec suivi d'état.",
+    security:"Exécution masquée, délais et plafonds de sortie, transports in-process.",
+    clip:{hook:"Regardez l'écran : rien ne s'ouvre. Et pourtant PowerShell tourne.",
+          demo:"run_powershell puis start_execution et execution_status sur une commande longue, avant un winrm_exec sur une seconde machine.",
+          payoff:"L'exécution discrète, celle qu'on veut dans un vrai poste de travail."},
+    picks:[
+      {n:"run_powershell", w:"le cœur, et la démo visuelle la plus parlante (aucune fenêtre)"},
+      {n:"start_execution", w:"l'asynchrone : lancer puis aller voir ailleurs"},
+      {n:"execution_status", w:"le suivi, indispensable pour les commandes longues"},
+      {n:"winrm_exec", w:"le transport distant dans le même processus"},
+      {n:"control_service", w:"un cas concret plutôt qu'une échappatoire"}
+    ]
+  },
+  {
+    id:"bigbatmanorg", name:"winrm-mcp", owner:"bigbatmanorg", cat:"win",
+    stars:0, push:"2026-11-03", lang:"Python", lic:"MIT", tools:27, transport:"stdio",
+    why:"Le socle minimal : des codes de sortie honnêtes, de vrais délais, un inventaire d'hôtes.",
+    analysis:"Un serveur volontairement étroit : exécuter du PowerShell ou du CMD sur Windows via WinRM, avec ce que les autres ratent — un code de sortie exact, des délais réels (connexion, lecture, opération), l'exécution sur plusieurs hôtes et un inventaire persistant avec test de connectivité. Plus le transfert de fichiers.",
+    security:"Identifiants par variables d'environnement, validation de certificat configurable, inventaire par portée.",
+    clip:{hook:"Le détail qui casse tout : un script qui réussit alors qu'il a échoué.",
+          demo:"winrm_test, puis winrm_execute_powershell avec un exit code non nul, puis winrm_execute_many sur deux hôtes.",
+          payoff:"Les fondations : sans code de sortie fiable, aucun agent n'est fiable."},
+    picks:[
+      {n:"winrm_execute_powershell", w:"la brique de base, montrée avec un exit code non nul"},
+      {n:"winrm_execute_many", w:"le multi-hôtes en un appel"},
+      {n:"winrm_test", w:"la vérification avant d'agir"},
+      {n:"winrm_inventory_init", w:"l'inventaire persistant, ce que les autres n'ont pas"},
+      {n:"winrm_upload", w:"le transfert, souvent le maillon manquant"}
+    ]
+  }
+];
+
+const REPO = {
+  "windows-mcp":"dr-stutters/windows-mcp",
+  "alpadalar":"alpadalar/ActiveDirectoryMCP",
+  "abhid":"abhid/ActiveDirectory_MCPServer",
+  "skills-mcp-ad":"DevSkillsIT/Skills-MCP-AD",
+  "chiefff":"Chiefff-Kiefff/adds-mcp",
+  "fredriksknese":"fredriksknese/mcp-activedirectory",
+  "koppla":"ruudmens/Koppla",
+  "winrdp-mcp":"emog33k/winrdp-mcp",
+  "chillwind":"Chillwind132/win-mcp-server",
+  "cosmicjedi":"Cosmicjedi/windows-admin-mcp",
+  "imrrd":"IMRRD/powershell-mcp",
+  "bigbatmanorg":"bigbatmanorg/winrm-mcp"
+};
+
+const grid = document.getElementById('grid');
+const q = document.getElementById('q');
+const sortSel = document.getElementById('sort');
+const countEl = document.getElementById('count');
+const emptyEl = document.getElementById('empty');
+const filters = document.getElementById('filters');
+
+let filter = 'all';
+let query = '';
+
+/* --- épisode 1 en tête --- */
+const hero = DATA.find(d => d.prio);
+document.getElementById('hero-picks').innerHTML =
+  hero.picks.map(p => `<span class="pick">${p.n}</span>`).join('');
+
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+function card(d, i){
+  const picks = d.picks.map(p => `<span class="pick" title="${esc(p.w)}">${esc(p.n)}</span>`).join('');
+  const list = d.picks.map(p => `<li><code>${esc(p.n)}</code> — ${esc(p.w)}</li>`).join('');
+  const cls = ['card'];
+  if (d.prio) cls.push('open');
+  return `
+  <article class="${cls.join(' ')}" data-id="${d.id}">
+    <div class="top">
+      <span class="rank">${String(i+1).padStart(2,'0')}</span>
+      <span class="name"><a href="https://github.com/${esc(REPO[d.id] || d.id)}" target="_blank" rel="noopener">${esc(d.name)}</a></span>
+      <span class="owner">${esc(d.owner)}</span>
+      <span class="badge ${d.cat}">${d.cat === 'ad' ? 'annuaire' : 'serveur'}</span>
+      ${d.prio ? '<span class="badge prio">épisode 1</span>' : ''}
+    </div>
+    <div class="metrics">
+      <span><b>${d.stars}</b> ★</span>
+      <span>dernier push <b>${esc(d.push)}</b></span>
+      <span><b>${d.tools}</b> outils</span>
+      <span>${esc(d.transport)}</span>
+      <span>licence <b>${esc(d.lic)}</b></span>
+    </div>
+    <p class="why">${esc(d.why)}</p>
+    <div class="picks">${picks}</div>
+    <button class="toggle" data-toggle>${d.prio ? 'replier' : "voir l'analyse et les outils retenus"} ▾</button>
+    <div class="detail">
+      <h4>analyse</h4>
+      <p>${esc(d.analysis)}</p>
+      <h4>sécurité</h4>
+      <p>${esc(d.security)}</p>
+      <h4>angle du clip</h4>
+      <div class="clip">
+        <div><b>accroche.</b> ${esc(d.clip.hook)}</div>
+        <div><b>démo.</b> ${esc(d.clip.demo)}</div>
+        <div><b>chute.</b> ${esc(d.clip.payoff)}</div>
+      </div>
+      <h4>outils retenus (${d.picks.length})</h4>
+      <ul class="picklist">${list}</ul>
+    </div>
+  </article>`;
+}
+
+function render(){
+  let list = DATA.slice();
+  if (filter === 'ad' || filter === 'win') list = list.filter(d => d.cat === filter);
+  if (filter === 'prio') list = list.filter(d => d.prio);
+  if (query){
+    const t = query.toLowerCase();
+    list = list.filter(d =>
+      (d.name + ' ' + d.owner + ' ' + d.why + ' ' + d.analysis + ' ' +
+       d.picks.map(p => p.n + ' ' + p.w).join(' ')).toLowerCase().includes(t));
+  }
+  if (sortSel.value === 'stars') list.sort((a,b) => b.stars - a.stars);
+  if (sortSel.value === 'push') list.sort((a,b) => b.push.localeCompare(a.push));
+  if (sortSel.value === 'tools') list.sort((a,b) => b.tools - a.tools);
+
+  grid.innerHTML = list.map(card).join('');
+  countEl.textContent = list.length + ' / ' + DATA.length;
+  emptyEl.hidden = list.length > 0;
+}
+
+grid.addEventListener('click', ev => {
+  const btn = ev.target.closest('[data-toggle]');
+  if (!btn) return;
+  const art = btn.closest('.card');
+  art.classList.toggle('open');
+  btn.textContent = art.classList.contains('open')
+    ? 'replier ▾' : "voir l'analyse et les outils retenus ▾";
+});
+
+filters.addEventListener('click', ev => {
+  const b = ev.target.closest('.chip');
+  if (!b) return;
+  filter = b.dataset.f;
+  [...filters.children].forEach(c => c.setAttribute('aria-pressed', String(c === b)));
+  render();
+});
+
+q.addEventListener('input', () => { query = q.value.trim(); render(); });
+sortSel.addEventListener('change', render);
+
+render();
+</script>
+</body>
+</html>

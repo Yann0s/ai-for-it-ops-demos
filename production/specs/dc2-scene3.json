@@ -1,0 +1,32 @@
+{
+  "title": "hermes  ▸  srv-dc2  ▸  scène 3",
+  "prompt": [
+    "> vérifier la réplication et les rôles"
+  ],
+  "bullets": [
+    "deux contrôleurs · réplication intra-site"
+  ],
+  "command": "PS> repadmin /replsummary",
+  "result_label": "RÉPLICATION 0 ÉCHEC",
+  "results": [
+    "srv-dc.aiitops.local + srv-dc2.aiitops.local",
+    "0 échec dans les deux sens",
+    "5 rôles fsmo sur srv-dc"
+  ],
+  "prompt_rule": "none",
+  "crop": [
+    8,
+    31,
+    1835,
+    661
+  ],
+  "layout": {
+    "prompt_h": 236,
+    "vm_h": 662
+  },
+  "footer": [
+    "hermes  ·  AI for IT & OPS",
+    "Windows Server 2022  ·  démo"
+  ],
+  "max_hold": 0
+}

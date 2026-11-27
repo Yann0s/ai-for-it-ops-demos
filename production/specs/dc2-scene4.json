@@ -1,0 +1,32 @@
+{
+  "title": "hermes  ▸  srv-dc2  ▸  scène 4",
+  "prompt": [
+    "> le conteneur « domain controllers »"
+  ],
+  "bullets": [
+    "mmc utilisateurs et ordinateurs active directory"
+  ],
+  "command": "PS> start-process dsa.msc",
+  "result_label": "DEUX CONTRÔLEURS DANS L'OU",
+  "results": [
+    "SRV-DC — contrôleur de domaine, GC",
+    "SRV-DC2 — contrôleur de domaine, GC",
+    "site : default-first-site-name"
+  ],
+  "prompt_rule": "none",
+  "crop": [
+    8,
+    31,
+    1835,
+    661
+  ],
+  "layout": {
+    "prompt_h": 236,
+    "vm_h": 662
+  },
+  "footer": [
+    "hermes  ·  AI for IT & OPS",
+    "Windows Server 2022  ·  démo"
+  ],
+  "max_hold": 0
+}

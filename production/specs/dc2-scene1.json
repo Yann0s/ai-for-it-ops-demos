@@ -1,0 +1,32 @@
+{
+  "title": "hermes  ▸  srv-dc2  ▸  scène 1",
+  "prompt": [
+    "> déployer srv-dc2 avec dockur"
+  ],
+  "bullets": [
+    "windows server 2022 · disque 80 go en qcow2 · ip 192.168.10.245"
+  ],
+  "command": "PS> docker compose up -d srv-dc2",
+  "result_label": "EN MOINS DE 5 MINUTES",
+  "results": [
+    "disque qcow2 : 80 go logiques, ~7 go écrits",
+    "install.bat : réseau statique + ssh / winrm / rdp",
+    "machine prête pour la promotion"
+  ],
+  "crop": [
+    8,
+    31,
+    1835,
+    661
+  ],
+  "prompt_rule": "none",
+  "layout": {
+    "prompt_h": 236,
+    "vm_h": 662
+  },
+  "footer": [
+    "hermes  ·  AI for IT & OPS",
+    "Windows Server 2022  ·  démo"
+  ],
+  "max_hold": 0
+}

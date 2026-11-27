@@ -69,6 +69,45 @@ services:
     restart: always
     stop_grace_period: 2m
 
+
+  srv-dc2:
+    image: dockurr/windows
+    container_name: srv-dc2
+    environment:
+      VERSION: "2022"
+      LANGUAGE: "French"
+      REGION: "fr-FR"
+      KEYBOARD: "fr"
+      USERNAME: "Admin"
+      PASSWORD: "MCPdemo2024!"
+      RAM_SIZE: "8G"
+      CPU_CORES: "4"
+      DISK_SIZE: "80G"
+      DISK_FMT: "qcow2"
+      DHCP: "Y"
+      IP: "192.168.10.245"
+      GATEWAY: "192.168.10.254"
+      DNS: "192.168.10.241"
+      COMMAND: "call C:\\OEM\\install.bat"
+      LOG: "Y"
+      MONITOR: "telnet:0.0.0.0:7777,server,nowait,nodelay"
+      HOST_PORTS: "7777"
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    device_cgroup_rules:
+      - 'c *:* rwm'
+    volumes:
+      - /vm-gold/dockur/srv-dc2:/storage
+      - ./oem-srv-dc2:/oem
+    networks:
+      default:
+        ipv4_address: 192.168.10.244
+    restart: always
+    stop_grace_period: 2m
+
 networks:
   default:
     driver: macvlan

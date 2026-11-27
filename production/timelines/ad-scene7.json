@@ -1,0 +1,6 @@
+[
+  {"t": 1.0, "type": "cmd", "text": "clear-host", "enter": true},
+  {"t": 3.0, "type": "cmd", "text": "(get-addomaincontroller -filter *).hostname", "enter": true},
+  {"t": 8.0, "type": "cmd", "text": "repadmin /replsummary", "enter": true},
+  {"t": 13.0, "type": "idle_wait", "quiet": 8, "timeout": 90}
+]

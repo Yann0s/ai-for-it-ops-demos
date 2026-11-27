@@ -187,15 +187,28 @@ régimes de capture :
 
 - **Console / texte** → framebuffer VNC direct (1:1, déterministe, déjà calibré).
   C'est ce qui a produit les 5 scènes.
-- **Interface graphique** (ADUC, DNS, DHCP, GPMC, AD CS…) → **obligatoirement** de
-  l'enregistrement temps réel à 25-30 fps. Deux raisons : la cadence VNC (1,3 fps) est
-  inutilisable pour du mouvement, et **le pointeur n'est pas dans le framebuffer** — un
-  vidage QEMU ne contient pas le curseur. À vérifier en 2 minutes, mais c'est le
-  comportement attendu du VNC.
+- **Interface graphique** (ADUC, DNS, DHCP, GPMC, AD CS…) → l'enregistrement temps réel
+  à 25-30 fps reste nécessaire, mais pour **une seule raison : la cadence**. Le pointeur,
+  lui, n'est pas un problème — voir la vérification ci-dessous.
 - **Hôte Linux** → `ffmpeg -f x11grab` (ou OBS) sur `:0`.
 
-RDP (Remmina) apporte : géométrie exacte 1920×1080, 30 fps, curseur visible, session
+RDP (Remmina) apporte : géométrie exacte 1920×1080, 30 fps, session
 séparée. Coût : chaîne RDP → rendu → capture, acceptable seulement en plein écran 1:1.
+
+**Vérifié le 27/11 — le curseur EST dans le framebuffer.** Deux screendumps QEMU
+pris avec la souris en (1500, 400) puis (400, 800) diffèrent d'exactement 288 pixels,
+sur une boîte englobant les deux positions du curseur ; les captures vncdotool montrent
+le même compte. Donc : la capture VNC affiche le curseur, et n'importe quelle méthode de
+capture du framebuffer aussi. La seule limite d'une démo graphique filmée par VNC est le
+débit (1,3 fps), pas le curseur. Protocole de re-vérification : déplacer la souris entre
+deux screendumps et comparer — si les captures sont identiques, le curseur a disparu.
+
+**Vérifié le 27/11 — la session X d'ubu1 est en 2560×1440** (HDMI-0, primaire,
+59,95 Hz ; `xrandr --query` sans sudo, avec `DISPLAY=:0`). 1920×1080 est un mode
+disponible de l'écran. Deux options pour filmer en 1080p propre : capturer une
+**région** de 1920×1080 (`x11grab -video_size 1920x1080 -i :0.0+0,0`) sans toucher à
+la résolution de l'utilisateur, ou basculer l'écran en 1920×1080 pendant la prise
+(`xrandr -s 1920x1080`) — intrusif puisque la machine sert aussi de poste.
 
 **Évolutions que cela impose** : `compose_wide.py` doit accepter un paramètre `fps`
 (30 pour les scènes graphiques) et des **plans** (intervalles avec cadrage/zoom) — une
@@ -210,8 +223,10 @@ basculer. Vérifié : utilisateur connecté, la machine sert de serveur Docker/K
 couper SRV-DC et montrer que le domaine répond. À noter honnêtement à l'antenne si les
 deux DC vivent sur le même hôte physique.
 
-**Deux points non vérifiés** : la résolution réelle de la session X sur ubu1 (`xrandr`),
-et le comportement exact du curseur dans un `screendump` QEMU.
+**Vérifié le 27/11** (voir ci-dessus) : la résolution de la session X d'ubu1, et le
+comportement du curseur dans un `screendump` QEMU. Il reste à mesurer le débit réel
+d'une capture VNC accélérée (client plus serré que vncdotool) avant de choisir entre
+VNC et RDP pour les scènes graphiques.
 
 ---
 

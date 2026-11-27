@@ -1,0 +1,8 @@
+[
+  {"t": 1.0, "type": "cmd", "text": "clear-host", "enter": true},
+  {"t": 4.0, "type": "cmd", "text": "start-process dsa.msc; start-sleep 5; . c:/temp/place_mmc.ps1 aduc", "enter": true},
+  {"t": 15.0, "type": "click", "x": 90, "y": 138},
+  {"t": 15.4, "type": "click", "x": 90, "y": 138},
+  {"t": 18.5, "type": "click", "x": 75, "y": 184},
+  {"t": 20.0, "type": "idle_wait", "quiet": 60, "timeout": 30}
+]

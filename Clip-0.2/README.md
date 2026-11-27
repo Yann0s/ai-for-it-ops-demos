@@ -1,5 +1,9 @@
 # Clip 0.2 — Installer Claude Code sur le poste d'administration
 
+## BandeSon
+
+On installe Claude Code sur le poste d'administration Windows 11. L'installeur officiel est téléchargé avec curl, l'installation se lance, puis on vérifie la version installée. Premier agent prêt à piloter le lab depuis la ligne de commande.
+
 ## Stack
 
 - **Hermes Desktop** (Mac) — poste de pilotage : on lance la prise et on suit l'exécution.

@@ -1,5 +1,9 @@
 # Clip 0.4 — Installer Vibe (Mistral) sur le poste d'administration
 
+## BandeSon
+
+On installe Mistral Vibe sur le poste d'administration Windows 11. winget installe d'abord le gestionnaire uv, qui installe ensuite mistral-vibe avec Python 3.12, puis on vérifie la version de vibe. Troisième agent prêt pour le lab.
+
 ## Stack
 
 - **Hermes Desktop** (Mac) — poste de pilotage : on lance la prise et on suit l'exécution.

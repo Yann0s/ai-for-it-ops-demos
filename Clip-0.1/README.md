@@ -1,5 +1,9 @@
 # Clip 0.1 — Préparer une machine Windows 11 pour l'administration à distance
 
+## BandeSon
+
+On prépare un poste Windows 11 pour l'administration à distance. La machine est renommée CLI-01, le DNS est réparé pour retrouver l'accès à Internet, puis OpenSSH Server est installé et le service sshd démarre automatiquement. Le poste est prêt à être piloté en SSH.
+
 ## Stack
 
 - **Hermes Desktop** (Mac) — poste de pilotage : on lance la prise et on suit l'exécution.

@@ -1,5 +1,9 @@
 # Clip 0.3 — Installer Antigravity CLI sur le poste d'administration
 
+## BandeSon
+
+On installe Antigravity CLI, l'agent de Google, sur le poste d'administration Windows 11. L'installeur officiel est téléchargé puis exécuté, et on vérifie que le binaire agy est bien en place. Deuxième agent prêt pour le lab.
+
 ## Stack
 
 - **Hermes Desktop** (Mac) — poste de pilotage : on lance la prise et on suit l'exécution.

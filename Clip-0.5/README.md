@@ -1,5 +1,9 @@
 # Clip 0.5 — Trois agents, la même question
 
+## BandeSon
+
+Trois agents, la même question. Claude Code, Antigravity et Mistral Vibe répondent en mode headless à la même demande : un contrôleur de domaine en dix mots. Trois réponses courtes et justes, qui prouvent que chaque agent est bien authentifié et accède à son modèle.
+
 ## Stack
 
 - **Hermes Desktop** (Mac) — poste de pilotage : on lance la prise et on suit l'exécution.

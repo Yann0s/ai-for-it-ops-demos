@@ -71,6 +71,21 @@ L'OU `lab` (scène 3) contient `alice.martin`, `bob.dupont` et `grp-helpdesk`.
 La première tentative de promotion (`/tmp/f6`) s'est soldée par le piège
 AAAA/IPv6 (voir section pièges) — elle n'est pas à monter.
 
+### Chapitre srv-dc2 rendu (vérifié ffprobe)
+
+| Rendu (`production/renders/`) | Durée | Taille |
+|---|---|---|
+| `dc2-scene1.mp4` — déploiement Dockur (letterbox) | 32,0 s | 638 219 o |
+| `dc2-scene2.mp4` — promotion + reboot | 56,5 s | 2 221 328 o |
+| `dc2-scene3.mp4` — vérification réplication + FSMO | 22,0 s | 721 731 o |
+| `dc2-scene4.mp4` — MMC ADUC, OU Domain Controllers | 30,0 s | 513 763 o |
+| `dc2-scene5.mp4` — MMC DNS sur SRV-DC2 | 35,5 s | 644 135 o |
+| `dc2-scene6.mp4` — résilience (srv-dc coupé) | 33,5 s | 1 270 403 o |
+| `dc2-chapitre-complet.mp4` — concaténation | **3 min 29,5 s** | 6 006 456 o |
+
+Servis sur `http://100.86.98.63:8099/` (Range OK). Specs dans
+`production/specs/dc2-scene{1..6}.json`.
+
 ---
 
 ## 3. Ce qui est produit (mesuré)

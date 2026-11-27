@@ -1,0 +1,33 @@
+{
+  "title": "hermes  ▸  srv-dc  ▸  scène 5",
+  "prompt": [
+    "> provisionner l'annuaire d'entreprise"
+  ],
+  "bullets": [
+    "35 comptes · 15 groupes · 2 partages · 35 dossiers personnels"
+  ],
+  "command": "PS> & C:\\temp\\provision.ps1",
+  "prompt_rule": "none",
+  "result_label": "EN MOINS DE 6 SECONDES",
+  "results": [
+    "15 OU, 35 comptes, 3 comptes de service",
+    "26 rattachements hiérarchiques",
+    "Home et Services publiés en SMB"
+  ],
+  "footer": [
+    "hermes  ·  AI for IT & OPS",
+    "Windows Server 2022  ·  démo"
+  ],
+  "crop": [
+    8,
+    31,
+    1835,
+    661
+  ],
+  "layout": {
+    "prompt_h": 236,
+    "vm_h": 662
+  },
+  "max_hold": 3,
+  "hold_frames": 10
+}

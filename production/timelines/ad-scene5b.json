@@ -1,0 +1,7 @@
+[
+  {"t": 1.0, "type": "cmd", "text": "clear-host", "enter": true},
+  {"t": 3.0, "type": "cmd", "text": "(get-aduser -filter * | measure-object).count", "enter": true},
+  {"t": 7.5, "type": "cmd", "text": "get-aduser -filter * -properties department | where-object department | group-object department | select-object name, count | sort-object count -descending", "enter": true},
+  {"t": 16.0, "type": "cmd", "text": "get-smbshare | where-object { $_.name -notlike '*$' } | select-object name, path", "enter": true},
+  {"t": 23.0, "type": "idle_wait", "quiet": 6, "timeout": 45}
+]

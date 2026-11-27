@@ -15,8 +15,10 @@ ai-for-it-ops-demos/
 │       └── install.bat            ← post-install Windows (WinRM, SSH, RDP)
 ├── seed/
 │   ├── generate_ad_seed.py        ← générateur déterministe (SEED=42)
+│   ├── build_provision.py         ← génère le script PowerShell depuis le JSON
 │   ├── ad_seed.json               ← spec AD (35 utilisateurs, 12 OUs, groupes…)
-│   └── provision_ad.ps1           ← script PowerShell standalone
+│   ├── promote_dc.ps1             ← promotion du serveur en contrôleur de domaine
+│   └── provision_ad.ps1           ← provisionnement (OU, comptes, groupes, partages)
 └── START_HERE.md                  ← ce fichier
 ```
 
@@ -119,6 +121,18 @@ cd seed && python3 generate_ad_seed.py
 ```
 
 Les fichiers `ad_seed.json` et `provision_ad.ps1` sont régénérés à l'identique.
+Le `.ps1` est produit par `build_provision.py`, qui déduit les OU des chemins
+réels, place les partages sur `C:\Shares` et retire les accents des
+SamAccountName — AD refuse un nom de compte accentué.
+
+## Appliquer le seed sur le serveur
+
+Dans l'ordre, sur SRV-DC :
+
+1. `promote_dc.ps1` — installe AD DS et crée la forêt (redémarre la machine).
+2. `provision_ad.ps1` — crée les OU, les comptes, les groupes, les partages et
+   les dossiers personnels. À lancer **après** le redémarrage, sur un serveur
+   déjà contrôleur de domaine.
 
 ## Nettoyage / reset
 

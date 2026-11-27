@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Déterministe : graine fixe → AD seed pour l'épisode MCP."""
 
-import json, random, textwrap
+import json, random, subprocess, sys, textwrap
 from pathlib import Path
 
 SEED = 42
@@ -212,120 +212,6 @@ def generate():
 
 
 # ── PowerShell generator ──────────────────────────────────────────────
-def to_ps1(seed):
-    """Génère un script PowerShell qui crée tout l'AD."""
-    pwd = seed["users"][0]["password"]
-    upn_suffix = "@" + seed["domain"]
-
-    lines = [
-        f'# AD Seed pour {seed["domain"]} — généré avec SEED={seed["seed"]}',
-        f'# Ce script crée la forêt, les OUs, utilisateurs, groupes et partages.',
-        f'',
-        f'$DomainName = "{seed["domain"]}"',
-        f'$NetBIOS   = "{seed["netbios"]}"',
-        f'$SafeModePwd = ConvertTo-SecureString "{pwd}" -AsPlainText -Force',
-        f'',
-        f'# ── Installer AD DS + créer la forêt ──',
-        f'Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools',
-        f'Import-Module ADDSDeployment',
-        f'Install-ADDSForest -DomainName $DomainName -DomainNetbiosName $NetBIOS '
-          f'-SafeModeAdministratorPassword $SafeModePwd -InstallDNS -Force',
-        f'',
-        f'# ── OUs ──',
-    ]
-    for ou in seed["ous"]:
-        name = ou["name"]; path = ou["path"]
-        parent = ",".join(path.split(",")[1:])
-        lines.append(f'New-ADOrganizationalUnit -Name "{name}" -Path "{parent}" -ProtectedFromAccidentalDeletion $false')
-
-    lines += ['', '# ── Utilisateurs ──']
-    # Group users by OU for cleaner script
-    by_ou = {}
-    for u in seed["users"]:
-        by_ou.setdefault(u["ou"], []).append(u)
-    for ou_path, us in by_ou.items():
-        for u in us:
-            upn = u["username"] + upn_suffix
-            lines.append(
-                f'New-ADUser -Name "{u["displayName"]}" -SamAccountName "{u["username"]}" '
-                f'-UserPrincipalName "{upn}" -GivenName "{u["firstName"]}" '
-                f'-Surname "{u["lastName"]}" -Title "{u["title"]}" '
-                f'-Department "{u["department"]}" -Path "{u["ou"]}" '
-                f'-AccountPassword (ConvertTo-SecureString "{u["password"]}" -AsPlainText -Force) '
-                f'-Enabled $true -HomeDrive "{u["homeDrive"]}" -HomeDirectory "{u["homeDirectory"]}" '
-                f'-OfficePhone "{u["phone"]}" -Office "{u["office"]}"'
-            )
-
-    lines += ['', '# ── Managers ──']
-    for u in seed["users"]:
-        if u["manager"]:
-            lines.append(
-                f'Set-ADUser -Identity "{u["username"]}" '
-                f'-Manager (Get-ADUser -Identity "{u["manager"]}").DistinguishedName'
-            )
-
-    lines += ['', '# ── Comptes de service ──']
-    for sa in seed["service_accounts"]:
-        lines.append(
-            f'New-ADUser -Name "{sa["displayName"]}" -SamAccountName "{sa["username"]}" '
-            f'-Path "{sa["ou"]}" -AccountPassword (ConvertTo-SecureString "{sa["password"]}" -AsPlainText -Force) '
-            f'-Enabled $true -Description "{sa["description"]}"'
-        )
-
-    lines += ['', '# ── Groupes de rôle ──']
-    for g in seed["role_groups"]:
-        lines.append(
-            f'New-ADGroup -Name "{g["name"]}" -GroupScope {g["scope"]} '
-            f'-GroupCategory Security -Path "{g["ou"]}"'
-        )
-        for member in g["members"]:
-            lines.append(f'Add-ADGroupMember -Identity "{g["name"]}" -Members "{member}"')
-
-    lines += ['', '# ── Groupes de ressource ──']
-    for g in seed["resource_groups"]:
-        lines.append(
-            f'New-ADGroup -Name "{g["name"]}" -GroupScope {g["scope"]} '
-            f'-GroupCategory Security -Path "OU=Groupes,OU=TN,DC=aiitops,DC=local"'
-        )
-
-    lines += ['', '# ── Partages + ACLs ──']
-    for s in seed["shares"]:
-        path = s["localPath"]
-        share = s["name"]
-        unc = s["uncPath"]
-        lines += [
-            f'New-Item -ItemType Directory -Path "{path}" -Force',
-        ]
-        for sub in s["subdirs"]:
-            lines.append(f'New-Item -ItemType Directory -Path "{path}\\{sub}" -Force')
-        lines += [
-            f'New-SmbShare -Name "{share}" -Path "{path}" -FullAccess "Utilisateurs du domaine"',
-        ]
-        for perm in s["permissions"]:
-            folder = f'{path}\\{perm["folder"]}' if perm["folder"] else path
-            lines.append(
-                f'$acl = Get-Acl "{folder}"; '
-                f'$rule = New-Object System.Security.AccessControl.FileSystemAccessRule '
-                f'("AIITOPS\\{perm["group"]}","{perm["rights"]}",'
-                f'"ContainerInherit,ObjectInherit","None","Allow"); '
-                f'$acl.AddAccessRule($rule); Set-Acl "{folder}" $acl'
-            )
-
-    lines += ['', '# ── Home folders per user ──']
-    for u in seed["users"]:
-        home = f'E:\\Shares\\Home\\{u["username"]}'
-        lines += [
-            f'New-Item -ItemType Directory -Path "{home}" -Force',
-            f'$acl = Get-Acl "{home}"; '
-            f'$rule = New-Object System.Security.AccessControl.FileSystemAccessRule '
-            f'("AIITOPS\\{u["username"]}","Modify","ContainerInherit,ObjectInherit","None","Allow"); '
-            f'$acl.AddAccessRule($rule); Set-Acl "{home}" $acl',
-        ]
-
-    lines += ['', 'Write-Host "AD Seed terminé. Redémarrage dans 5 secondes..."', 'Start-Sleep 5', 'Restart-Computer -Force']
-    return "\r\n".join(lines)  # CRLF for Windows
-
-
 # ── Main ──────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     HERE = Path(__file__).resolve().parent
@@ -335,6 +221,9 @@ if __name__ == "__main__":
     json_path.write_text(json.dumps(seed, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"✓ {json_path}  ({len(seed['users'])} utilisateurs, {len(seed['ous'])} OUs)")
 
+    # Le script PowerShell est genere par build_provision.py : il doit rester
+    # aligne sur le JSON (OU deduites des chemins, partages sur C:, SamAccountName
+    # sans accent, encodage UTF-8 avec BOM).
     ps1_path = HERE / "provision_ad.ps1"
-    ps1_path.write_text(to_ps1(seed), encoding="utf-8")
-    print(f"✓ {ps1_path}  (script PowerShell standalone)")
+    subprocess.run([sys.executable, str(HERE / "build_provision.py"), "--out", str(ps1_path)],
+                   check=True)

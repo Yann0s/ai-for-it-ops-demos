@@ -13,11 +13,13 @@ Deux écarts assumés par rapport au seed d'origine :
 
 Usage : python build_provision.py > provision_scene.ps1
 """
+import argparse
 import json
 import os
 
 SEED = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ad_seed.json")
 SHARE_ROOT = "C:\\Shares"
+PAUSES = False
 
 
 def sam(name):
@@ -32,6 +34,16 @@ def ps_str(s):
 
 
 def main():
+    ap = argparse.ArgumentParser(
+        description="Genere le script de provisionnement depuis ad_seed.json.")
+    ap.add_argument("--pauses", action="store_true",
+                    help="ajoute des pauses pour la capture video")
+    ap.add_argument("--out", metavar="FICHIER",
+                    help="ecrit le script (BOM UTF-8 + CRLF) au lieu de stdout")
+    args = ap.parse_args()
+    global PAUSES
+    PAUSES = args.pauses
+
     d = json.load(open(SEED, encoding="utf-8"))
     users = d["users"]
     svc = d["service_accounts"]
@@ -96,7 +108,8 @@ def main():
             a("$nUser++")
         short = ou.split(",")[0].replace("OU=", "")
         a("Write-Host ('  {0,-20} {1,2} comptes' -f %s, %d)" % (ps_str(short), len(by_ou[ou])))
-        a("Start-Sleep -Milliseconds 220")
+        if PAUSES:
+            a("Start-Sleep -Milliseconds 220")
     a("Write-Host ('[USER]    {0} comptes nominatifs' -f $nUser) -ForegroundColor Green")
     a("")
 
@@ -169,7 +182,8 @@ def main():
         a("")
 
     # ── Résumé ──
-    a("Start-Sleep -Milliseconds 600")
+    if PAUSES:
+        a("Start-Sleep -Milliseconds 600")
     a("$dt = (Get-Date) - $t0")
     a("Write-Host ''")
     a("Write-Host ('=== termine en {0:N1} s ===' -f $dt.TotalSeconds) -ForegroundColor Cyan")
@@ -178,7 +192,25 @@ def main():
     a("'{0,-14} {1}' -f 'OU',           (Get-ADOrganizationalUnit -Filter * | Measure-Object).Count")
     a("'{0,-14} {1}' -f 'partages',     (Get-SmbShare | Where-Object { $_.Name -notlike '*$' } | Measure-Object).Count")
 
-    print("\n".join(out))
+    text = "\n".join(out) + "\n"
+    if args.out:
+        # l'entete ci-dessous remplace la premiere ligne du generateur
+        if out and out[0].startswith("# Provisionnement"):
+            out = out[1:]
+        text = "\n".join(out) + "\n"
+        header = [
+            "# AD Seed pour aiitops.local — généré depuis ad_seed.json (SEED=%s)" % d.get("seed"),
+            "# À exécuter sur un contrôleur de domaine déjà promu (voir promote_dc.ps1).",
+            "# Crée les OU, les comptes, les groupes, les partages et les dossiers personnels.",
+            "# Généré par seed/build_provision.py — ne pas éditer à la main.",
+            "",
+        ]
+        data = b"\xef\xbb\xbf" + ("\n".join(header) + text).replace("\n", "\r\n").encode("utf-8")
+        with open(args.out, "wb") as fh:
+            fh.write(data)
+        print(f"ecrit {args.out} ({len(data)} octets)")
+    else:
+        print(text, end="")
 
 
 if __name__ == "__main__":

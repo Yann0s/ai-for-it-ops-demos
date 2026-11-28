@@ -1,0 +1,32 @@
+{
+  "title": "hermes  ▸  srv-dc2  ▸  scène 2",
+  "prompt": [
+    "> joindre le domaine et promouvoir en contrôleur additionnel"
+  ],
+  "bullets": [
+    "identifiants du domaine pré-étapés en dpapi — jamais à l'écran"
+  ],
+  "command": "PS> install-addsdomaincontroller -domainname aiitops.local -credential $c",
+  "result_label": "TOUS LES TESTS ONT RÉUSSI",
+  "results": [
+    "srv-dc2 joint au domaine aiitops.local",
+    "dns installé sur le second contrôleur",
+    "redémarrage automatique de fin de promotion"
+  ],
+  "prompt_rule": "none",
+  "crop": [
+    8,
+    31,
+    1835,
+    661
+  ],
+  "layout": {
+    "prompt_h": 236,
+    "vm_h": 662
+  },
+  "footer": [
+    "hermes  ·  AI for IT & OPS",
+    "Windows Server 2022  ·  démo"
+  ],
+  "max_hold": 0
+}

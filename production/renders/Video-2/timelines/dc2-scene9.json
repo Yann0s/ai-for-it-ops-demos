@@ -1,0 +1,8 @@
+[
+  {"t": 1.0, "type": "cmd", "text": "clear-host", "enter": true},
+  {"t": 3.0, "type": "cmd", "text": "nltest /dsgetdc:aiitops.local", "enter": true},
+  {"t": 9.0, "type": "wait", "seconds": 95},
+  {"t": 105.0, "type": "cmd", "text": "nltest /dsgetdc:aiitops.local", "enter": true},
+  {"t": 110.0, "type": "cmd", "text": "(get-addomain).dnsroot", "enter": true},
+  {"t": 114.0, "type": "idle_wait", "quiet": 60, "timeout": 25}
+]

@@ -1,0 +1,45 @@
+[
+ {
+  "t": 4.0,
+  "type": "cmd",
+  "text": "start-process dnsmgmt.msc; start-sleep 5; . c:/temp/place_mmc.ps1 dns",
+  "enter": true
+ },
+ {
+  "t": 15.0,
+  "type": "click",
+  "x": 75,
+  "y": 112
+ },
+ {
+  "t": 15.8,
+  "type": "key",
+  "key": "right"
+ },
+ {
+  "t": 16.6,
+  "type": "key",
+  "key": "down"
+ },
+ {
+  "t": 17.4,
+  "type": "key",
+  "key": "right"
+ },
+ {
+  "t": 18.2,
+  "type": "key",
+  "key": "down"
+ },
+ {
+  "t": 19.0,
+  "type": "key",
+  "key": "down"
+ },
+ {
+  "t": 20.0,
+  "type": "idle_wait",
+  "quiet": 60,
+  "timeout": 30
+ }
+]

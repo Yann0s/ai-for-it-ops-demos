@@ -1,0 +1,33 @@
+{
+  "title": "hermes ▸ srv-dc ▸ scène 4",
+  "footer": [
+    "windows server 2022",
+    "démonstration"
+  ],
+  "prompt": [
+    "> renommer le serveur en srv-dc"
+  ],
+  "bullets": [
+    "le contrôleur de domaine garde son rôle",
+    "SPN et enregistrements DNS suivent au redémarrage"
+  ],
+  "command": "PS> rename-computer -newname SRV-DC -force -restart",
+  "results": [
+    "hostname → SRV-DC",
+    "PDC emulator → SRV-DC.aiitops.local",
+    "service NTDS : Running"
+  ],
+  "result_label": "APRÈS REDÉMARRAGE",
+  "prompt_rule": "none",
+  "crop": [
+    8,
+    31,
+    1835,
+    661
+  ],
+  "layout": {
+    "prompt_h": 236,
+    "vm_h": 662
+  },
+  "max_hold": 0
+}

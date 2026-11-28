@@ -1,0 +1,7 @@
+[
+  {"t": 1.2, "type": "cmd", "text": "clear-host", "enter": true},
+  {"t": 3.8, "type": "cmd", "text": "hostname", "enter": true},
+  {"t": 8.2, "type": "cmd", "text": "(get-addomain).pdcemulator", "enter": true},
+  {"t": 12.6, "type": "cmd", "text": "(get-service NTDS).status", "enter": true},
+  {"t": 16.5, "type": "idle_wait", "quiet": 6, "timeout": 60}
+]

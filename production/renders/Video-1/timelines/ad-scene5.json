@@ -1,0 +1,8 @@
+[
+  {"t": 1.0, "type": "cmd", "text": "clear-host", "enter": true},
+  {"t": 3.2, "type": "cmd", "text": "& C:\\temp\\provision.ps1", "enter": true},
+  {"t": 17.0, "type": "cmd", "text": "(get-aduser -filter * | measure-object).count", "enter": true},
+  {"t": 21.5, "type": "cmd", "text": "get-aduser -filter * -properties department | group-object department | select-object name, count | sort-object count -descending", "enter": true},
+  {"t": 28.5, "type": "cmd", "text": "get-smbshare | select-object name, path", "enter": true},
+  {"t": 33.0, "type": "idle_wait", "quiet": 6, "timeout": 60}
+]

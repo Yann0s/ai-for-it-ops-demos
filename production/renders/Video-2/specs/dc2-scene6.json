@@ -1,0 +1,32 @@
+{
+  "title": "hermes  ▸  srv-dc2  ▸  scène 6",
+  "prompt": [
+    "> couper le premier contrôleur en pleine vie"
+  ],
+  "bullets": [
+    "docker stop srv-dc — hors caméra, pendant la prise"
+  ],
+  "command": "PS> nltest /dsgetdc:aiitops.local",
+  "result_label": "LE DOMAINE RÉPOND ENCORE",
+  "results": [
+    "contrôleur de réponse : srv-dc2.aiitops.local (.245)",
+    "(get-addomain).dnsroot → aiitops.local",
+    "un seul dc suffit pour authentifier"
+  ],
+  "prompt_rule": "none",
+  "crop": [
+    8,
+    31,
+    1835,
+    661
+  ],
+  "layout": {
+    "prompt_h": 236,
+    "vm_h": 662
+  },
+  "footer": [
+    "hermes  ·  AI for IT & OPS",
+    "Windows Server 2022  ·  démo"
+  ],
+  "max_hold": 0
+}

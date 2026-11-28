@@ -1,0 +1,5 @@
+[
+  {"t": 1.0, "type": "cmd", "text": "get-windowsfeature ad-domain-services | select-object name, installstate", "enter": true},
+  {"t": 4.0, "type": "cmd", "text": "install-addsforest -domainname aiitops.local -installdns -safemodeadministratorpassword (convertto-securestring 'LabDsrm2024!' -asplaintext -force) -force", "enter": true},
+  {"t": 12.0, "type": "idle_wait", "quiet": 10, "timeout": 180}
+]

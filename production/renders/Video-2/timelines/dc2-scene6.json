@@ -1,0 +1,7 @@
+[
+  {"t": 1.0, "type": "cmd", "text": "clear-host", "enter": true},
+  {"t": 3.0, "type": "cmd", "text": "hostname", "enter": true},
+  {"t": 6.0, "type": "cmd", "text": "$c = import-clixml c:\\temp\\cred.xml", "enter": true},
+  {"t": 10.0, "type": "cmd", "text": "install-windowsfeature ad-domain-services -includemanagementtools; install-addsdomaincontroller -domainname aiitops.local -credential $c -safemodeadministratorpassword $c.password -installdns -force", "enter": true},
+  {"t": 20.0, "type": "idle_wait", "quiet": 12, "timeout": 480}
+]

@@ -1,0 +1,36 @@
+{
+  "title": "hermes  ▸  srv-dc  ▸  scène 2",
+  "prompt": [
+    "> promouvoir le serveur en contrôleur de domaine"
+  ],
+  "bullets": [
+    "windows server 2022 · forêt aiitops.local · dns intégré"
+  ],
+  "command": "PS> install-addsforest -domainname aiitops.local -installdns",
+  "prompt_rule": "none",
+  "result_label": "RÉSULTAT",
+  "results": [
+    "forêt et domaine aiitops.local créés",
+    "dns intégré · redémarrage automatique"
+  ],
+  "next_label": "PROCHAINE ÉTAPE",
+  "next": [
+    "Vérifier le domaine après redémarrage, puis créer OU, utilisateurs et groupes."
+  ],
+  "footer": [
+    "hermes  ·  AI for IT & OPS",
+    "Windows Server 2022  ·  démo"
+  ],
+  "crop": [
+    8,
+    31,
+    1895,
+    655
+  ],
+  "layout": {
+    "prompt_h": 236,
+    "vm_h": 634
+  },
+  "max_hold": 3,
+  "hold_frames": 10
+}

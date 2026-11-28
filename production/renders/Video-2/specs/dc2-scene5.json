@@ -1,0 +1,32 @@
+{
+  "title": "hermes  ▸  srv-dc2  ▸  scène 5",
+  "prompt": [
+    "> la zone du domaine servie par les deux DC"
+  ],
+  "bullets": [
+    "mmc gestionnaire dns — ouverte sur srv-dc2"
+  ],
+  "command": "PS> start-process dnsmgmt.msc",
+  "result_label": "ZONE RÉPLIQUÉE",
+  "results": [
+    "soa servi par srv-dc2.aiitops.local",
+    "2 serveurs de noms : srv-dc + srv-dc2",
+    "a records : 192.168.10.241 et 192.168.10.245"
+  ],
+  "prompt_rule": "none",
+  "crop": [
+    8,
+    31,
+    1835,
+    661
+  ],
+  "layout": {
+    "prompt_h": 236,
+    "vm_h": 662
+  },
+  "footer": [
+    "hermes  ·  AI for IT & OPS",
+    "Windows Server 2022  ·  démo"
+  ],
+  "max_hold": 0
+}

@@ -1,0 +1,28 @@
+{
+  "title": "hermes  ▸  srv-dc  ▸  scène 3",
+  "prompt": [
+    "> structurer l'annuaire : OU, utilisateurs, groupe"
+  ],
+  "bullets": [
+    "aiitops.local · ou=lab · 2 comptes · 1 groupe global"
+  ],
+  "command": "PS> new-aduser -name \"alice.martin\" -path \"ou=lab,dc=aiitops,dc=local\"",
+  "prompt_rule": "none",
+  "result_label": "RÉSULTAT",
+  "results": [
+    "OU lab créée dans aiitops.local",
+    "alice.martin et bob.dupont activés",
+    "grp-helpdesk : 2 membres"
+  ],
+  "footer": [
+    "hermes  ·  AI for IT & OPS",
+    "Windows Server 2022  ·  démo"
+  ],
+  "crop": [8, 31, 1835, 661],
+  "layout": {
+    "prompt_h": 236,
+    "vm_h": 662
+  },
+  "max_hold": 3,
+  "hold_frames": 10
+}

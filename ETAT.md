@@ -86,6 +86,13 @@ AAAA/IPv6 (voir section pièges) — elle n'est pas à monter.
 Servis sur `http://100.86.98.63:8099/` (Range OK). Specs dans
 `production/specs/dc2-scene{1..6}.json`.
 
+Les deux chapitres sont **versionnés dans le dépôt** :
+`production/renders/Video-1/` (chapitre AD) et `production/renders/Video-2/`
+(chapitre srv-dc2) — même structure que les `Clip-0.x` : MP4 des scènes +
+chapitre complet, specs, timelines et README. `production/renders/` ne figure
+plus dans `.gitignore` ; les timelines du chapitre srv-dc2 ont été renommées
+`dc2-scene6..9.json` (ex-`ad-scene6..9`).
+
 ---
 
 ## 3. Ce qui est produit (mesuré)

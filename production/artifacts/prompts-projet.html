@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prompts du projet — AI for IT & OPS</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin: 0; padding: 32px 20px 60px; background: #0d1117; color: #e6edf3;
+         font: 15px/1.55 -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .col { max-width: 900px; margin: 0 auto; }
+  h1 { font-size: 26px; margin: 0 0 6px; color: #58a6ff; }
+  .sous { color: #8b949e; margin: 0 0 28px; font-size: 14px; }
+  .stats { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+  .stat { background: #161b22; border: 1px solid #21262d; border-radius: 8px;
+          padding: 10px 16px; }
+  .stat b { color: #3fb950; font-size: 20px; display: block; }
+  .stat span { color: #8b949e; font-size: 12px; }
+  h2 { font-size: 16px; color: #58a6ff; border-bottom: 1px solid #21262d;
+       padding-bottom: 6px; margin: 34px 0 12px; }
+  .p { background: #161b22; border: 1px solid #21262d; border-left: 3px solid #58a6ff;
+       border-radius: 8px; padding: 10px 14px; margin: 10px 0; }
+  .p .h { color: #8b949e; font-size: 11.5px; margin-bottom: 6px;
+          font-family: ui-monospace, monospace; }
+  .p pre { margin: 0; white-space: pre-wrap; word-break: break-word;
+           font: 13.5px/1.5 ui-monospace, "Cascadia Mono", monospace; color: #e6edf3; }
+</style>
+</head>
+<body>
+<div class="col">
+  <h1>Prompts du projet — « AI for IT & OPS »</h1>
+  <p class="sous">Tous les messages envoyés par Yann0s à l'agent Hermes,
+  du 12 nov. 2026 · 20h03 au 28 nov. 2026 · 10h53 — session
+  <code>20261112_200337_07106c</code>, textes verbatim (collages > 2 000 caractères
+  tronqués, intégral dans <code>prompts-projet.json</code>).</p>
+  <div class="stats">
+    <div class="stat"><b>119</b><span>prompts</span></div>
+    <div class="stat"><b>8</b><span>jours de travail</span></div>
+    <div class="stat"><b>14</b><span>prompts / jour (moy.)</span></div>
+  </div>
+  <h2>jeudi 12 novembre 2026</h2><div class="jour"><div class="p"><div class="h">#1550 · 12 nov. 2026 · 20h03</div><pre>en complement du projet de la chaine youtube AI for IT, analyser comment on pourrait utiliser ces outils pour realiser des maquettes de windows server, windows 11 et linux ou mac sur mon gros PC Linux KVM / Docker : 
+@url:`https://www.it-connect.fr/dockur-executer-windows-11-tiny-11-et-macos-avec-docker/#google_vignette`
+
+@url:`https://github.com/tobi/wrapvm`
+
+--- Attached Context ---
+
+🌐 @url:`https://www.it-connect.fr/dockur-executer-windows-11-tiny-11-et-macos-avec-docker/#google_vignette` (2630 tokens)
+# Dockur : découvrez comment exécuter Windows 11, Tiny 11 et macOS dans un conteneur Docker !
+
+Sommaire
+
+- I. Présentation
+- II. Dockur : une VM dans un conteneur
+- III. Prérequis
+- IV. Dockur : démonstration complète en vidéo
+- V. Déployer Windows avec Dockur
+  - A. Fichier Docker Compose
+  - B. Choix de la version de Windows
+  - C. Script post-installation
+  - D. Connexion RDP
+- VI. Déployer macOS avec Dockur
+  - A. Fichier Docker Compose
+  - B. Choix de la version de macOS
+- VII. Conclusion
+
+## I. Présentation
+
+**Exécuter Windows ou macOS et pourquoi pas les deux au sein de conteneurs Docker, c&#x27;est possible ! Le projet open source Dockur rend cela possible avec une approche simple basée sur des fichiers Docker Compose.**
+
+Que ce soit pour créer un environnement de test rapide, isoler une machine Windows sans machine virtuelle classique, ou lancer macOS sans hackintosh, Dockur offre une solution originale qui combine Docker et KVM. À la lecture de ces premières lignes, certains vont trouver cela inutile, tandis que d&#x27;autres vont déjà avoir des idées plein la tête ! Je serai curieux d&#x27;avoir votre avis en commentaire !
+
+## II. Dockur : une VM dans un conteneur
+
+**Dockur** est un** projet open source** qui encapsule un environnement **QEMU/KVM** dans un conteneur **Docker**, dans le but de **faire tourner des systèmes d’exploitation** complets comme **Windows** et **macOS**, dans des conteneurs. Les performances ne sont pas mises de côté, puisque vous pouvez **perso
+
+[ … +23888 caractères — collage/document joint, texte intégral dans prompts-projet.json ]</pre></div></div><h2>vendredi 13 novembre 2026</h2><div class="jour"><div class="p"><div class="h">#1562 · 13 nov. 2026 · 10h35</div><pre>yes, 1. commencer par Windows Server 2022 + Windows 11 via Dockur,  avec utilisation de macvlan,pas de Linux pour le moment et on oublie macOS.
+2. Dockur directement sur mon ubuntu ubu1 qui a 128 Go de RAM, je configure sshd;
+Pour un épisode « l&#x27;agent crée un domaine AD via MCP » : j&#x27;ai deja une vm &quot;AD1&quot; qui contient un annuaire Active Directory (AD), tu peux reutiliser cette VM ou faut partir sur du neuf pour Dockur ?</pre></div><div class="p"><div class="h">#1566 · 13 nov. 2026 · 12h00</div><pre>&quot;C&#x27;est ça qui rend les démos filmables&quot; = effectivement a faire pour chaque episode
+Pour la creation du nouvel AD dans Dockur, tu vas trouver un dataset pour constituer un annuaire (utilisateurs, groupes, droits sur des repertoires de services et dossiers personnels) ?</pre></div><div class="p"><div class="h">#1568 · 13 nov. 2026 · 14h27</div><pre>ok, c&#x27;est valide, go</pre></div><div class="p"><div class="h">#1596 · 13 nov. 2026 · 14h35</div><pre>avant, faire le push dans le depo github</pre></div><div class="p"><div class="h">#1627 · 13 nov. 2026 · 14h51</div><pre>comment modifier ce commentaire sur github : &quot;feat: maquettes Windows AD via Dockur pour chaîne AI for IT &amp; OPS&quot; car le depot de la chaine est encore en private</pre></div><div class="p"><div class="h">#1631 · 13 nov. 2026 · 14h52</div><pre>parfait, merci</pre></div><div class="p"><div class="h">#1633 · 13 nov. 2026 · 14h54</div><pre>le ssh est ok, tu peux le tester avant de deployer, et il te faut me poser au moins 1 question pour deployer, non ?</pre></div><div class="p"><div class="h">#1637 · 13 nov. 2026 · 14h58</div><pre>1. A; 2. br0 192.168.10.5/24
+mais il manque le stockage, non ? = /vm-gold ; ne rien effacer, sinon j&#x27;ai plus mes poc</pre></div><div class="p"><div class="h">#1641 · 13 nov. 2026 · 14h58</div><pre>user yannos</pre></div><div class="p"><div class="h">#1659 · 13 nov. 2026 · 15h01</div><pre>avec une commande echo &gt;&gt; , faut des guillemets ou pas ?</pre></div><div class="p"><div class="h">#1661 · 13 nov. 2026 · 15h03</div><pre>c&#x27;est fait</pre></div><div class="p"><div class="h">#1717 · 13 nov. 2026 · 15h11</div><pre>ok, fait</pre></div><div class="p"><div class="h">#1731 · 13 nov. 2026 · 15h16</div><pre>envoyer un suivi vers telegram et documenter l&#x27;avancement de la mise en place dans artefact html</pre></div><div class="p"><div class="h">#1740 · 13 nov. 2026 · 15h17</div><pre>je t&#x27;envoie un message depuis telegram</pre></div><div class="p"><div class="h">#1760 · 13 nov. 2026 · 15h23</div><pre>tu peux m&#x27;informer sur telegram pour chaque push github (valable pour tous les projets), merci</pre></div><div class="p"><div class="h">#1794 · 13 nov. 2026 · 15h28</div><pre>pourquoi un nouveau bot ? on en a deja 1 en place pour Hermes</pre></div><div class="p"><div class="h">#1796 · 13 nov. 2026 · 15h29</div><pre>comment je les trouves ?</pre></div><div class="p"><div class="h">#1812 · 13 nov. 2026 · 15h32</div><pre>super !!
+par repo tu veux dire dossier sur le vps ?</pre></div><div class="p"><div class="h">#1814 · 13 nov. 2026 · 15h33</div><pre>cést quoi la commande pour aller ecrire dans les repos github stp</pre></div><div class="p"><div class="h">#1816 · 13 nov. 2026 · 15h37</div><pre>merci, je fais 1 breack et apres on valide le deploiement Dockur
+puis on prepare la premiere scene &quot;Deployer une AD via MCP&quot;</pre></div><div class="p"><div class="h">#1820 · 13 nov. 2026 · 15h45</div><pre>192.168.10.241:8006 = windows 11, pas windows server 2022, tu valides ?</pre></div><div class="p"><div class="h">#1860 · 13 nov. 2026 · 16h00</div><pre>ok, lance et je reviens</pre></div><div class="p"><div class="h">#1877 · 13 nov. 2026 · 16h02</div><pre>tu feras aussi la maj du fichier html deployment-status</pre></div><div class="p"><div class="h">#1891 · 13 nov. 2026 · 16h47</div><pre>yes</pre></div><div class="p"><div class="h">#1899 · 13 nov. 2026 · 16h50</div><pre>fais une comparaison des 3 solutions stp</pre></div><div class="p"><div class="h">#1904 · 13 nov. 2026 · 16h52</div><pre>yes, dr-stutters/windows-mcp</pre></div><div class="p"><div class="h">#1913 · 13 nov. 2026 · 16h53</div><pre>uv est deja installe sur ubu1</pre></div><div class="p"><div class="h">#1925 · 13 nov. 2026 · 17h06</div><pre>c&#x27;est bien long, ca coince qq part ?</pre></div><div class="p"><div class="h">#1941 · 13 nov. 2026 · 17h09</div><pre>good</pre></div><div class="p"><div class="h">#2088 · 13 nov. 2026 · 18h22</div><pre>alors, ce signal ?</pre></div><div class="p"><div class="h">#2122 · 13 nov. 2026 · 19h24</div><pre>qu&#x27;est ce que ca donne ?</pre></div><div class="p"><div class="h">#2126 · 13 nov. 2026 · 19h29</div><pre>windows server 2022, je lance le .bat a la main ? il est dans quel dossier ?
+@image:/home/hermes/.hermes/images/upload_hmu432ns.png</pre></div><div class="p"><div class="h">#2128 · 13 nov. 2026 · 19h31</div><pre>il reboot</pre></div><div class="p"><div class="h">#2140 · 13 nov. 2026 · 19h35</div><pre>ca donne quoi ?</pre></div><div class="p"><div class="h">#2144 · 13 nov. 2026 · 19h36</div><pre>oui</pre></div><div class="p"><div class="h">#2146 · 13 nov. 2026 · 19h43</div><pre>all running</pre></div><div class="p"><div class="h">#2154 · 13 nov. 2026 · 19h45</div><pre>cést fait</pre></div><div class="p"><div class="h">#2166 · 13 nov. 2026 · 19h49</div><pre>ok fait</pre></div><div class="p"><div class="h">#2176 · 13 nov. 2026 · 19h51</div><pre>bonne nouvelle, que fait on des 3 processus en arriere plan ?</pre></div><div class="p"><div class="h">#2187 · 13 nov. 2026 · 19h53</div><pre>mettre a jour le fichier html deployment-status, et on fera la scene demain et toujours un recap vers telegram ;)</pre></div><div class="p"><div class="h">#2195 · 13 nov. 2026 · 19h56</div><pre>et deployment-status ? il est pas dans le panneau apercu ?</pre></div><div class="p"><div class="h">#2201 · 13 nov. 2026 · 19h58</div><pre>au top</pre></div></div><h2>jeudi 19 novembre 2026</h2><div class="jour"><div class="p"><div class="h">#2216 · 19 nov. 2026 · 18h14</div><pre>J&#x27;ai fait qq tests et validation de Dockur et des 2 VM windows 11 et windows server 2022 :
+elles fonctionnent et je peux faire du RDP depuis UBU1 avec Remmina.
+Il y a SSH sur le serveur, mais pas sur le CLI-01.
+Pour commencer avant la scene 1.0 (Deployer AD via MCP), j&#x27;ai besoin d&#x27;un peu d&#x27;entrainement, et de faire des scenes en 0.xx pour prendre en main l&#x27;aspect filmable que tu as mentionne.
+Et je souhaite d&#x27;abbord montrer des basiques pour commencer doucement avec la chaine youtube, sans publication en ligne au debut.
+Je voudrais commencer par :
+- montrer l&#x27;installation par Hermes du SSHD sur le PC Windows 11 (SSHD seulement present sur Serveur W2K2022, et connexion validee)
+- montrer des actions (actions realisees depuis le Mac) avec les harnais / agents : Hermes, Antigravity, Claude Code (CC), Mistral Vibe sur le PC W11 via SSH ( par exemple une petite sequence de diag de la machine : version de l&#x27;OS, Taille / espace disque, RAM, adresse IP, les 10 dernieres lignes des logs systemes  ),
+puis quelques actions de creation de dossiers / fichiers; creation de cle de registry (quelque chose de visuel pour la demo).
+Ceci pour demontrer les possibilites des &quot;IA&quot; en language naturel pour faire de l&#x27;administration ou du diag / debug a distance d&#x27;un Windows en 2 ou 3 videos d&#x27;initiation qui seraient epinglees (ou une playlist d&#x27;intro) dans la chaine youtube
+Etape suivante, meme type de demo avec le MCP (dr-stutters/windows-mcp) installe sur UBU1&gt;
+Voila, je te laisse reflechir pour des idees complementaires et des propositions de realisations, on fait le point demain matin (avec une synthese dans telegram ;) )</pre></div></div><h2>vendredi 20 novembre 2026</h2><div class="jour"><div class="p"><div class="h">#2224 · 20 nov. 2026 · 16h55</div><pre>avant de se lancer,
+j&#x27;ai configure Dockur pour pouvoir faire des snapshot des vm, c&#x27;est teste, ca fonctionne.
+Donc dans un tout premier temps:
+installer WinRM sur la VM Windows 11, MAIS en filmant pour realiser en meme temps les tests d&#x27;enregistrement de videos, ici pour faire un short.
+C&#x27;est possible ou il te faut installer un skill / plugin ?</pre></div><div class="p"><div class="h">#2234 · 20 nov. 2026 · 17h14</div><pre>tu vas faire Option A — WinRM d&#x27;abord, pour la suite, on va suivre le fil narratif, ok pour la proposition de realisation et pour l&#x27;ordre des agents, ok pour installer les 3 outils manquants.
+Qui pilote la VM : Hermes, split-screen cést plus parlant, duree 45 sec, le snapshot, je le fais en ligne de commande qemu
+Yes, test a blanc avec les infos ci-dessus</pre></div><div class="p"><div class="h">#2280 · 20 nov. 2026 · 17h21</div><pre>jái change le mot de passe, sorry
+c&#x27;est ca maintenant:</pre></div><div class="p"><div class="h">#2282 · 20 nov. 2026 · 17h21</div><pre>Test01++</pre></div><div class="p"><div class="h">#2332 · 20 nov. 2026 · 17h27</div><pre>c&#x27;est bon avec la console web, j&#x27;ai ouvert la session</pre></div><div class="p"><div class="h">#2376 · 20 nov. 2026 · 18h02</div><pre>en fait avec la commande qemu, il faut eteindre le conteneur de la vm : docker compose stop cli-01
+puis dans le dossier /vm-gold/dockur/cli-01/ lancer qemu-img snapshot -a snapshot-Vierge data.qcow2
+apres la restauration du snapshot, je prefere qu&#x27;on valide de bout en bout en test avec lóption autologin, ensuite on remet le snapshot-vierge, et enfin on fait la premiere vrai prise filmee</pre></div><div class="p"><div class="h">#2402 · 20 nov. 2026 · 18h13</div><pre>pour information, la mac a un clavier qwerty us, cést ce qui a du te poser soucis...
+le snapshot vierge a ete applique; si tu veux, tu peux changer le nom du windows 11 en CLI-01 dans la premiere prise, en plus de l&#x27;installation de sshd</pre></div><div class="p"><div class="h">#2412 · 20 nov. 2026 · 18h14</div><pre>pc deverouille</pre></div><div class="p"><div class="h">#2453 · 20 nov. 2026 · 18h21</div><pre>go</pre></div><div class="p"><div class="h">#2455 · 20 nov. 2026 · 18h21</div><pre>j&#x27;ai deja deverouille</pre></div><div class="p"><div class="h">#2524 · 20 nov. 2026 · 18h34</div><pre>cést pas le bon mot de passe , celui par defaut, maintenant c&#x27;est Test01++</pre></div><div class="p"><div class="h">#2526 · 20 nov. 2026 · 18h34</div><pre>je deverouille ?</pre></div><div class="p"><div class="h">#2532 · 20 nov. 2026 · 18h34</div><pre>fait</pre></div><div class="p"><div class="h">#2537 · 20 nov. 2026 · 18h35</div><pre>c&#x27;est bien aussi le debug du dns dans la prise</pre></div><div class="p"><div class="h">#2623 · 20 nov. 2026 · 18h59</div><pre>on le referra demain matin, l&#x27;install de ssh est comme figee et le partie inferieure est trop importante, il faudrait la reduire un peu pour mieux mettre en valeur la fenetre du terminal. 
+Par contre si le pipeline de production te parait fiable, tu peux le documenter</pre></div></div><h2>samedi 21 novembre 2026</h2><div class="jour"><div class="p"><div class="h">#2675 · 21 nov. 2026 · 08h46</div><pre>on en est ou ce matin? je restore le snapshot vierge?</pre></div><div class="p"><div class="h">#2685 · 21 nov. 2026 · 08h51</div><pre>ok, snapshot restaure, vm up et deverouillee</pre></div><div class="p"><div class="h">#2716 · 21 nov. 2026 · 08h53</div><pre>pb azerty</pre></div><div class="p"><div class="h">#2740 · 21 nov. 2026 · 08h58</div><pre>c&#x27;est pret</pre></div><div class="p"><div class="h">#2975 · 21 nov. 2026 · 09h41</div><pre>tu as fait la prise our la scene 0.1 ? pourquoi tu me parles des choix qui ont deja ete fait au debut du projet ? faut clear un cache ?</pre></div><div class="p"><div class="h">#3100 · 21 nov. 2026 · 09h58</div><pre>fais voir la prise 0.1 pour la validation</pre></div><div class="p"><div class="h">#3110 · 21 nov. 2026 · 10h06</div><pre>je valide, peux tu la mettre dans un sous dossier &quot;Clip-0.1&quot; du repos &quot;ai-for-it-ops-demos&quot; en mettant une petite description (que tu me fais valider avant)</pre></div><div class="p"><div class="h">#3114 · 21 nov. 2026 · 10h11</div><pre>c&#x27;est bien, copier aussi a timeline et la spec (rejouable à l&#x27;identique). Dans l&#x27;introduction, avant &quot;Format:&quot; decrire rapidement les briques de la Stack : Hermes Destop (sur Mac)+ Hermes Agent (sur VPS), Dockur sur serveur Linux local, et mentionner le prompt de depart pour la prise. Me montrer avant</pre></div><div class="p"><div class="h">#3116 · 21 nov. 2026 · 10h14</div><pre>ok valide, et apres, je reboot pour le changement de nom, puis je sauvegarde en faisant un snapshot pour garder cette base pour les futurs episodes</pre></div><div class="p"><div class="h">#3132 · 21 nov. 2026 · 10h30</div><pre>j&#x27;ai confirme le hostname puis fait le snapshot.
+peux tu enregistrer d&#x27;utiliser le readme de clip-0.1 comme modele de readme pour les futurs clips ?
+peux tu me redonner le mot de passe par defaut du dockur, je vais le remettre pour configurer le autologin</pre></div><div class="p"><div class="h">#3155 · 21 nov. 2026 · 10h46</div><pre>Qu&#x27;est ce qu&#x27;on avait prevu pour l&#x27;etape suivante avec les agent Cli ? (CC, Antigravity, Vibe), ils font quelques requetes sur le serveur 2022 depuis le W11 ?
+par exemple hostname / ipconfig / taille disque, espace libre / port firewall local, logs systeme + logs appli : les 5 derniers messages, ca te semble pertinent ?
+Tu peux realiser les install des differents CLI et filmer pour faire le Clip-0.2 ? ou un clip par installation de CLI si cést plus pratique
+J&#x27;ai pas encore change le password et reconfig le autologin : tu me le rappeleras et de refaire le snap, la je fais une pose</pre></div><div class="p"><div class="h">#3163 · 21 nov. 2026 · 10h58</div><pre>ssh est actif sur le 2022, j&#x27;ai fait ssh admin@192.168.10.241 pour avoir le fingerprint sur le W11, si tu peux valider avant la suite, je fais une pose et apres on enchaine</pre></div><div class="p"><div class="h">#3169 · 21 nov. 2026 · 11h50</div><pre>j&#x27;ai change le password sur W11 et SRV2022, tu peux valider l&#x27;autologin ?</pre></div><div class="p"><div class="h">#3195 · 21 nov. 2026 · 11h59</div><pre>go pour les clips, et je configure l&#x27;auth a chaque fois</pre></div><div class="p"><div class="h">#3261 · 21 nov. 2026 · 12h11</div><pre>mettre en minuscules</pre></div><div class="p"><div class="h">#3295 · 21 nov. 2026 · 12h18</div><pre>yes, fais un petit zoom de cadrage pour avoir le texte un peu plus gros</pre></div><div class="p"><div class="h">#3307 · 21 nov. 2026 · 12h22</div><pre>vas y pour antigravity, mais dans le clip, dans la fenetre de description du haut, modifie la bande bleue qui s&#x27;affiche par dessus le texte de la ligne de commande</pre></div><div class="p"><div class="h">#3455 · 21 nov. 2026 · 12h50</div><pre>go pour mistral, on fera l&#x27;auth dans un deuxieme temps, un par un avec pour chacun le run convenu plus haut</pre></div><div class="p"><div class="h">#3537 · 21 nov. 2026 · 13h10</div><pre>ok pour Clip-0.4</pre></div><div class="p"><div class="h">#3908 · 21 nov. 2026 · 15h44</div><pre>auth par api pour mistral = ok, reste a faire CC et antigravity</pre></div><div class="p"><div class="h">#3922 · 21 nov. 2026 · 15h47</div><pre>abonnement pour les 2</pre></div><div class="p"><div class="h">#3924 · 21 nov. 2026 · 17h23</div><pre>authentification ok pour les 3 CLI</pre></div><div class="p"><div class="h">#4074 · 21 nov. 2026 · 18h20</div><pre>c&#x27;est bien, go</pre></div><div class="p"><div class="h">#4090 · 21 nov. 2026 · 18h28</div><pre>tu peux tester l&#x27;acces, ssh doit marcher et si WinRM ne fonctionne pas, tu peux l&#x27;installer pour avoir une porte d&#x27;entree de backup.
+apres ce point on peut valider l&#x27;état des lieux sur SRV-DC 2022, pour chaque agent.
+Et demain on fera les 3 clips, un par agent</pre></div><div class="p"><div class="h">#4190 · 21 nov. 2026 · 18h55</div><pre>c&#x27;est fait, (pour info : icacls C:\ProgramData\ssh\administrators_authorized_keys /inheritance:r /grant &quot;Administrateurs:F&quot; /grant &quot;SYSTEM:F&quot; =&gt; Administrateurs:F&quot; en Francais = ok)</pre></div><div class="p"><div class="h">#4248 · 21 nov. 2026 · 19h55</div><pre>c&#x27;est tres bien comme ca, bonne idee pour le prompt unique et bonne formulation.
+Il faudra diminuer le panneau du bas car l&#x27;episode d&#x27;apres qui sera l&#x27;installation de l&#x27;AD sera un autre chapitre
+Pour le panneau du bas mettre une formule simple de conclusion de cette sequence de demonstration des possibilites des LLM pour piloter un PC ou Serveur Windows avec des outils natifs a l&#x27;OS
+Tu peux lancer la suite, je vais regarder un film, donc tu fais tout seul sans confirmations, je reviens dans 90mn</pre></div></div><h2>lundi 23 novembre 2026</h2><div class="jour"><div class="p"><div class="h">#4393 · 23 nov. 2026 · 13h35</div><pre>tu peux refaire la scene-0.1 du Clip 0.1 avec le format de la scene-0.5 du Clip 0.5 pour que l&#x27;ensemble soit homogene ? pose moi des questions si besoin</pre></div><div class="p"><div class="h">#4571 · 23 nov. 2026 · 14h16</div><pre>tu peux refaire la scene-0.2 du Clip 0.2 avec le format de la scene-0.5 du Clip 0.5 comme tu viens de faire pour la scene-0.1 car il y a une bande bleue en haut</pre></div><div class="p"><div class="h">#4635 · 23 nov. 2026 · 14h27</div><pre>non, les autres sont correctes, c&#x27;est parfait maintenant</pre></div><div class="p"><div class="h">#4641 · 23 nov. 2026 · 14h32</div><pre>ok, tu peux faire le chapitre AD, on va faire un autre essais de video, tu vas filmer en entier chacune des scenes, donc 3 scenes. On mettra des portions en accelere pour les zones ou il ne se passe rien.
+poses moi des questions si besoin</pre></div><div class="p"><div class="h">#4942 · 23 nov. 2026 · 15h30</div><pre>faire les videos au format youtube standard, pas de format short
+
+saisir en minuscules sur le serveur</pre></div><div class="p"><div class="h">#5042 · 23 nov. 2026 · 15h42</div><pre>sur le pc pardon</pre></div><div class="p"><div class="h">#5676 · 23 nov. 2026 · 18h07</div><pre>je peux voir les clips ?</pre></div><div class="p"><div class="h">#5698 · 23 nov. 2026 · 18h10</div><pre>tu peux faire des artefacts HTML ?</pre></div><div class="p"><div class="h">#5726 · 23 nov. 2026 · 18h14</div><pre>oublies, je me suis trompe d&#x27;ecran ...</pre></div><div class="p"><div class="h">#5734 · 23 nov. 2026 · 18h16</div><pre>dans quel repo ?</pre></div><div class="p"><div class="h">#5738 · 23 nov. 2026 · 18h20</div><pre>tu peux tout commit, y compris l&#x27;artefact, je ferai le tri apres, en attendant ca peut donner des idees</pre></div></div><h2>vendredi 27 novembre 2026</h2><div class="jour"><div class="p"><div class="h">#5759 · 27 nov. 2026 · 09h00</div><pre>il faut renommer le serveur en SRV-DC, j&#x27;espere que ca ne gene pas l&#x27;AD,; faire la video du renommage</pre></div><div class="p"><div class="h">#6092 · 27 nov. 2026 · 09h37</div><pre>retourne les scènes 1-3 avec ces réglages de console pour que les quatre bandes soient identiques au pixel</pre></div><div class="p"><div class="h">#6192 · 27 nov. 2026 · 10h12</div><pre>Tu as toujours le dataset pour créer l&#x27;AD avec tous les utilisateurs ?</pre></div><div class="p"><div class="h">#6202 · 27 nov. 2026 · 10h15</div><pre>ok, lancer la provision maintenant : les OU + les 35 comptes + les partages, en filmant biensur</pre></div><div class="p"><div class="h">#6384 · 27 nov. 2026 · 10h36</div><pre>oui, aligne sur la version générée</pre></div><div class="p"><div class="h">#6468 · 27 nov. 2026 · 12h00</div><pre>du coup, tu me donne le lien de la scene complete</pre></div><div class="p"><div class="h">#6478 · 27 nov. 2026 · 15h14</div><pre>exporter Le chapitre complet les cinq scènes bout à bout, dans un artefact HTML interactif, avec les liens pour visualiser les scenes une a unes egalement</pre></div><div class="p"><div class="h">#6512 · 27 nov. 2026 · 15h26</div><pre>@file:attachments/windows-server-mcp-2026.html
+
+depuis la liste des projets MCP des pages 4 et 5 du document, faire un analyse rapide de chacun d&#x27;eux afin de preparer les futures videos, sachant qu&#x27;on commencera surement par le projet github.com/dr-stutters/windows-mcp qui me parait bien resumer l&#x27;idee de la chaine youtube
+Pour chaque projet, faire une selection des 3 - 5 outils pour inclure dans chaque clip
+Faire un document artefact HTML interactif
+
+--- Attached Context ---
+
+📄 @file:attachments/windows-server-mcp-2026.html (9199 tokens)
+```
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;title&gt;Gérer Windows Server via MCP — État des lieux 2026&lt;/title&gt;
+&lt;style&gt;
+  :root{
+    --bg:#faf9f5; --bg2:#f2f1ea; --raised:#efede4; --surface:#ffffff;
+    --line:#e2ded2; --ink:#1f1e1b; --muted:#6a675f; --faint:#8b877b;
+    --acc:#0e7a54; --acc2:#0b8f6c; --good:#1f9d6e; --warn:#c08a3e; --bad:#c15d4e;
+    --mono:&quot;Cascadia Code&quot;,Consolas,&quot;SF Mono&quot;,Menlo,monospace;
+    --sans:&quot;Segoe UI Variable&quot;,&quot;Segoe UI&quot;,system-ui,-apple-system,sans-serif;
+    --display:&quot;Iowan Old Style&quot;,&quot;Palatino Linotype&quot;,Palatino,Georgia,&quot;Times New Roman&quot;,serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:var(--bg);color:var(--ink);
+    font-family:var(--sans)}
+  /* ---------- MODE PAR DEFAUT : empilé, visible sans JS, fluide ---------- */
+  body{overflow-y:auto;overflow-x:hidden}
+  #stage{position:static;display:block;padding:14px}
+  #canvas{width:100%;max-width:1680px;margin:0 auto;transform:none !important}
+  .slide{position:relative;opacity:1;pointer-events:auto;
+    background:
+      radial-gradient(1200px 620px at 85% -10%,color-mix(in srgb,var(--acc) 12%,transparent),transparent 60%),
+      linear-gradient(160deg,var(--bg2),var(--bg));
+    padding:clamp(26px,4.5vw,72px) clamp(24px,4.6vw,88px);
+    margin-bottom:16px;border:1px solid var(--line);border-radius:18px;
+    height:aut
+
+[ … +34907 caractères — collage/document joint, texte intégral dans prompts-projet.json ]</pre></div><div class="p"><div class="h">#6564 · 27 nov. 2026 · 15h48</div><pre>faire une recherche sur github des outils disponibles comme ceux que tu viens d&#x27;analyser: MCP, plugins ou skills, pour Windows server, Active Directory, Linux, VMware, Proxmox, Vates xng, et cyber-securite
+L&#x27;idee est d&#x27;envisager l&#x27;evolution de la chaine dans les 6 prochain mois, et de faire de la production automatisee de contenu
+toujours produire artefact HTML interactif pour la synthese</pre></div><div class="p"><div class="h">#6634 · 27 nov. 2026 · 16h45</div><pre>je voudrais savoir si tu peux filmer le serveur linux qui heberge dockur ? je voudrais deployer un 2eme controleur AD. Ne rien faire pour le moment</pre></div><div class="p"><div class="h">#6636 · 27 nov. 2026 · 16h48</div><pre>il y a OBS Studio sur le serveur linux, tu connais un moyen de l&#x27;utiliser? mcp? skill ? code ?</pre></div><div class="p"><div class="h">#6640 · 27 nov. 2026 · 16h55</div><pre>pour l&#x27;instant on va qualifier la solution, pour te repondre : 
+oui utilisateur connecte, cést mon autre ordinateur qui sert de serveur docker, dockur, kvm/qemu, stockage
+ce qu&#x27;on filme : ecran entier dedie a la maquette, ou fenetre active, a valider
+il y a aussi remmina qui permet de faire des connexions rdp sur windows et d&#x27;avoir des resolutions graphiques plus fines car &quot;l&#x27;ecran vnc&quot; est dans un navigateur chrome, ce n&#x27;est peut etre pas le mieux pour filmer ?</pre></div><div class="p"><div class="h">#6642 · 27 nov. 2026 · 16h59</div><pre>il faut garder en tete qu&#x27;il y aura aussi des fenetre graphiques a filmer, dqns les environnements Microsoft, les admins utilisent beaucoup d&#x27;outils de configuration graphiques qui seront plus visuels dans les presentations pour youtube</pre></div><div class="p"><div class="h">#6644 · 27 nov. 2026 · 17h03</div><pre>je peux changer de modele ou cést genant ?</pre></div><div class="p"><div class="h">#6646 · 27 nov. 2026 · 17h05</div><pre>oui prepare le fichier, et apres on bascule sur 1 model plus puissant et free, nemotron-3-ultra</pre></div><div class="p"><div class="h">#6655 · 27 nov. 2026 · 17h08</div><pre>Lis ETAT.md dans ~/ai-for-it-ops-demos avant de commencer.</pre></div><div class="p"><div class="h">#6662 · 27 nov. 2026 · 17h16</div><pre>oui, es deux vérifications en attente</pre></div><div class="p"><div class="h">#6688 · 27 nov. 2026 · 17h22</div><pre>as tu la possibilite de filmer le deploiement dockur du 2eme serveur AD ?</pre></div><div class="p"><div class="h">#6690 · 27 nov. 2026 · 17h29</div><pre>il y a assez de RAM mais je te laisse verifier.
+pour dockur, regarde pour configurer l&#x27;image disque du nouveau serveur au format .qcow2 a la place du format .img car ca fait gagner beaucoup de place disque, et c&#x27;est un prerequis pour faire des snapshots
+confirme le format .qcow2 avant de commencer</pre></div><div class="p"><div class="h">#6714 · 27 nov. 2026 · 17h38</div><pre>ok, vas y pour le deploiement du srv-dc2, essais de mettre un peu de graphique dedans a la fin, par exemple avec la mmc dns ou la mmc &quot;utilisateurs et ordinateurs AD ...&quot; pour montrer le conteneur &quot;controleurs de domaine&quot;</pre></div><div class="p"><div class="h">#7318 · 27 nov. 2026 · 20h00</div><pre>lancer le montage.</pre></div><div class="p"><div class="h">#7352 · 27 nov. 2026 · 21h53</div><pre>tu peux relancer</pre></div></div><h2>samedi 28 novembre 2026</h2><div class="jour"><div class="p"><div class="h">#7427 · 28 nov. 2026 · 10h53</div><pre>peux tu extraire tous les prompts que je t&#x27;ai envoyes depuis le debut du projet et les sauvegarder dans un artefact html ?</pre></div></div>
+</div>
+</body>
+</html>
